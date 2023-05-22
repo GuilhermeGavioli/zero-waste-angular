@@ -1,0 +1,300 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+:root {
+
+    --zw-yellow: #D99D2A;
+    --zw-red: #CA262C;
+    --zw-green: white;
+    --white: white;
+
+    --clear-text: rgb(160,160,160);
+    --my-sec: rgb(188, 188, 188);
+    --my-third: rgb(0, 0, 0);
+}
+
+p{
+    margin: 0;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.master{
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: blue;
+}
+
+.main{
+    /* padding: 16px; */
+    background-color: var(--white);
+    background-color: var(--zw-red)!important;
+    padding: 16px;
+    overflow-y: scroll;
+    /* height: fit-content; */
+    flex-grow: 1;
+    box-sizing: border-box;
+    width: 100vw;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+:root {
+    --white: white;
+    --clear-text: rgb(160,160,160);
+    --my-primary: #CA262C;
+    --my-sec: rgb(188, 188, 188);
+    --my-third: rgb(0, 0, 0);
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Manrope', sans-serif;
+}
+body{
+    /* height: 100vh; */
+    /* width: 100vw; */
+    /* overflow: hidden; */
+    height: 100vh;
+
+}
+
+
+
+input{
+    padding-left: 10px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+.search-input-container{
+    display: flex;
+    height: 45px;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+.search-input{
+    flex-grow: 1;
+}
+input::placeholder{
+    color: rgb(190,190,190);
+}
+.search-input-button{
+    width: 45px;
+    height: 45px;
+    border: none;
+    background-color: var(--white);
+    color: var(--clear-text);
+}
+
+.classic-button{
+    width: fit-content;
+    padding: 8px 32px 8px 32px;
+    border-radius: 4px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border: none;
+}
+.clear-text{
+     color: var(--clear-text);
+}
+.p-btn{
+    background-color: var(--my-sec);
+    color: white;
+}
+.s-btn{
+    color: var(--my-third);
+    background-color: white;
+}
+.t-btn{
+    background-color: var(--my-third);
+    color: white;
+}
+
+.titles-box{
+    display: flex;
+    align-items: center;
+    margin: 24px 0 16px 0;
+ 
+}
+
+
+.s-text{
+    font-size: .8em;
+}
+
+
+li{
+    list-style: none;
+}
+
+ul{
+
+    padding-left: 8px;
+}
+
+
+.elip{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.fl{
+    -webkit-line-clamp: 1;
+}
+.sl{
+    -webkit-line-clamp: 2;
+}
+
+
+
+.progress-bar-outside{
+    width: 100%;
+    height: 18px;
+    background-color: rgb(220, 220, 220);
+    border-radius: 15px;
+    overflow: hidden;
+}
+.progress-bar-inside{
+    width: 25%;
+    background-color: var(--zw-red);
+    height: 100%;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+input{
+    padding-left: 10px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+.search-input-container{
+    display: flex;
+    height: 45px;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+.search-input{
+    flex-grow: 1;
+}
+input::placeholder{
+    color: rgb(190,190,190);
+}
+.search-input-button{
+    width: 45px;
+    height: 45px;
+    border: none;
+    background-color: var(--white);
+    color: var(--clear-text);
+}
+
+.classic-button{
+    width: fit-content;
+    padding: 8px 32px 8px 32px;
+    border-radius: 4px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border: none;
+}
+.clear-text{
+     color: var(--clear-text);
+}
+.p-btn{
+    background-color: var(--my-sec);
+    color: white;
+}
+.s-btn{
+    color: var(--my-third);
+    background-color: white;
+}
+
+
+
+.s-text{
+    font-size: .8em;
+}
+
+
+li{
+    list-style: none;
+}
+
+ul{
+
+    padding-left: 8px;
+}
+
+
+.elip{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.fl{
+    -webkit-line-clamp: 1;
+}
+.sl{
+    -webkit-line-clamp: 2;
+}
+
+
+
+.company{
+    width: 100%;
+    display: flex;
+    margin: 8px 0 8px 0;
+    gap: 8px;
+    align-items: center;
+    background-color: white;
+}
+.company-pic{
+    border-radius: 8px;
+    min-width: 60px;
+    min-height: 60px;
+    background-color: var(--my-sec);
+}
+.company-info{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+
+
+.box-title{
+    flex-grow: 1;
+    font-size: 1.3em;
+}
