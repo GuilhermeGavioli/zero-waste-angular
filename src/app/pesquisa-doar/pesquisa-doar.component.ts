@@ -110,6 +110,7 @@ export class PesquisaDoarComponent implements OnInit {
       this.ongs[index].likes++;
     }
   }
+  
   async unlikeOng(ong_id: string, index: number){
     const res = await fetch(`http://localhost:3000/unlike?ong_id=${ong_id}`, {
       credentials: 'include',
