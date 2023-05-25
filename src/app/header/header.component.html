@@ -1,3 +1,8 @@
+<div *ngIf="sidebarButton" class="sidebar" #sidebar>
+
+    <button class="cancel-button" (click)="closeSidebar()">Cancelar</button>
+    <button class="logout-button">Logout</button>
+</div>
 
 <header class="header">
 
@@ -40,8 +45,4 @@
     <button class="cancel-button">Cancelar</button>
     <button class="logout-button">Logout</button>
 </div> -->
-<div *ngIf="sidebarButton" class="sidebar" #sidebar>
 
-    <button class="cancel-button">Cancelar</button>
-    <button class="logout-button">Logout</button>
-</div>
