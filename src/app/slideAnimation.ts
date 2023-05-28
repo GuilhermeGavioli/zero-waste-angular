@@ -43,6 +43,24 @@ export const slideAnimation = trigger('slideAnimation', [
   ])
 ]);
 
+export const slideAnimationWithLeave = trigger('slideAnimationWithLeave', [
+  state('void', style({
+    transform: 'translateY(200%)',
+    // opacity: 0
+  })),
+  transition(':enter', [
+    animate('200ms ease-out', style({
+      transform: 'translateY(0)',
+      // opacity: 1
+    }))
+  ]),
+  transition(':leave', [
+    animate('100ms ease-in', style({
+      transform: 'translateY(100%)',
+    }))
+  ])
+]);
+
 export const fastSlideAnimation = trigger('fastSlideAnimation', [
   state('void', style({
     transform: 'translateY(100%)',

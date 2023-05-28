@@ -33,6 +33,7 @@ export class PerfilUsuarioComponent implements OnInit{
   // }
   async ngOnInit() {
     await this.getName()
+    await this.getMyLikes()
     await this.getMostLikedOngs();
     if (this.user.type === 'ong') {
       await this.getMyOrders()
@@ -58,8 +59,18 @@ export class PerfilUsuarioComponent implements OnInit{
       method: 'GET',
     });
     if (res.status === 200) {
-      this.most_liked_ongs = await res.json()
+      const data = await res.json();
+      this.most_liked_ongs = data;
+      console.log('most liked')
       console.log(this.most_liked_ongs)
+      for(let i = 0; i < data?.length; i++){
+        const idExistsInMyLikes = this.my_likes.some(like => like?.ong_id === data[i].ongInfo._id);
+        if (idExistsInMyLikes){
+          data[i].liked = true;
+        }
+        // data[i].likedCount = data[i].likedCount[`${data[i].ongInfo._id}`] || 0
+        // this.most_liked_ongs.push(data[i])
+      }
     }
   }
 
@@ -106,7 +117,7 @@ export class PerfilUsuarioComponent implements OnInit{
     })
     if (res.status === 200){
       this.most_liked_ongs[index].liked = true;
-      this.most_liked_ongs[index].likes++;
+      this.most_liked_ongs[index].likedCount++;
     }
   }
   
@@ -117,7 +128,7 @@ export class PerfilUsuarioComponent implements OnInit{
     })
     if (res.status === 200){
       this.most_liked_ongs[index].liked = false;
-      this.most_liked_ongs[index].likes--;
+      this.most_liked_ongs[index].likedCount--;
     }
   }
 
@@ -137,6 +148,7 @@ export class PerfilUsuarioComponent implements OnInit{
 
 
   goTo(url: string){
+    console.log('runing go to')
     this.router.navigateByUrl(`/${url}`)
   }
 }

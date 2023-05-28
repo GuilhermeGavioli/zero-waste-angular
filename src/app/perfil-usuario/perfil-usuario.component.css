@@ -66,11 +66,11 @@
     /* padding: 0 8px 0 8px; */
     
     color: var(--clear-text);
-    color: var(--white);
     
     color: black;
     color: rgb(160,160,160);
-    background-color: var(--zw-yellow);
+    color: var(--white);
+    background-color: var(--zw-red);
     border-radius: 8px;
 
 }
@@ -81,7 +81,7 @@
   
 .category-circle{
     width: 70px;
-    border: 1px solid var(--my-sec);
+    border: 1px solid var(--zw-red);
     border-radius: 50%;
     color: white;
     height: 70px;
@@ -101,6 +101,7 @@
     height: fit-content;
     min-height: 150px;
 }
+
 
 
 

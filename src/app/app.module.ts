@@ -30,6 +30,7 @@ import { FormsModule } from '@angular/forms';
 import { CategoriasComponent } from './categorias/categorias.component';
 import { MeusAgendamentosComponent } from './meus-agendamentos/meus-agendamentos.component';
 import { MeusLikesComponent } from './meus-likes/meus-likes.component';
+import { StartComponent } from './start/start.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { MeusLikesComponent } from './meus-likes/meus-likes.component';
     CategoriasComponent,
     MeusAgendamentosComponent,
     MeusLikesComponent,
+    StartComponent,
   ],
   imports: [
     BrowserAnimationsModule,

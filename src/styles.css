@@ -36,12 +36,13 @@ body{
     display: flex;
     flex-direction: column;
     background-color: blue;
+  
 }
 
 .main{
     /* padding: 16px; */
+    background-color: var(--zw-red);
     background-color: var(--white);
-    background-color: var(--zw-red)!important;
     padding: 16px;
     overflow-y: scroll;
     /* height: fit-content; */
@@ -71,15 +72,21 @@ body{
     /* overflow: hidden; */
     height: 100vh;
 
+
 }
 
 
 
-input{
+input, select{
     padding-left: 10px;
     box-sizing: border-box;
     border: none;
     outline: none;
+}
+
+select{
+    height: 45px;
+    color: rgb(160,160,160);
 }
 .search-input-container{
     display: flex;
@@ -160,6 +167,9 @@ ul{
 }
 .sl{
     -webkit-line-clamp: 2;
+}
+.tl{
+    -webkit-line-clamp: 3;
 }
 
 
@@ -269,6 +279,12 @@ ul{
 .sl{
     -webkit-line-clamp: 2;
 }
+.tl{
+    -webkit-line-clamp: 3;
+}
+.fifl{
+    -webkit-line-clamp: 5;
+}
 
 
 
@@ -276,7 +292,10 @@ ul{
     width: 100%;
     display: flex;
     margin: 8px 0 8px 0;
-    gap: 8px;
+    height: fit-content;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px;
     align-items: center;
     background-color: white;
 }
@@ -284,6 +303,8 @@ ul{
     border-radius: 8px;
     min-width: 60px;
     min-height: 60px;
+    height: 60px;
+    width: 60px;
     background-color: var(--my-sec);
 }
 .company-info{
@@ -296,5 +317,64 @@ ul{
 
 .box-title{
     flex-grow: 1;
-    font-size: 1.3em;
+    font-size: 1.4em;
 }
+
+
+
+.pair-of-buttons{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    gap: 16px;
+    align-items: center;
+}
+
+.like-button, .dislike-button{
+    padding: 4px;
+    border-radius: 50%;
+    border: 1px solid var(--zw-yellow);
+    background-color: white;
+}
+
+.view-more-button{
+    margin: 0;
+    color: var(--zw-yellow);
+    font-size: .9em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.spinner {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 4px solid #f3f3f3; /* Light color */
+    border-top: 4px solid var(--zw-red); /* Highlight color */
+    animation: spin 0.35s infinite linear;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

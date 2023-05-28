@@ -1,5 +1,6 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { slideToSide } from '../slideAnimation';
 
 @Component({
@@ -12,7 +13,7 @@ export class MeusLikesComponent implements OnInit {
 
   public my_likes: any[] = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
   
   async ngOnInit() {
       await this.getMyLikes()
@@ -27,6 +28,10 @@ export class MeusLikesComponent implements OnInit {
       // this.my_likes = await res.json();
       console.log(this.my_likes)
     }
+  }
+
+  goTo(url: string){
+    this.router.navigateByUrl(`/${url}`)
   }
 
 }

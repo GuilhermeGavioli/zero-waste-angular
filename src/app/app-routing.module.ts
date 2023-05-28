@@ -19,6 +19,7 @@ import { FazerAgendamentoComponent } from './fazer-agendamento/fazer-agendamento
 import { CategoriasComponent } from './categorias/categorias.component';
 import { MeusLikesComponent } from './meus-likes/meus-likes.component';
 import { MeusAgendamentosComponent } from './meus-agendamentos/meus-agendamentos.component';
+import { StartComponent } from './start/start.component';
 
 const routes: Routes = [
   { path: '', component: TipoUsuarioComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
 
   { path: 'meus-likes', component: MeusLikesComponent },
   { path: 'meus-agendamentos', component: MeusAgendamentosComponent },
+  { path: 'start', component:  StartComponent },
 ];
 
 @NgModule({
