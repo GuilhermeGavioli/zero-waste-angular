@@ -64,11 +64,7 @@
 }
 
 
-button:disabled{
-    background-color: rgb(160, 160, 160)!important;
-    opacity: 0.25;
-    color: rgb(75, 75, 75)!important;
-}
+
 .passw_forgot{
     display: flex;
     flex-direction: row;
@@ -254,7 +250,7 @@ button{
   
   input:focus{
     background-color: #d6d6d6;
-    outline: none;
+    border: none;
   }
   
   

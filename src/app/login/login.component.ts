@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppModule } from '../app.module';
 import { AuthService } from '../auth.service';
+import { Validators } from '@angular/forms';
 import { slideAnimation, slideToSide, fastSlideAnimation, slideToSideFromRight, slideAnimationWithLeave } from '../slideAnimation';
 @Component({
   selector: 'app-login',
@@ -10,12 +11,20 @@ import { slideAnimation, slideToSide, fastSlideAnimation, slideToSideFromRight, 
   animations: [slideAnimation, slideToSide, fastSlideAnimation, slideToSideFromRight, slideAnimationWithLeave]
 })
 export class LoginComponent {
-  public login_email: string = ''
-  public login_password: string = ''
+  public email: string = ''
+  public password: string = ''
+  public valid_email: boolean = false
+  public valid_password: boolean = false
 
   @ViewChild('opacitycontainer') opacitycontainer!: ElementRef;
   @ViewChild('spinner') spinner!: ElementRef;
   @ViewChild('loginButton') loginButton!: ElementRef;
+
+  @ViewChild('emailInput') emailInput!: ElementRef;
+  @ViewChild('passwordInput') passwordInput!: ElementRef;
+
+  @ViewChild('emailContainer') emailContainer!: ElementRef;
+  @ViewChild('passwordContainer') passwordContainer!: ElementRef;
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -56,7 +65,53 @@ export class LoginComponent {
     this.loginButton.nativeElement.disabled = false
   }
   
+  onEmailInputChange() {
+    if (this.email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const valid = emailRegex.test(this.email)
+      // Update UI based on email validity
+      if (valid) {
+        this.valid_email = true
+        this.emailContainer.nativeElement.style.border = '2px solid var(--zw-red)'
+        // Valid email
+        // Perform UI updates or other actions
+      } else {
+        this.valid_email = false
+        this.emailContainer.nativeElement.style.border = '1px solid #b4b4b4'
+        // Invalid email
+        // Perform UI updates or other actions
+      }
+    } else {
+      this.valid_email = false
+      this.emailContainer.nativeElement.style.border = '1px solid #b4b4b4'
+      // Empty email
+      // Perform UI updates or other actions
+    }
+  }
 
+  onPasswordInputChange() {
+    if (this.password) {
+      const passwordRegex =  /^[a-zA-Z0-9 ]*$/;
+      const valid = passwordRegex.test(this.password)
+      // Update UI based on email validity
+      if (valid && (this.password.length > 8 && this.password.length < 40)) {
+        this.valid_password = true
+        this.passwordContainer.nativeElement.style.border = '2px solid var(--zw-red)'
+        // Valid email
+        // Perform UI updates or other actions
+      } else {
+        this.passwordContainer.nativeElement.style.border = '1px solid #b4b4b4'
+        this.valid_password = false
+        // Invalid email
+        // Perform UI updates or other actions
+      }
+    } else {
+      this.passwordContainer.nativeElement.style.border = '1px solid #b4b4b4'
+      this.valid_password = false
+      // Empty email
+      // Perform UI updates or other actions
+    }
+  }
 
   async login() {
     this.showLoading()
@@ -64,7 +119,7 @@ export class LoginComponent {
       const res = await fetch(`http://localhost:3000/account/login/default`, {
         credentials: 'include',
         method: 'POST',
-        body: JSON.stringify({email: this.login_email, password: this.login_password})
+        body: JSON.stringify({email: this.email, password: this.password})
       });
       if (res.status === 200) {
         const data = await res.json();

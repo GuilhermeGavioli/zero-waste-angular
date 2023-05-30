@@ -5,6 +5,8 @@
 
     --zw-yellow: #D99D2A;
     --zw-red: #CA262C;
+    --zw-red: #6526ca;
+ 
     --zw-green: white;
     --white: white;
 
@@ -98,8 +100,11 @@ select{
 .search-input{
     flex-grow: 1;
 }
-input::placeholder{
+input::placeholder, textarea::placeholder{
     color: rgb(190,190,190);
+}
+textarea{
+    resize: none;
 }
 .search-input-button{
     width: 45px;
@@ -185,7 +190,12 @@ ul{
     width: 25%;
     background-color: var(--zw-red);
     height: 100%;
+}
 
+button:disabled{
+    background-color: rgb(160, 160, 160)!important;
+    opacity: 0.25;
+    color: rgb(75, 75, 75)!important;
 }
 
 
