@@ -20,6 +20,8 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { MeusLikesComponent } from './meus-likes/meus-likes.component';
 import { MeusAgendamentosComponent } from './meus-agendamentos/meus-agendamentos.component';
 import { StartComponent } from './start/start.component';
+import { EmailComponent } from './email/email.component';
+import { SolicitacaoComponent } from './solicitacao/solicitacao.component';
 
 const routes: Routes = [
   { path: '', component: TipoUsuarioComponent },
@@ -43,6 +45,8 @@ const routes: Routes = [
   { path: 'meus-likes', component: MeusLikesComponent },
   { path: 'meus-agendamentos', component: MeusAgendamentosComponent },
   { path: 'start', component:  StartComponent },
+  { path: 'mail/:email', component:  EmailComponent },
+  { path: 'solicitacao/:order_id', component:  SolicitacaoComponent },
 ];
 
 @NgModule({

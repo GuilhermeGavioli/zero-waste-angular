@@ -31,6 +31,8 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { MeusAgendamentosComponent } from './meus-agendamentos/meus-agendamentos.component';
 import { MeusLikesComponent } from './meus-likes/meus-likes.component';
 import { StartComponent } from './start/start.component';
+import { EmailComponent } from './email/email.component';
+import { SolicitacaoComponent } from './solicitacao/solicitacao.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { StartComponent } from './start/start.component';
     MeusAgendamentosComponent,
     MeusLikesComponent,
     StartComponent,
+    EmailComponent,
+    SolicitacaoComponent,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -27,9 +27,15 @@
 
 
     <span class="titles-box" style="flex-direction: column; align-items: flex-start; margin-top: 8px; font-size: 1.5em;">
-        <h2 >Olá, <span style="color: var(--zw-red);">{{user?.name?.split(' ')[0]}}</span></h2>
+        <h2 >Olá, <span style="color: var(--zw-red);">{{user?.name?.split(' ')[0].charAt(0).toUpperCase() + user?.name?.slice(1)}}</span></h2>
         <!-- <h3>Como voce está hoje?</h3> -->
         <h4>Bem vindo!</h4>
+        <div *ngIf="user?.type === 'ong'" style="color: rgb(160,160,160); display: flex; gap: 4px; align-items: center;">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="rgb(160,160,160)" class="bi bi-heart" viewBox="0 0 16 16">
+                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+              </svg> -->
+              <h4>0</h4>
+        </div>
     </span>
 
 
@@ -57,6 +63,15 @@
                   </svg>
             </div>
             <p class="s-text">Perfil</p>
+        </div>
+        <div class="category" *ngIf="user?.type === 'ong'" (click)="goTo('add-solicitacao')">
+            <div class="category-circle">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                  </svg>
+            </div>
+            <p class="s-text">Solicitar</p>
         </div>
         <div class="category" *ngIf="user?.type === 'ong'">
             <div class="category-circle">
@@ -141,7 +156,7 @@
                         <p class="elip fl" style="margin-top: 6px;">Items Dispostos:</p>
 
                         <div *ngFor="let item of appointment?.items; let i = index">
-                            <p *ngIf="item !== 0">{{item_names[i]}}: {{item}}</p>
+                            <p *ngIf="item !== 0">{{possible_items[i]}}: {{item}}</p>
                         </div>
 
         
@@ -170,7 +185,7 @@
 
 
     <span class="titles-box" *ngIf="user?.type === 'ong'">
-        <h3 class="box-title">Minhas Solicitaçoes</h3>
+        <h3 class="box-title">Minhas Solicitaçoes ({{my_orders?.length}}/2)</h3>
         <svg *ngIf="is_orders_open === 0" (click)="toggleOrderMenu()" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="rgb(180,180,180)" class="bi bi-chevron-right" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
           </svg>
@@ -194,21 +209,27 @@
 
             <div *ngFor="let order of my_orders">
                 <div class="request">
-                    <div class="company-info elip sc">
+                    <div class="request-info">
                         <h4 class="company-name elip fl" style="text-transform: capitalize;">{{order?.name}}</h4>
-                        <p class="company-description elip sl s-text clear-text">{{order?.description}}</p>
-        
-                        <p class="elip fl" style="margin-top: 6px;">Itens: Arroz, Enlatados, Leite, Cereais, Café, Açúcares</p>
+                        <p class="company-description elip sl s-text" style="color: rgb(65,65,65);">{{order?.description}}</p>
+                        
+                        <p class="elip fl" style="margin-top: 6px;">Itens: 
+                        <div *ngFor="item of order?.items; let j = index">
+                                <span *ngIf="order?.items[j] > 0">
+                                    {{possible_items[j]}}
+                                </span>
+                            </div> 
                     </div>
                     <div style="display: flex; gap: 12px; align-items: center; width: 100%;">
                         <p>{{(order?.sum_donated / order?.sum_items) * 100}}%</p>
                         <div class="progress-bar-outside">
-                            <div class="progress-bar-inside">
+                            <div class="progress-bar-inside" [style.width.%]="((order?.sum_donated / order?.sum_items) * 100) + 2">
                             </div>
                             
                         </div>
                      
                     </div>
+                    <p (click)="goToOrderPage(order?._id)">ver mais</p>
                 </div>
 
             </div>
@@ -239,7 +260,7 @@
 
         <!-- starts -->
             <div style="width: 100%; background: white; height: fit-content; margin: 8px 0 8px 0;">
-                <h2 class="elip sl" style="width: 100%; background: var(--zw-red); padding: 12px; color: white" >{{ong?.ongInfo?.name}}</h2>
+                <h2 class="elip sl" style="width: 100%; background: var(--zw-red); padding: 12px; color: white; text-transform: capitalize;">{{ong?.ongInfo?.name}}</h2>
 
                 <div class="elip fifl" style="background: white; padding: 12px">
                     <p>{{ong?.ongInfo?.description}}</p>

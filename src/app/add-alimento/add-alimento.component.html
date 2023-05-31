@@ -8,100 +8,39 @@
     <h1>Do que sua ONG precisa?</h1>
     <p>Somente é permitido o cadastro de alimentos não-perecíveis.</p>
 
-
     <input type="text" [(ngModel)]="name" placeholder="name">
-    <input type="text" [(ngModel)]="description" placeholder="description">
-    
-    <div class="tipo-alimento">
-        <div class="alimento">
-            <h3>Grãos e cereais</h3>
-            <select name="" id="" class="select">
-                <option value="">Selecione</option>
-            </select>
+
+    <div style="display: flex; align-items: flex-start; background: white; overflow: hidden; flex-direction: column;">
+        <textarea #descriptionInput  [ngModelOptions]="{standalone: true}" [(ngModel)]="description" (ngModelChange)="onDescriptionInputChange()" style=" width: 300px; background-color: white; padding: 8px; outline: none; padding: 8px; border: 1px solid #b4b4b4;" name="" id="" cols="30" rows="5" placeholder="Descreva sua Instituição - Quando surgiu - Objetivos - Motivações - Breve História"></textarea>
+        <div style="display: flex; justify-content: space-between; width: 100%;">
+          <p style="color: rgb(170,170,170); font-size: .8em; text-align: start; flex-grow: 1;">Minimo de 85 caracteres</p>
+          <p style="color: rgb(170,170,170); text-align: end; width: fit-content;">{{description.length}}/400</p>
         </div>
-        <div class="quantidade">
-            <h3>Quantidade</h3>
-            <input type="number" name="" id="" class="input">
+      </div>
+
+
+
+    <div>
+    <div *ngFor="let item of possible_items; let i = index">
+
+        <div class="tipo-alimento">
+            <div class="alimento">
+                <h3>Grãos e cereais</h3>
+                <select name="" id="" class="select">
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+            <div class="quantidade">
+                <h3>Quantidade</h3>
+                <input type="number" name="" id="" class="input" [(ngModel)]="items[i]">
+            </div>
         </div>
+        
+    </div>
     </div>
 
-    <div class="tipo-alimento">
-        <div class="alimento">
-            <h3>Farinhas e amidos</h3>
-            <select name="" id="" class="select">
-                <option value="">Selecione</option>
-            </select>
-        </div>
-        <div class="quantidade">
-            <h3>Quantidade</h3>
-            <input type="number" name="" id="" class="input">
-        </div>
-    </div>
 
-    <div class="tipo-alimento">
-        <div class="alimento">
-            <h3>Conservas</h3>
-            <select name="" id="" class="select">
-                <option value="">Selecione</option>
-            </select>
-        </div>
-        <div class="quantidade">
-            <h3>Quantidade</h3>
-            <input type="number" name="" id="" class="input">
-        </div>
-    </div>
 
-    <div class="tipo-alimento">
-        <div class="alimento">
-            <h3>Óleos e gorduras</h3>
-            <select name="" id="" class="select">
-                <option value="">Selecione</option>
-            </select>
-        </div>
-        <div class="quantidade">
-            <h3>Quantidade</h3>
-            <input type="number" name="" id="" class="input">
-        </div>
-    </div>
-
-    <div class="tipo-alimento">
-        <div class="alimento">
-            <h3>Leites e derivados</h3>
-            <select name="" id="" class="select">
-                <option value="">Selecione</option>
-            </select>
-        </div>
-        <div class="quantidade">
-            <h3>Quantidade</h3>
-            <input type="number" name="" id="" class="input">
-        </div>
-    </div>
-
-    <div class="tipo-alimento">
-        <div class="alimento">
-            <h3>Bebidas</h3>
-            <select name="" id="" class="select">
-                <option value="">Selecione</option>
-            </select>
-        </div>
-        <div class="quantidade">
-            <h3>Quantidade</h3>
-            <input type="number" name="" id="" class="input">
-        </div>
-    </div>
-
-    <div class="tipo-alimento">
-        <div class="alimento">
-            <h3>Outros</h3>
-            <select name="" id="" class="select">
-                <option value="">Selecione</option>
-            </select>
-        </div>
-        <div class="quantidade">
-            <h3>Quantidade</h3>
-            <input type="number" name="" id="" class="input">
-        </div>
-    </div>
     <div class="btn-holder">
         <button class="confirma-btn" (click)="createOrder()">Enviar</button>
     </div>

@@ -17,38 +17,38 @@ export class CadONGComponent {
   constructor(private router: Router, private authService: AuthService) { }
 
   
-  public email: string = ''
+  public email: string = 'aaa@gmail.com'
   public valid_email: boolean = false
   @ViewChild('emailInput') emailInput!: ElementRef;
   @ViewChild('emailContainer') emailContainer!: ElementRef;
 
-  public name: string = ''
+  public name: string = 'aaa'
   public valid_name: boolean = false
   @ViewChild('nameInput') nameInput!: ElementRef;
   @ViewChild('nameContainer') nameContainer!: ElementRef;
   
-  public description: string = ''
+  public description: string = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
   public valid_description: boolean = false
   @ViewChild('descriptionInput') descriptionInput!: ElementRef;
 
-  public password: string = ''
+  public password: string = 'aaaaaaaaa'
   public valid_password: boolean = false
   @ViewChild('passwordInput') passwordInput!: ElementRef;
   @ViewChild('passwordContainer') passwordContainer!: ElementRef;
 
-  public confirmPassword: string = ''
+  public confirmPassword: string = 'aaaaaaaaa'
   public valid_confirm_password: boolean = false
   @ViewChild('confirmPasswordInput') confirmPasswordInput!: ElementRef;
   @ViewChild('confirmPasswordContainer') confirmPasswordContainer!: ElementRef;
 
-  public address: string = ''
+  public address: string = 'aaaaaaaaaaaaaaaaaa'
   public valid_address: boolean = false
   @ViewChild('addressInput') addressInput!: ElementRef;
   @ViewChild('addressContainer') addressContainer!: ElementRef;
 
-  public address_state: string = ''
+  public address_state: string = 'SP'
 
-  public addressNumber: string = ''
+  public addressNumber: string = '430'
   public valid_address_number: boolean = false
   @ViewChild('addressNumberInput') addressNumberInput!: ElementRef;
   @ViewChild('addressNumberContainer') addressNumberContainer!: ElementRef;
@@ -167,21 +167,16 @@ export class CadONGComponent {
   
   async register() {
     this.showLoading()
-    console.log(
-
-      this.email,
-      this.name,
-      this.description,
-
-      // days
-
-      this.password,
-      this.confirmPassword,
-
-      this.address,
-      this.addressNumber,
-      this.address_state,
-    )
+    const user: any = {
+      name: this.name,
+      email: this.email,
+      description: this.description,
+      password: this.password,
+      confirm_password: this.confirmPassword,
+      address: this.address,
+      address_number: this.addressNumber,
+      address_state: this.address_state,
+    }
 
     let weeks: any = {}
     this.weekdays.forEach((item, i) => {
@@ -189,23 +184,24 @@ export class CadONGComponent {
         weeks[item.day] = `${this.weekdays[i].inputData}-${this.weekdaysclose[i].inputData}`
       } else {
         weeks[item.day] = '00:00-00:00'
-        // ({[`${item.day}`]: '00:00'})
       }
     })
-    console.log(weeks)
+    user.working_time = {...weeks} 
     
    
     setTimeout(async () => {
-      const res = await fetch(`http://localhost:3000/account/login/default`, {
+      const res = await fetch(`http://localhost:3000/account/register/ONG`, {
         credentials: 'include',
         method: 'POST',
-        body: JSON.stringify({email: this.email, password: this.password})
+        body: JSON.stringify(user)
       });
       if (res.status === 200) {
-        const data = await res.json();
-        
-        localStorage.setItem('user-info', JSON.stringify({ type: data.type, name: data.name }))
-        this.router.navigate(['/perfil'])
+        const data = await res.text();
+        console.log('ok')
+        console.log(data)
+        this.router.navigateByUrl(`/mail/${this.email}`)
+        // localStorage.setItem('user-info', JSON.stringify({ type: data.type, name: data.name }))
+        // this.router.navigate(['/perfil'])
         
       } else {
         console.log(await res.text());

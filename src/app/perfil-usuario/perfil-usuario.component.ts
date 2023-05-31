@@ -20,6 +20,9 @@ export class PerfilUsuarioComponent implements OnInit{
   public my_likes: any[] = []
   public most_liked_ongs: any[] = []
 
+
+  public possible_items = ['Farinhas e Amidos', 'Conservas', 'Óleos e Gorduras', 'Leites e Derivados', 'Sucos e Bebidas', 'Grãos e Cereais', 'Enlatados']
+
   public item_names = ['item a', 'item b', 'item c', 'item d', 'item e', 'item f', 'item g']
   
   constructor(private router: Router, private app: AppModule, private authService: AuthService) { }
@@ -150,5 +153,10 @@ export class PerfilUsuarioComponent implements OnInit{
   goTo(url: string){
     console.log('runing go to')
     this.router.navigateByUrl(`/${url}`)
+  }
+
+  goToOrderPage(order_id: string) {
+    alert(order_id)
+    this.router.navigateByUrl(`/solicitacao/${order_id}`)
   }
 }
