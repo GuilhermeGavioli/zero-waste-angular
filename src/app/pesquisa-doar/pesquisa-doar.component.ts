@@ -32,7 +32,7 @@ export class PesquisaDoarComponent implements OnInit {
   }
 
   makeAppointment(order_id: string) {
-    window.location.href = `/agendando/${order_id}`
+    window.location.href = `/solicitacao/${order_id}`
   }
 
   async openOng(i: number) {

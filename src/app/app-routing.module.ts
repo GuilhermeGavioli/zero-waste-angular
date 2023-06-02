@@ -22,12 +22,12 @@ import { MeusAgendamentosComponent } from './meus-agendamentos/meus-agendamentos
 import { StartComponent } from './start/start.component';
 import { EmailComponent } from './email/email.component';
 import { SolicitacaoComponent } from './solicitacao/solicitacao.component';
+import { PaginaDaSolicitacaoComponent } from './pagina-da-solicitacao/pagina-da-solicitacao.component';
 
 const routes: Routes = [
   { path: '', component: TipoUsuarioComponent },
   { path: 'ongs', component: PesquisaDoarComponent },
   { path: 'add-solicitacao', component: AddAlimentoComponent },
-  {path: 'ong', component: PaginaOngComponent},
   {path: 'perfil', component: PerfilUsuarioComponent},
   {path: 'minhas-solicitacoes', component: MinhasSolicitacoesComponent},
   {path: 'meus-dados', component: MeusDadosComponent},
@@ -41,12 +41,16 @@ const routes: Routes = [
   {path: 'comprovante', component:ComprovanteComponent},
   {path: 'agendando/:order_id', component:FazerAgendamentoComponent},
   { path: 'categorias', component: CategoriasComponent },
-
+  
+  { path: 'pagina-ong', component: PaginaOngComponent},
+  
+  {path: 'ong/:ong_id', component: PaginaOngComponent},
   { path: 'meus-likes', component: MeusLikesComponent },
   { path: 'meus-agendamentos', component: MeusAgendamentosComponent },
   { path: 'start', component:  StartComponent },
   { path: 'mail/:email', component:  EmailComponent },
   { path: 'solicitacao/:order_id', component:  SolicitacaoComponent },
+    {path: 'solicitacao', component: PaginaDaSolicitacaoComponent},
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppModule } from '../app.module';
 import { OnInit } from '@angular/core';
@@ -12,10 +12,12 @@ import { AuthService } from '../auth.service';
   animations: [slideAnimation, slideToSide, fastSlideAnimation, slideToSideFromRight]
 })
 export class PerfilUsuarioComponent implements OnInit{
+  @ViewChild('appointmentContainer') appointmentContainer!: ElementRef;
+  
   public my_orders: any[] = [];
   public is_orders_open: number = 0;
   public my_appointments: any[] = [];
-  public is_appointments_open: number = 0;
+  public is_appointments_open: number = 1;
   public user: any;
   public my_likes: any[] = []
   public most_liked_ongs: any[] = []
@@ -42,6 +44,24 @@ export class PerfilUsuarioComponent implements OnInit{
       await this.getMyOrders()
     } else if (this.user.type === 'user') {
       await this.getMyAppointments()
+    }
+  }
+
+  loading = true;
+  openAppointmentDetails(appointment_id: string) {
+    this.appointmentContainer.nativeElement.style.bottom = '0'
+    
+  }
+
+  async desmarcar(appointment_id: string) {
+    const res = await fetch(`http://localhost:3000/delete/myappointment?appointment_id=${appointment_id}`, {
+      credentials: 'include',
+      method: 'GET',
+    });
+    if (res.status === 200) {
+      this.my_appointments = this.my_appointments.filter(appointment => appointment._id !== appointment_id)
+    } else {
+      console.log(await res.text())
     }
   }
 
@@ -156,7 +176,9 @@ export class PerfilUsuarioComponent implements OnInit{
   }
 
   goToOrderPage(order_id: string) {
-    alert(order_id)
     this.router.navigateByUrl(`/solicitacao/${order_id}`)
+  }
+  goToOngPage(ong_id: string) {
+    this.router.navigateByUrl(`/ong/${ong_id}`)
   }
 }

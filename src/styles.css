@@ -6,6 +6,8 @@
     --zw-yellow: #D99D2A;
     --zw-red: #CA262C;
     --zw-red: #6526ca;
+    --zw-red-dark: #3b1578;
+    --zw-red-clear: #793bdbe1;
  
     --zw-green: white;
     --white: white;
@@ -327,6 +329,7 @@ ul{
 
 .box-title{
     flex-grow: 1;
+    color: rgb(100,100,100);
     font-size: 1.4em;
 }
 

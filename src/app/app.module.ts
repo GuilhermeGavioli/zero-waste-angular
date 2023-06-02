@@ -33,6 +33,7 @@ import { MeusLikesComponent } from './meus-likes/meus-likes.component';
 import { StartComponent } from './start/start.component';
 import { EmailComponent } from './email/email.component';
 import { SolicitacaoComponent } from './solicitacao/solicitacao.component';
+import { AgendamentoComponent } from './agendamento/agendamento.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { SolicitacaoComponent } from './solicitacao/solicitacao.component';
     StartComponent,
     EmailComponent,
     SolicitacaoComponent,
+    AgendamentoComponent,
   ],
   imports: [
     BrowserAnimationsModule,

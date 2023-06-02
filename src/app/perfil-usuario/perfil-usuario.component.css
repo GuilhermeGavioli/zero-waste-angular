@@ -68,10 +68,12 @@
     color: var(--clear-text);
     
     color: black;
+    padding: 0 36px 0 36px;
     color: rgb(160,160,160);
     color: var(--white);
     background-color: var(--zw-red);
     border-radius: 8px;
+    padding-bottom: 8px;
 
 }
 
@@ -126,6 +128,7 @@
 
 .request-info{
     background-color: white;
+    padding: 16px;;
     width: 100%;
 }
 

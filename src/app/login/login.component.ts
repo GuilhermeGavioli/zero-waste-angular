@@ -124,7 +124,7 @@ export class LoginComponent {
       if (res.status === 200) {
         const data = await res.json();
         
-        localStorage.setItem('user-info', JSON.stringify({ type: data.type, name: data.name }))
+        localStorage.setItem('user-info', JSON.stringify({...data}))
         this.router.navigate(['/perfil'])
         
       } else {

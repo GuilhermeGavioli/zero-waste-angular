@@ -1,4 +1,5 @@
 import { Component, Input, ViewChild, ElementRef  } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +8,16 @@ import { Component, Input, ViewChild, ElementRef  } from '@angular/core';
 })
 export class HeaderComponent {
   @ViewChild('sidebar') sidebar!: ElementRef;
+  
+  constructor(private router: Router) { }
+  
   public is_sidebar_open: number = 0;
 
   @Input() logoutButton: boolean = false;
   @Input() sidebarButton: boolean = false;
   @Input() red: boolean = false;
+  @Input() back: string = '';
+
 
 
 
@@ -26,5 +32,10 @@ export class HeaderComponent {
   toggleSidebar() {
     if (this.is_sidebar_open === 0) return this.openSidebar()
     this.closeSidebar()
+  }
+
+
+  goBack(){
+    this.router.navigateByUrl(`/${this.back}`)
   }
 }
