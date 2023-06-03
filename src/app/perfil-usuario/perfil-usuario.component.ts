@@ -15,7 +15,7 @@ export class PerfilUsuarioComponent implements OnInit{
   @ViewChild('appointmentContainer') appointmentContainer!: ElementRef;
   
   public my_orders: any[] = [];
-  public is_orders_open: number = 0;
+  public is_orders_open: number = 1;
   public my_appointments: any[] = [];
   public is_appointments_open: number = 1;
   public user: any;
@@ -76,6 +76,8 @@ export class PerfilUsuarioComponent implements OnInit{
     this.is_appointments_open = this.is_appointments_open === 0 ? 1 : 0;
   }
 
+
+
   async getMostLikedOngs() {
     const res = await fetch(`http://localhost:3000/mostlikedongs`, {
       credentials: 'include',
@@ -118,6 +120,9 @@ export class PerfilUsuarioComponent implements OnInit{
       console.log(this.my_orders)
     }
   }
+
+  public my_appointments_count: number = 0;
+  public my_not_viewd_donations_count: number = 0;
   async getMyAppointments() {
     const res = await fetch(`http://localhost:3000/myappointments`, {
       credentials: 'include',
@@ -127,6 +132,10 @@ export class PerfilUsuarioComponent implements OnInit{
       const data = await res.json();
       console.log(data)
       this.my_appointments = data;
+      this.my_appointments.forEach(item => { 
+        if (!item.confirmed) this.my_appointments_count++
+        if (item?.confirmed && !item?.viewd) this.my_not_viewd_donations_count++
+      })
     }
   }
 
@@ -171,8 +180,11 @@ export class PerfilUsuarioComponent implements OnInit{
 
 
   goTo(url: string){
-    console.log('runing go to')
     this.router.navigateByUrl(`/${url}`)
+  }
+
+  goToAppointmentsFromOrderPage(order_id: string) {
+    this.router.navigateByUrl(`/agendamentosdaorder/${order_id}`)
   }
 
   goToOrderPage(order_id: string) {
