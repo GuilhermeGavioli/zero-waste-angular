@@ -38,13 +38,14 @@ export class PerfilUsuarioComponent implements OnInit{
   // }
   async ngOnInit() {
     await this.getName()
-    await this.getMyLikes()
-    await this.getMostLikedOngs();
+    
+    // await this.getMostLikedOngs();
     if (this.user.type === 'ong') {
       await this.getMyOrders()
     } else if (this.user.type === 'user') {
       await this.getMyAppointments()
     }
+    await this.getLastOrders()
   }
 
   loading = true;
@@ -99,6 +100,29 @@ export class PerfilUsuarioComponent implements OnInit{
     }
   }
 
+  public last_orders: any;
+  async getLastOrders() {
+    const res = await fetch(`http://localhost:3000/gettwolastorders`, {
+      credentials: 'include',
+      method: 'GET',
+    })
+    if (res.status === 200) {
+      const data = await res.json();
+      if (data) {
+        
+        for (let i = 0; i < data?.length; i++) {
+          data[i].sum_items = 0 
+          data[i].sum_donated = 0 
+          for (let j = 0; j < data[i].items?.length; j++) {
+            data[i].sum_items += data[i].items[j]
+            data[i].sum_donated += data[i].donated[j]
+          }
+        }
+        this.last_orders = data
+      }
+    }
+  }
+
   async getMyOrders() {
     const res = await fetch(`http://localhost:3000/myorders`, {
       credentials: 'include',
@@ -132,9 +156,9 @@ export class PerfilUsuarioComponent implements OnInit{
       const data = await res.json();
       console.log(data)
       this.my_appointments = data;
-      this.my_appointments.forEach(item => { 
+      this.my_appointments?.forEach(item => { 
         if (!item.confirmed) this.my_appointments_count++
-        if (item?.confirmed && !item?.viewd) this.my_not_viewd_donations_count++
+        if (item?.confirmed && !item?.viewed) this.my_not_viewd_donations_count++
       })
     }
   }
@@ -182,6 +206,8 @@ export class PerfilUsuarioComponent implements OnInit{
   goTo(url: string){
     this.router.navigateByUrl(`/${url}`)
   }
+
+  
 
   goToAppointmentsFromOrderPage(order_id: string) {
     this.router.navigateByUrl(`/agendamentosdaorder/${order_id}`)

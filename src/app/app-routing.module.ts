@@ -25,6 +25,7 @@ import { SolicitacaoComponent } from './solicitacao/solicitacao.component';
 import { PaginaDaSolicitacaoComponent } from './pagina-da-solicitacao/pagina-da-solicitacao.component';
 import { AgendamentosdaminhaorderComponent } from './agendamentosdaminhaorder/agendamentosdaminhaorder.component';
 import { MinhasdoacoesComponent } from './minhasdoacoes/minhasdoacoes.component';
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = [
   { path: '', component: TipoUsuarioComponent },
@@ -54,7 +55,9 @@ const routes: Routes = [
   { path: 'solicitacao/:order_id', component:  SolicitacaoComponent },
     {path: 'solicitacao', component: PaginaDaSolicitacaoComponent},
     {path: 'agendamentosdaorder/:order_id', component: AgendamentosdaminhaorderComponent},
-    {path: 'minhasdoacoes', component: MinhasdoacoesComponent},
+  { path: 'minhasdoacoes', component: MinhasdoacoesComponent },
+    
+    { path: 'orders', component: OrdersComponent },
 ];
 
 @NgModule({

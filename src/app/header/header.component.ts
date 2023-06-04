@@ -15,7 +15,7 @@ export class HeaderComponent {
 
   @Input() logoutButton: boolean = false;
   @Input() sidebarButton: boolean = false;
-  @Input() red: boolean = false;
+  @Input() color: boolean = false;
   @Input() back: string = '';
 
 

@@ -36,6 +36,7 @@ import { SolicitacaoComponent } from './solicitacao/solicitacao.component';
 import { AgendamentoComponent } from './agendamento/agendamento.component';
 import { AgendamentosdaminhaorderComponent } from './agendamentosdaminhaorder/agendamentosdaminhaorder.component';
 import { MinhasdoacoesComponent } from './minhasdoacoes/minhasdoacoes.component';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { MinhasdoacoesComponent } from './minhasdoacoes/minhasdoacoes.component'
     AgendamentoComponent,
     AgendamentosdaminhaorderComponent,
     MinhasdoacoesComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserAnimationsModule,
