@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
 
 :root {
 
@@ -8,7 +9,8 @@
     --zw-red: #6526ca;
     --zw-red-dark: #3b1578;
     --zw-red-clear: #793bdbe1;
- 
+    
+    --zw-second: #3AFFF3;
     --zw-green: white;
     --white: white;
 

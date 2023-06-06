@@ -26,6 +26,7 @@ import { PaginaDaSolicitacaoComponent } from './pagina-da-solicitacao/pagina-da-
 import { AgendamentosdaminhaorderComponent } from './agendamentosdaminhaorder/agendamentosdaminhaorder.component';
 import { MinhasdoacoesComponent } from './minhasdoacoes/minhasdoacoes.component';
 import { OrdersComponent } from './orders/orders.component';
+import { AjudaComponent } from './ajuda/ajuda.component';
 
 const routes: Routes = [
   { path: '', component: TipoUsuarioComponent },
@@ -56,6 +57,7 @@ const routes: Routes = [
     {path: 'solicitacao', component: PaginaDaSolicitacaoComponent},
     {path: 'agendamentosdaorder/:order_id', component: AgendamentosdaminhaorderComponent},
   { path: 'minhasdoacoes', component: MinhasdoacoesComponent },
+  { path: 'ajuda', component: AjudaComponent },
     
     { path: 'orders', component: OrdersComponent },
 ];

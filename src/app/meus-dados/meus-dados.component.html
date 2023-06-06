@@ -1,4 +1,4 @@
-<div class="box">
+<!-- <div class="box">
     <a href="" class="voltar"><div class="voltar-btn"><img src="../../assets/Voltar.png" alt=""></div></a>
     <h1>Meus Dados</h1>
     <div class="dados">
@@ -47,4 +47,84 @@
     <footer class="delete">
         <a href="">Deletar minha conta <img src="../../assets/Vector.png" alt=""></a>
     </footer>
-</div>
+</div> -->
+
+
+
+
+
+
+
+
+<main class="master" [@slideToSide]>
+    <app-header [back]="'perfil'"></app-header>
+    <main class="main">
+        
+
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+
+            <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
+
+                <div style="border: 10px solid var(--zw-red); border-radius: 50%; width: 120px; height: 120px; display: flex; justify-content: center; align-items: center;;">
+                    <img src="../../assets/userprofile.png" style="width: 80px;" alt="">
+                </div>
+                <p style="color: #bebebe; font-weight: 700; font-size: 1.1em;">{{me?.email}}</p>
+                
+            </div>
+            
+
+            <div style="display: flex; flex-direction: column; gap: 16px; padding: 0 16px 0 16px;">
+                
+                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+                    <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Nome:</label>
+                    <input type="text" name="" style="background: #EAEAEA; border:none; color: #8f8f8f; font-weight: 700; height: 45px; width: 100%; font-size: 1.2em;" value="{{me?.name}}">
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+                    <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Endereço:</label>
+                    <input type="text" name="" style="background: #EAEAEA; border:none; color: #8f8f8f; font-weight: 700; height: 45px; width: 100%; font-size: 1.2em;" value="{{me?.address}}">
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+                    <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Número:</label>
+                    <input type="number" name="" style="background: #EAEAEA; border:none; color: #8f8f8f; font-weight: 700; height: 45px; width: 100%; font-size: 1.2em;" value="{{me?.address_number}}">
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+                    <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Estado:</label>
+                    <select style="background: #EAEAEA; border:none; color: #8f8f8f; font-weight: 700; height: 45px; width: 100%; font-size: 1.2em;" [(ngModel)]="address_state" name= "UF" style="box-shadow: 2px 4px 6px -3px rgba(0, 0, 0, 0.214); width: 145px;">
+                        <option value="AC">AC</option>
+                        <option value="DF">DF</option>
+                        <option value="ES">ES</option>
+                        <option value="GO">GO</option>
+                        <option value="SC">SC</option>
+                        <option value="SP">SP</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+                    <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Telefone:</label>
+                    <input type="text" name="" style="background: #EAEAEA; border:none; color: #8f8f8f; font-weight: 700; height: 45px; width: 100%; font-size: 1.2em;" value="{{me?.phone}}">
+                </div>
+
+                <!-- <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
+                    <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Senha:</label>
+                    <input type="password" name="" style="background: #EAEAEA; border:none; color: #8f8f8f; font-weight: 700; height: 45px; width: 100%; font-size: 1.2em;" value="{{me?.password}}">
+                </div> -->
+
+
+                <button #loginButton (click)="changeInfo()" style="margin-top: 24px; width: 100%; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 6px 46px 6px 46px; font-weight: 600; border-radius: 0px; box-shadow: none;" >
+                    Alterar Info
+                  </button>
+                
+            </div>
+
+
+              
+              <div style="height: 50px; display: flex; justify-content: center; align-items: center;">
+                  <div #spinner class="spinner" *ngIf="loading"></div>
+              </div>
+
+        </div>
+      
+    </main>
+</main>
+

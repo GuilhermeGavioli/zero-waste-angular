@@ -93,6 +93,7 @@ export class PesquisaDoarComponent implements OnInit {
           data.data[i].likes = data.likes[`${data.data[i]._id}`] || 0
           this.ongs.push(data.data[i])
         }
+        console.log(this.ongs)
         this.current_pack++;
       } else {
         this.is_over = 1;

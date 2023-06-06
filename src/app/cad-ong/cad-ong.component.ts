@@ -17,38 +17,38 @@ export class CadONGComponent {
   constructor(private router: Router, private authService: AuthService) { }
 
   
-  public email: string = 'aaa@gmail.com'
+  public email: string = ''
   public valid_email: boolean = false
   @ViewChild('emailInput') emailInput!: ElementRef;
   @ViewChild('emailContainer') emailContainer!: ElementRef;
 
-  public name: string = 'aaa'
+  public name: string = ''
   public valid_name: boolean = false
   @ViewChild('nameInput') nameInput!: ElementRef;
   @ViewChild('nameContainer') nameContainer!: ElementRef;
   
-  public description: string = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+  public description: string = ''
   public valid_description: boolean = false
   @ViewChild('descriptionInput') descriptionInput!: ElementRef;
 
-  public password: string = 'aaaaaaaaa'
+  public password: string = ''
   public valid_password: boolean = false
   @ViewChild('passwordInput') passwordInput!: ElementRef;
   @ViewChild('passwordContainer') passwordContainer!: ElementRef;
 
-  public confirmPassword: string = 'aaaaaaaaa'
+  public confirmPassword: string = ''
   public valid_confirm_password: boolean = false
   @ViewChild('confirmPasswordInput') confirmPasswordInput!: ElementRef;
   @ViewChild('confirmPasswordContainer') confirmPasswordContainer!: ElementRef;
 
-  public address: string = 'aaaaaaaaaaaaaaaaaa'
+  public address: string = ''
   public valid_address: boolean = false
   @ViewChild('addressInput') addressInput!: ElementRef;
   @ViewChild('addressContainer') addressContainer!: ElementRef;
 
-  public address_state: string = 'SP'
+  public address_state: string = ''
 
-  public addressNumber: string = '430'
+  public addressNumber: string = ''
   public valid_address_number: boolean = false
   @ViewChild('addressNumberInput') addressNumberInput!: ElementRef;
   @ViewChild('addressNumberContainer') addressNumberContainer!: ElementRef;
@@ -63,9 +63,9 @@ export class CadONGComponent {
   public weekdays: any[] = [
     { day: 'dom', active: false },
     { day: 'seg',active: true},
-    { day: 'ter',active: true},
+    { day: 'ter',active: false},
     { day: 'qua',active: false},
-    { day: 'qui',active: true},
+    { day: 'qui',active: false},
     { day: 'sex',active: false},
     { day: 'sab',active: false},
 ]

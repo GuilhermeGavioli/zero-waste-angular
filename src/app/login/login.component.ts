@@ -35,7 +35,8 @@ export class LoginComponent {
   public painel_open: boolean = false;
 
   
-
+  // email: Joi.string().email().min(6).max(113).required(),
+  // password: Joi.string().regex(/^[a-zA-Z0-9 ]*$/).min(8).max(50).required(),
 
   
 
@@ -89,30 +90,45 @@ export class LoginComponent {
     }
   }
 
+
+  public showPasswordMessage: boolean = false;
   onPasswordInputChange() {
     if (this.password) {
-      const passwordRegex =  /^[a-zA-Z0-9 ]*$/;
+      
+
+      const passwordRegex = /^[a-zA-Z0-9 ]*$/;
+      const specialRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
       const valid = passwordRegex.test(this.password)
+      
       // Update UI based on email validity
       if (valid && (this.password.length > 8 && this.password.length < 40)) {
-        this.valid_password = true
-        this.passwordContainer.nativeElement.style.border = '2px solid var(--zw-red)'
+        const validSpecialCharacters = specialRegex.test(this.password)
+        if (validSpecialCharacters) {
+          this.valid_password = true
+          this.passwordContainer.nativeElement.style.border = '2px solid var(--zw-red)'
+        } else {
+          this.showPasswordMessage = true
+        }
+
         // Valid email
         // Perform UI updates or other actions
       } else {
         this.passwordContainer.nativeElement.style.border = '1px solid #b4b4b4'
         this.valid_password = false
+        this.showPasswordMessage = true
         // Invalid email
         // Perform UI updates or other actions
       }
     } else {
       this.passwordContainer.nativeElement.style.border = '1px solid #b4b4b4'
       this.valid_password = false
+      this.showPasswordMessage = true
       // Empty email
       // Perform UI updates or other actions
     }
   }
 
+  public denied_message: string = ''
   async login() {
     this.showLoading()
     setTimeout(async () => {
@@ -128,9 +144,13 @@ export class LoginComponent {
         this.router.navigate(['/perfil'])
         
       } else {
-        console.log(await res.text());
+        this.denied_message = await res.text();
       }
       this.hideLoading()
     }, 1500);
+  }
+
+  goTo(path: string) {
+    this.router.navigateByUrl(`/${path}`)
   }
 }

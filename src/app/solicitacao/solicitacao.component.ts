@@ -43,7 +43,7 @@ export class SolicitacaoComponent {
     console.log(this.ong_owner)
     if (this.user.type === 'user') {
       await this.getMyAppointments()
-      this.my_appointments.forEach((appointment: any) => {
+      this.my_appointments?.forEach((appointment: any) => {
         if (appointment?.order_parent_id == this.order_id && !appointment.confirmed) { 
           this.is_appointed = 1;
           this.appointed_mentioned_to_this_order = appointment;

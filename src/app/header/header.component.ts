@@ -26,7 +26,7 @@ export class HeaderComponent {
     this.is_sidebar_open = 1
   }
   closeSidebar() {
-    this.sidebar.nativeElement.style.left = '-80vw'
+    this.sidebar.nativeElement.style.left = '-90vw'
     this.is_sidebar_open = 0
   }
   toggleSidebar() {

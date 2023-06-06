@@ -61,11 +61,11 @@
 }
 
 .sidebar{
-    width: 80vw;
+    width: 90vw;
     height: 100vh;
-    background-color: rgb(231, 231, 231);
+    background-color: white;
     position: absolute;
-    left: -80vw;
+    left: -90vw;
     z-index: 3;
     transition: 0.15s ease-in-out;
 }
