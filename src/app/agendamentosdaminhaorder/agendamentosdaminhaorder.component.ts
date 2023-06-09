@@ -20,7 +20,7 @@ export class AgendamentosdaminhaorderComponent {
   
   public possible_items = ['Farinhas e Amidos', 'Conservas', 'Óleos e Gorduras', 'Leites e Derivados', 'Sucos e Bebidas', 'Grãos e Cereais', 'Enlatados']
   
-  
+
   public appointments: any = []
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService){}
   
@@ -31,6 +31,19 @@ export class AgendamentosdaminhaorderComponent {
     // await this.getOrder()
     await this.getAppointmentsFromMyOrder()
     console.log(this.appointments)
+    this.filterArray()
+  }
+
+  public search_text: string = ''
+  public filtered_appointments: any[] = []
+  filterArray() {
+    if (this.search_text) {
+      this.filtered_appointments = this.appointments.filter((item: any) =>
+        item?._id.toLowerCase().includes(this.search_text.toLowerCase())
+      );
+    } else {
+      this.filtered_appointments = this.appointments
+    }
   }
 
   async confirmDonation(appointment_id: string) {
@@ -98,6 +111,10 @@ export class AgendamentosdaminhaorderComponent {
     } else {
       console.log(await res.text())
     }
+  }
+
+  goTo(url: string){
+    this.router.navigateByUrl(`/${url}`)
   }
   
 }

@@ -5,12 +5,17 @@
 :root {
 
     --zw-yellow: #D99D2A;
-    --zw-red: #CA262C;
     --zw-red: #6526ca;
+    --zw-red: #CA262C;
+    --zw-red: #d8181e;
+
     --zw-red-dark: #3b1578;
-    --zw-red-clear: #793bdbe1;
+    --zw-red-dark: #7c171a;
     
-    --zw-second: #3AFFF3;
+    --zw-red-clear: #793bdbe1;
+    --zw-red-clear: #d44045;
+    
+    --zw-second: #eea41b;
     --zw-green: white;
     --white: white;
 
@@ -41,7 +46,6 @@ body{
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: blue;
   
 }
 

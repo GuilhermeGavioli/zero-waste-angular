@@ -11,9 +11,11 @@ import { slideAnimation } from '../slideAnimation';
 })
 export class AddAlimentoComponent {
 
-  public description: string = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaa aaaaaaa aaaaaaaaa aaaaaaa aaaaaaaaaaaaa aaaaaaaaaaaaaaa aaaaaaaaa aa aaaaaaaaaaaaaaaaaaaaaa'
+  public description: string = ''
   public valid_description: boolean = false
   @ViewChild('descriptionInput') descriptionInput!: ElementRef;
+  public valids = ['a', 'b', 'c', 'd', 'e']
+ 
 
   constructor(private router: Router) {}
   goToPage(pageName:string){
@@ -30,8 +32,8 @@ export class AddAlimentoComponent {
   }
 
   public items = [0, 0, 0, 0, 0, 0, 0]
-  public possible_items = ['Farinhas e Amidos', 'Conservas', 'Óleos e Gorduras', 'Leites e Derivados', 'Sucos e Bebidas', 'Grãos e Cereais', 'Enlatados']
-  public name: string = 'Minha Primeira Solicitação'
+  public possible_items = ['Farinhas e Amidos', 'Produtos em Conserva', 'Óleos e Gorduras', 'Leites e Derivados', 'Sucos e Bebidas', 'Grãos e Cereais', 'Enlatados']
+
 
 
   async createOrder() {
@@ -45,6 +47,39 @@ export class AddAlimentoComponent {
     } else {
       console.log(await res.text())
     }
+  }
+
+
+  public name: string = ''
+  public valid_name: boolean = false
+  @ViewChild('nameInput') nameInput!: ElementRef;
+  @ViewChild('nameContainer') nameContainer!: ElementRef;
+  onNameInputChange() {
+    if (this.name) {
+      const nameRegex = /^[a-zA-Z0-9ç ]*$/;
+      const valid = nameRegex.test(this.name)
+      // Update UI based on name validity
+      if (valid && this.name.length > 3)  {
+        this.valid_name = true
+        this.nameContainer.nativeElement.style.border = '2px solid var(--zw-red)'
+        // Valid name
+        // Perform UI updates or other actions
+      } else {
+        this.valid_name = false
+        this.nameContainer.nativeElement.style.border = '1px solid #b4b4b4'
+        // Invalid name
+        // Perform UI updates or other actions
+      }
+    } else {
+      this.valid_name = false
+      this.nameContainer.nativeElement.style.border = '1px solid #b4b4b4'
+      // Empty email
+      // Perform UI updates or other actions
+    }
+  }
+
+  goTo(url: string){
+    this.router.navigateByUrl(`/${url}`)
   }
 
 }

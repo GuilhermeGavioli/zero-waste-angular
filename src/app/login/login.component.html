@@ -66,24 +66,7 @@
 <main class="master" [@slideAnimation]>
     <main class="main">
         
-        <div *ngIf="painel_open" [@slideAnimationWithLeave] style="z-index: 2; width: 275px; height: 250px; background: rgb(255, 255, 255); position: absolute; inset: 0 0 45px 0; margin: auto;
-        border-radius: 8px; box-shadow: 4px 4px 8px -2px rgba(0, 0, 0, 0.401); display: flex; align-items: center;
-        gap: 32px;justify-content: center;">
-
-        
-
-
-<div style="width: fit-content; height: fit-content; background: var(--zw-red); padding: 8px; border-radius: 3px;">
-    <svg (click)="goTo('cadastroONG')" xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="white" class="bi bi-bank" viewBox="0 0 16 16">
-        <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z"/>
-    </svg>
-</div>
     
-<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="var(--zw-red)" class="bi bi-person" viewBox="0 0 16 16">
-<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
-</svg>
-
-    </div>
 
         <div  #opacitycontainer *ngIf="state === 'login'" [@slideToSide] style="background-color: white; width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: start; gap: 8px; align-items: center; position: relative; padding-top: 120px; transition: 0.15s ease-in-out;">
 
@@ -185,7 +168,18 @@
                   
                     <div style="font-size: .8em; display: flex; flex-direction: column; gap: 8px; color: rgb(83, 83, 83); position: absolute; bottom: 45px;">
                       <p>Esqueceu sua senha? <a (click)="state = 'register'" style="margin-left: 4px;color: var(--zw-red);" id="link-tag">Recuperar Senha</a></p>
-                        <p class="bottom-text">Não tem uma conta? <span (click)="openRegisterChoisePainel()" style="margin-left: 4px;  color: var(--zw-red);" id="link-tag">Registrar</span></p>
+                      <div>
+
+                        <p class="bottom-text" style="text-align: center;">Não tem uma conta? Registrar como:</p>
+                  
+                        <div style="display: flex; gap: 6px; align-items: center; width: 100%; justify-content: center;">
+
+                          <p (click)="goTo('cadastrousuario')" style="margin-left: 4px;  color: var(--zw-red); text-align:center ;" id="link-tag">Usuario</p>
+                          <p>ou</p>
+                          <p (click)="goTo('cadastroONG')" style="margin-left: 4px; text-align:center ;  color: var(--zw-red);" id="link-tag">Instituição</p>
+                        </div>
+                      </div>
+                       
               
                     </div>
                 </form>

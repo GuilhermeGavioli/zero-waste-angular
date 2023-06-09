@@ -43,46 +43,82 @@
                 </div>
             </div> -->
 
-            <div class="ong-main-info">
+          
+<main class="master" [@slideToSide]>
+    <app-header [back]="'perfil'"></app-header>
+    <main class="main">
 
-                <p>
-                    {{ong?.name}}
-                    {{ong?.cnpj}}
-                    {{ong?.created_at}}
-                    {{ong?.email}}
-                    {{ong?.likes}}
-                    {{ong?.liked}}
-                    {{ong?.working_time}}
-                    {{ong?._id}}
-                </p>
+
+ 
+      
         
+            <div class="local">
+                <p>Para doar basta verificar o endereço abaixo e enviar os alimentos necessários para a ONG.</p>
+                <div>
+                    <h3>Cidade: <span>{{ong?.address_street}}</span></h3>
+                </div>
+                <div>
+                    <h3>Estado: <span>{{ong?.address_state}}</span></h3>
+                </div>
+                <div>
+                    <h3>Número: <span>{{ong?.address_number}}</span></h3>
+                </div>
+                <div>
+                    <h3>Funcionamento:</h3>
+                      
+                        <div class="funcionamento" *ngFor="let day of weekdays">
+                            <span class="dia" *ngIf="ong?.working_time[day] === '00:00-00:00'">
+                                <p class="dia">{{day}}: Fechado</p>
+            
+                            </span>
+                            <span *ngIf="ong?.working_time[day] !== '00:00-00:00'">
+                                <p class="dia">{{day}}: {{ong?.working_time[day]}}</p>
+                            
 
-                <div class="ong-pic"></div>
-                <h3>{{ong?.name}}</h3>
-                <h4>Children | Love | Help | Better | World</h4>
-                
-                <div class="pair-of-buttons-container">
-                    <button class="classic-button p-btn">Like</button>
-                    <button class="classic-button s-btn">Chat</button>
+                            </span>
+                        </div>
+                       
+                    
                 </div>
             </div>
-        
-            <div>
-                <h2>About</h2>
-                <p>{{ong?.description}}</p>
-            </div>
-        
-        
-            <div class="requests" *ngFor="let order of ong?.orders">
-                <div class="request" >
-                    <h3>{{order.name}}</h3>
-                    <p>{{order.description}}</p>
-                    <div class="pair-of-buttons-container">
-                        <button class="classic-button p-btn" (click)="makeAppointment(order._id)">Fazer um Agendamento</button>
+
+            <div class="alimentos">
+            <div *ngFor="let order of ong_active_orders">
+
+                <h2>Solicitações em Aberto:</h2>
+                <button class="alimento" (click)="goToOrderPage(order?._id)">
+                    <h1 class="nome-sol">{{order?.name}}</h1>
+                    <p>Alimento:</p>
+                    <div *ngFor="let item of order.items; let i = index;">
+                        <p *ngIf="order?.items[i] !== 0">{{possible_items[i]}}: {{order?.items[i]}}</p>
                     </div>
-                </div>
-               
+             
+                    <p class="data">Solicitação realizada em: {{order?.created_at}}</p>    
+                    <div style="display: flex; gap: 12px; align-items: center; width: 100%;">
+                        <p>{{((order?.sum_donated / order?.sum_items) * 100).toString().split('.')[0]}}%</p>
+                        <div class="progress-bar-outside">
+                            <div class="progress-bar-inside" [style.width.%]="((order?.sum_donated / order?.sum_items) * 100) + 2">
+                            </div>
+                            
+                        </div>
+                    </div>
+                </button>
             </div>
+        </div>
+            <br>
+            <br>
+            <br>
+            <br>
+     
+
+
+
+
+
+
+
+</main>
+</main>
         
 <!--         
             <div class="bottom-company-info">

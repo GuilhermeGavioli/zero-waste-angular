@@ -16,6 +16,7 @@ export class PaginaOngComponent implements OnInit{
   public user: any;
   percentage = 12;
   public ong: any;
+  public ong_active_orders: any;
   public ong_id: string = '';
   public is_user_owner: boolean = false;
   // public ong = {
@@ -67,6 +68,9 @@ export class PaginaOngComponent implements OnInit{
     }
   }
 
+
+  public possible_items = ['Farinhas e Amidos', 'Conservas', 'Óleos e Gorduras', 'Leites e Derivados', 'Sucos e Bebidas', 'Grãos e Cereais', 'Enlatados']
+  
   async desmarcar(order_id: string) {
     const found = this.my_appointments.find((appointment: any) =>  appointment.order_parent_id === order_id )
     if (!found) return
@@ -127,7 +131,7 @@ export class PaginaOngComponent implements OnInit{
   }
 
   async getOngOrders() {
-    const res = await fetch(`http://localhost:3000/getordersfrom?ong_id=${this.ong._id}`, {
+    const res = await fetch(`http://localhost:3000/getactiveordersfrom?ong_id=${this.ong._id}`, {
       credentials: 'include',
     method: 'GET',
     })
@@ -142,7 +146,8 @@ export class PaginaOngComponent implements OnInit{
           data[i].sum_donated += data[i].donated[j]
         }
       }
-      this.ong.orders = data;
+      this.ong_active_orders = data;
+      console.log(this.ong_active_orders)
     }
 }
 

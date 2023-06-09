@@ -21,6 +21,7 @@ export class HeaderComponent {
 
 
 
+
   openSidebar() {
     this.sidebar.nativeElement.style.left = '0'
     this.is_sidebar_open = 1

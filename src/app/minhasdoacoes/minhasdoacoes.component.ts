@@ -42,6 +42,16 @@ export class MinhasdoacoesComponent {
     }
   }
 
+  async gerarComprovante(appointment_id: string){
+    const res = await fetch(`http://localhost:3000/generatePDF?appointment_id=${appointment_id.toString()}`, {
+      credentials: 'include',
+      method: 'GET',
+    });
+    if (res.status === 200) {
+      console.log(await res.text())
+    }
+  }
+
   async fireView() {
     const arr: any[] = []
     this.not_viewd_donations.forEach((item: any) => {

@@ -58,6 +58,12 @@ export class SolicitacaoComponent {
     
   }
 
+  createComponent() {
+    const produto = document.getElementById('prod');
+    let cloneProduto = produto?.cloneNode(true);
+    document.getElementById('produtos')?.appendChild(cloneProduto as Node);
+  }
+
   async getUserInfo() {
     this.user = await this.authService.getUserFromStorage()
   }
@@ -129,6 +135,10 @@ export class SolicitacaoComponent {
     } else {
       console.log(await res.text())
     }
+  }
+
+  goToOngPage(ong_id: string) {
+    this.router.navigateByUrl(`/ong/${ong_id}`)
   }
 
 }

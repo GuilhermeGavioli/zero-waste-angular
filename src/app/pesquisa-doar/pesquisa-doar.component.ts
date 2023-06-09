@@ -17,6 +17,7 @@ export class PesquisaDoarComponent implements OnInit {
   public my_likes: any[] = []
   public current_pack: number = 1
   public is_over: number = 0
+  public ong_active_orders: any;
 
   public is_on_ong_screen = 0;
 
@@ -35,18 +36,22 @@ export class PesquisaDoarComponent implements OnInit {
     window.location.href = `/solicitacao/${order_id}`
   }
 
+  goToOrderPage(order_id: string) {
+    this.router.navigateByUrl(`/solicitacao/${order_id}`)
+  }
+
   async openOng(i: number) {
     this.is_on_ong_screen = 1
     this.ong = this.ongs[i]
     this.ong.orders = [];
     this.ong.loading_orders = 1;
-    const res = await fetch(`http://localhost:3000/getordersfrom?ong_id=${this.ongs[i]._id}`, {
+    const res = await fetch(`http://localhost:3000/getactiveordersfrom?ong_id=${this.ongs[i]._id}`, {
       credentials: 'include',
       method: 'GET',
     })
     const data = await res.json()
     console.log(data)
-    this.ong.orders = data;
+    this.ong_active_orders = data;
     this.ong.loading_orders = 0;
   }
 
@@ -100,6 +105,9 @@ export class PesquisaDoarComponent implements OnInit {
       }
     }
   }
+
+  public weekdays = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab']
+  public possible_items = ['Farinhas e Amidos', 'Conservas', 'Óleos e Gorduras', 'Leites e Derivados', 'Sucos e Bebidas', 'Grãos e Cereais', 'Enlatados']
 
   async likeOng(ong_id: string, index: number){
     const res = await fetch(`http://localhost:3000/like?ong_id=${ong_id}`, {

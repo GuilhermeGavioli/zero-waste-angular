@@ -43,6 +43,57 @@
     <button (click)="makeAppointment()"  style="width: 100%; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 6px 46px 6px 46px; font-weight: 600; border-radius: 0px; box-shadow: none;">
         Marcar Agendamento
       </button>
+
+      <div class="box">
+        <a href="" class="voltar"><div class="voltar-btn"><img src="../../assets/Voltar.png" alt=""></div></a>
+        <h1>Faça seu agendamento!</h1>
+        <br>
+        <h2>NOME DA SOLICITAÇÃO</h2>
+        <div class="holder data">
+            <h3>Selecione o data da sua visita: </h3>
+            <div class="info">
+                <div class="dia">
+                    <select name="" id="" class="select">
+                        <option value="" >Domingo</option>
+                        <option value="" selected>Segunda-feira</option>
+                        <option value="" >Terça-feira</option>
+                        <option value="" >Quarta-feira</option>
+                        <option value="" >Quinta-feira</option>
+                        <option value="" >Sexta-feira</option>
+                        <option value="" >Sábado</option>
+                    </select>
+                </div>
+                <div class="hora">
+                    <input type="time" class="input" placeholder="12:00">
+                </div>
+            </div>
+        </div>
+        <div class="holder" id="produtos">
+            <div class="alimentoInfo" id="prod">
+                <div class="alimento">
+                    <h3>Selecione o que deseja doar:</h3>
+                    <select name="" id="" class="select">
+                        <option value="">Arroz</option>
+                    </select>
+                </div>
+                <div class="quantidade">
+                    <h3>Quantidade:</h3>
+                    <input type="text" class="input" placeholder="0 Kg">
+                </div>    
+            </div>
+        </div>      
+        <div class="btn-holder">
+            <button class="envia-btn" (click)="createComponent()">
+                <img src="../../assets/mais.png" alt="">Adicionar outro
+            </button>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="btn-holder">
+            <button class="confirma-btn" >Agenda</button>
+        </div>
+    </div>
     </div>
 
 
@@ -108,18 +159,26 @@
             <button *ngIf="is_owner === 1">Editar</button>
             
         <div>
-            <p style="font-size: 1.4em; font-weight: 900; color: rgb(45,45,45)">{{ong_owner?.name}}</p>
-            <p style="font-size: 1.2em; font-weight: 700; color: rgb(45,45,45)">{{order?.name}}</p>
+            <p style="font-size: 1.4em; font-weight: 900; color: rgb(45,45,45)">{{order?.name}}</p>
+            <p style="font-size: 1.2em; font-weight: 700; color: var(--zw-second); text-decoration: underline; " (click)="goToOngPage(ong_owner?._id)">{{ong_owner?.name}}</p>
+            <div>
+                <p style="color: rgb(45,45,45)">{{order?.description}}</p>
+              </div>
         </div>
 
-        <div>
+        <div *ngIf="order?.over" style="border-radius: 15px; padding: 12px; border: 1px solid var(--zw-red); background-color: whitesmoke; color: var(--zw-red)">
+            <h2 style="font-size: 1.3em;">Agendamento Já concluído</h2>
+            <p style="font-size: 0.9em;">Caso voce já possua um agendamento para com esta solicitação, voce ainda poderá realiza-lo normalmente e receber seu comprovante. Caso desmarque ele, nãos será possivel agenda-lo novamente.</p>
+          </div>
+
+        <!-- <div>
             <p style="color: rgb(45,45,45)"><span style="font-weight: 900;">Endereço: </span>{{ong_owner?.address_street}}</p>
             <p style="color: rgb(45,45,45)"><span style="font-weight: 900;">Número: </span> {{ong_owner?.address_number}}</p>
             <p style="color: rgb(45,45,45)"><span style="font-weight: 900;">Estado: </span> {{ong_owner?.address_state}}</p>
             <p style="color: rgb(45,45,45)"><span style="font-weight: 900;">Contato: </span> 
                 ({{ong_owner?.phone.substring(0,2)}}) {{ong_owner?.phone.slice(2)}}
             </p>
-      </div>
+      </div> -->
 
       <div *ngIf="user.type === 'ong'">warning Apenas usuarios podem fazer agendamentos</div>
 
@@ -133,20 +192,26 @@
             </thead>
             <tbody>
                 <tr *ngFor="let item of possible_items; let i = index">
-                <td class="truncate">{{ item }}</td>
-                <td>{{order?.items[i]}}</td>
-                <td>{{order?.donated[i]}}</td>
+                <td class="truncate" [style.background]="order?.items[i] === 0 ? 'rgb(220,220,220)': 'white'"
+                [style.color]="order?.items[i] === 0 ? 'gray': 'black'"
+                >{{ item }}</td>
+                <td [style.background]="order?.items[i] === 0 ? 'rgb(220,220,220)': 'white'"
+                [style.color]="order?.items[i] === 0 ? 'gray': 'black'"
+                >{{order?.items[i]}}</td>
+                <td [style.background]="order?.items[i] === 0 ? 'rgb(220,220,220)': 'white'"
+                [style.color]="order?.items[i] === 0 ? 'gray': 'black'">{{order?.donated[i]}}</td>
             </tr>
         </tbody>
           </table>
 
-          <div>
-              <p style="color: rgb(45,45,45)">{{order?.description}}</p>
-            </div>
+
+      
+
+      
 
             <div *ngIf="user.type === 'user'">
 
-                <button  (click)="is_open = 1; marking_appointment = 1" *ngIf="is_appointed === 0"  style="width: 100%; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 12px 46px 12px 46px; font-weight: 600; border-radius: 0px; box-shadow: none;">
+                <button *ngIf="is_appointed === 0 && !order?.over"  (click)="is_open = 1; marking_appointment = 1" style="width: 100%; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 12px 46px 12px 46px; font-weight: 600; border-radius: 0px; box-shadow: none;">
                     Marcar Agendamento
                 </button>
 
@@ -158,6 +223,10 @@
                     Desmarcar Agendamento
                 </button> -->
             </div>
+
+           
+
+
     
             
             

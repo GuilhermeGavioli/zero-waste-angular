@@ -25,7 +25,7 @@ export class PerfilUsuarioComponent implements OnInit{
 
   public possible_items = ['Farinhas e Amidos', 'Conservas', 'Óleos e Gorduras', 'Leites e Derivados', 'Sucos e Bebidas', 'Grãos e Cereais', 'Enlatados']
 
-  public item_names = ['item a', 'item b', 'item c', 'item d', 'item e', 'item f', 'item g']
+
   
   constructor(private router: Router, private app: AppModule, private authService: AuthService) { }
   
@@ -124,7 +124,7 @@ export class PerfilUsuarioComponent implements OnInit{
   }
 
   async getMyOrders() {
-    const res = await fetch(`http://localhost:3000/myorders`, {
+    const res = await fetch(`http://localhost:3000/myactiveorders`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -142,13 +142,15 @@ export class PerfilUsuarioComponent implements OnInit{
       
       this.my_orders = data
       console.log(this.my_orders)
+    } else {
+      console.log(await res.text())
     }
   }
 
   public my_appointments_count: number = 0;
   public my_not_viewd_donations_count: number = 0;
   async getMyAppointments() {
-    const res = await fetch(`http://localhost:3000/myappointments`, {
+    const res = await fetch(`http://localhost:3000/myactiveappointments`, {
       credentials: 'include',
       method: 'GET',
     });

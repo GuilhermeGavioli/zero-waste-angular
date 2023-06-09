@@ -1,100 +1,91 @@
 <main class="master" [@slideToSide] *ngIf="is_on_order_screen === 1">
     <app-header></app-header>
     <main class="main">
-        <button (click)="closeOrder()">back</button>
+       
+
      
-            <!-- <div class="size1">
-                <a href="" class="voltar"><div class="voltar-btn"><img src="../../assets/Voltar.png" alt=""></div></a>
-                
-            <div class="filtragem">
-                <h2>Veja abaixo as solicitações 
-                    de doações</h2>
-                <div class="filtros">
-                    <select name="" id="">
-                        <option value="">selecionar</option>
-                    </select>
-                    <select name="" id="">
-                        <option value="">selecionar</option>
-                    </select>
-                    <select name="" id="">
-                        <option value="">selecionar</option>
-                    </select>
-                    <select name="" id="">
-                        <option value="">selecionar</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-            <div class="solicitacoes">
-                <div class="solicitacao">
-                    <h3>NOME DA ONG</h3>
-                    <p>solicitação feita em: <span>DATA DA SOLICITAÇÃO</span></p>
-                    <a href="/pagina-ong/0">clique aqui para ver a solicitação</a>
-                </div>
-                <div class="solicitacao">
-                    <h3>NOME DA ONG</h3>
-                    <p>solicitação feita em: <span>DATA DA SOLICITAÇÃO</span></p>
-                    <a href="/pagina-ong/1">clique aqui para ver a solicitação</a>
-                </div>
-                <div class="solicitacao">
-                    <h3>NOME DA ONG</h3>
-                    <p>solicitação feita em: <span>DATA DA SOLICITAÇÃO</span></p>
-                    <a href="/pagina-ong/2">clique aqui para ver a solicitação</a>
-                </div>
-            </div> -->
-
-            <div class="ong-main-info">
-
-                <p>
-                    {{order?.name}}
-                    {{order?.items}}
-                    {{order?.donated}}
-
-                </p>
-        
-
-                <div class="ong-pic"></div>
-                <h3>{{order?.name}}</h3>
-                <h4>Children | Love | Help | Better | World</h4>
-                
-                <div class="pair-of-buttons-container">
-                    <button class="classic-button p-btn">Like</button>
-                    <button class="classic-button s-btn">Chat</button>
-                </div>
-            </div>
-        
+            <p style="font-size: 1.4em; font-weight: 900; color: rgb(45,45,45)">{{order?.name}}</p>
+            <!-- <p style="font-size: 1.2em; font-weight: 700; color: var(--zw-second); text-decoration: underline; " (click)="goToOngPage(ong_owner?._id)">{{ong_owner?.name}}</p> -->
             <div>
-                <h2>About</h2>
-                <p>{{order?.description}}</p>
+                <p style="color: rgb(45,45,45)">{{order?.description}}</p>
+              </div>
+        
+
+        <div *ngIf="order?.over" style="border-radius: 15px; padding: 12px; border: 1px solid var(--zw-red); background-color: whitesmoke; color: var(--zw-red)">
+            <h2 style="font-size: 1.3em;">Agendamento Já concluído</h2>
+            <p style="font-size: 0.9em;">Caso voce já possua um agendamento para com esta solicitação, voce ainda poderá realiza-lo normalmente e receber seu comprovante. Caso desmarque ele, nãos será possivel agenda-lo novamente.</p>
+          </div>
+
+        <!-- <div>
+            <p style="color: rgb(45,45,45)"><span style="font-weight: 900;">Endereço: </span>{{ong_owner?.address_street}}</p>
+            <p style="color: rgb(45,45,45)"><span style="font-weight: 900;">Número: </span> {{ong_owner?.address_number}}</p>
+            <p style="color: rgb(45,45,45)"><span style="font-weight: 900;">Estado: </span> {{ong_owner?.address_state}}</p>
+            <p style="color: rgb(45,45,45)"><span style="font-weight: 900;">Contato: </span> 
+                ({{ong_owner?.phone.substring(0,2)}}) {{ong_owner?.phone.slice(2)}}
+            </p>
+      </div> -->
+
+      <div *ngIf="user?.type === 'ong'">warning Apenas usuarios podem fazer agendamentos</div>
+
+        <table>
+            <thead>
+              <tr>
+                  <th>Items</th>
+                <th>Solicitado</th>
+                <th>Doado</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of possible_items; let i = index">
+                <td class="truncate" [style.background]="order?.items[i] === 0 ? 'rgb(220,220,220)': 'white'"
+                [style.color]="order?.items[i] === 0 ? 'gray': 'black'"
+                >{{ item }}</td>
+                <td [style.background]="order?.items[i] === 0 ? 'rgb(220,220,220)': 'white'"
+                [style.color]="order?.items[i] === 0 ? 'gray': 'black'"
+                >{{order?.items[i]}}</td>
+                <td [style.background]="order?.items[i] === 0 ? 'rgb(220,220,220)': 'white'"
+                [style.color]="order?.items[i] === 0 ? 'gray': 'black'">{{order?.donated[i]}}</td>
+            </tr>
+        </tbody>
+          </table>
+
+
+      
+
+      
+
+            <div *ngIf="user?.type === 'user'">
+
+                <button *ngIf="is_appointed === 0 && !order?.over"  (click)="makeAppointment(order._id)" style="width: 100%; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 12px 46px 12px 46px; font-weight: 600; border-radius: 0px; box-shadow: none;">
+                    Marcar Agendamento
+                </button>
+
+                <button  (click)="is_open = 1;" *ngIf="is_appointed === 1"  style="width: 100%; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 12px 24px 12px 24px; font-weight: 600; border-radius: 0px; box-shadow: none;">
+                    Desmarcar Agendamento
+                </button> 
+    
+                <!-- <button  (click)="is_open = 1" *ngIf="is_appointed === 1"  style="width: 100%; border: none; color: var(--zw-red); background: white; font-size: 1.3em; padding: 8px 24px 8px 24px; font-weight: 600; border-radius: 0px; box-shadow: none;">
+                    Desmarcar Agendamento
+                </button>-->
             </div>
+
+           
+
+
+    
+            
+            
+          
+          
+
+       
+        <!-- <button >Marcar Agendamento</button> -->
+
         
         
-            <div class="requests" *ngFor="let order of orders">
-                <div class="request" >
-                    <h3>{{order.name}}</h3>
-                    <p>{{order.description}}</p>
-                    <div class="pair-of-buttons-container">
-                        <button class="classic-button p-btn" (click)="makeAppointment(order._id)">Fazer um Agendamento</button>
-                    </div>
-                </div>
-               
-            </div>
-        
-<!--         
-            <div class="bottom-company-info">
-                <span class="bottom-info-container">
-                    <p>likes</p>
-                    <p>7</p>
-                </span>
-                <span class="bottom-info-container">
-                    <p>Requests</p>
-                    <p>1</p>
-                </span>
-                <span class="bottom-info-container">
-                    <p>Completed</p>
-                    <p>0</p>
-                </span>
-            </div> -->
+
+     
+          
         
 
 
