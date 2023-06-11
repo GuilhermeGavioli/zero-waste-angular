@@ -5,7 +5,16 @@
 
      
   
+      <div #ErrorMessage style="z-index: 3; position: absolute; top: -300px; background-color: var(--zw-second); border-radius: 35px; padding: 16px 24px 16px 24px; color: white; font-weight: 700; width: 300px; font-size: 1.1em; display: flex; align-items: center; gap: 8px; box-shadow: 4px 6px 4px -2px rgba(0, 0, 0, 0.111); margin: auto; right: 0; left: 0; transition: .2s ease-in-out;">
+        <div>
 
+          <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="white" class="bi bi-exclamation-diamond" viewBox="0 0 16 16">
+            <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+          </svg>
+        </div>
+        <p>{{denied_message}}</p>
+      </div>
      
 
             <!-- <img src="../../assets/Group_218-removebg-preview.png" style="position: absolute; top: -45px; left: -8px; width: 400px;" alt=""> -->
@@ -47,7 +56,7 @@
                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
                       </svg>
                   </div>
-                  <input  name="name" [(ngModel)]="name" type="text" style="flex-grow: 1; background-color: white; border: none;" placeholder="Nome" [ngModelOptions]="{standalone: true}" (ngModelChange)="onNameInputChange()" #nameInput="ngModel" >
+                  <input  name="name" [(ngModel)]="name" type="text" style="flex-grow: 1; background-color: white; border: none;" placeholder="Nome" [ngModelOptions]="{standalone: true}"  #nameInput="ngModel" >
 
                   <div  *ngIf="valid_name" style="width: 30px; height: 100%; background: white; display: flex; justify-content: center; align-items: center; transition: 0.2s ease-in-out;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--zw-red)" class="bi bi-check" viewBox="0 0 16 16">
@@ -63,7 +72,7 @@
                       <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
                     </svg>
                   </div>
-                  <input  name="email" [(ngModel)]="email" type="email" style="flex-grow: 1; background-color: white;" placeholder="Email" [ngModelOptions]="{standalone: true}" (ngModelChange)="onEmailInputChange()" #emailInput="ngModel" >
+                  <input  name="email" [(ngModel)]="email" type="email" style="flex-grow: 1; background-color: white;" placeholder="Email" [ngModelOptions]="{standalone: true}"  #emailInput="ngModel" >
 
                   <div  *ngIf="valid_email" style="width: 30px; height: 100%; background: white; display: flex; justify-content: center; align-items: center; transition: 0.2s ease-in-out;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--zw-red)" class="bi bi-check" viewBox="0 0 16 16">
@@ -99,7 +108,7 @@
                       <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
                     </svg>
                   </div>
-                  <input  name="senha" [(ngModel)]="password" type="password" style="flex-grow: 1; background-color: white;" placeholder="Senha" [ngModelOptions]="{standalone: true}" (ngModelChange)="onPasswordInputChange()" #passwordInput="ngModel" >
+                  <input  name="senha" [(ngModel)]="password" type="password" style="flex-grow: 1; background-color: white;" placeholder="Senha" [ngModelOptions]="{standalone: true}"  #passwordInput="ngModel" >
 
                   <div  *ngIf="valid_password" style="width: 30px; height: 100%; background: white; display: flex; justify-content: center; align-items: center; transition: 0.2s ease-in-out;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--zw-red)" class="bi bi-check" viewBox="0 0 16 16">
@@ -116,7 +125,7 @@
                       <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
                     </svg>
                   </div>
-                  <input  name="confirmar_senha" [(ngModel)]="confirmPassword" type="password" style="flex-grow: 1; background-color: white;" placeholder="Confirmar Senha" [ngModelOptions]="{standalone: true}" (ngModelChange)="onConfirmPasswordInputChange()" #confirmPasswordInput="ngModel" >
+                  <input  name="confirmar_senha" [(ngModel)]="confirmPassword" type="password" style="flex-grow: 1; background-color: white;" placeholder="Confirmar Senha" [ngModelOptions]="{standalone: true}"  #confirmPasswordInput="ngModel" >
 
                   <div  *ngIf="valid_confirm_password" style="width: 30px; height: 100%; background: white; display: flex; justify-content: center; align-items: center; transition: 0.2s ease-in-out;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--zw-red)" class="bi bi-check" viewBox="0 0 16 16">
@@ -138,7 +147,7 @@
                       <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
                     </svg>
                   </div>
-                  <input  name="endereco" [(ngModel)]="address" type="text" style="flex-grow: 1; background-color: white;" placeholder="Endereço" [ngModelOptions]="{standalone: true}" (ngModelChange)="onAddressInputChange()" #addressInput="ngModel" >
+                  <input  name="endereco" [(ngModel)]="address" type="text" style="flex-grow: 1; background-color: white;" placeholder="Endereço" [ngModelOptions]="{standalone: true}"  #addressInput="ngModel" >
   
                   <div  *ngIf="valid_address" style="width: 30px; height: 100%; background: white; display: flex; justify-content: center; align-items: center; transition: 0.2s ease-in-out;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--zw-red)" class="bi bi-check" viewBox="0 0 16 16">
@@ -170,7 +179,7 @@
                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484-.08.08-.162.158-.242.234-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z"/>
                   </svg>
                 </div>
-                <input  name="endereco" [(ngModel)]="address" type="text" style="flex-grow: 1; background-color: white;" placeholder="Endereço" [ngModelOptions]="{standalone: true}" (ngModelChange)="onAddressInputChange()" #addressInput="ngModel" >
+                <input  name="endereco" [(ngModel)]="address" type="text" style="flex-grow: 1; background-color: white;" placeholder="Endereço" [ngModelOptions]="{standalone: true}"  #addressInput="ngModel" >
 
                 <div  *ngIf="valid_address" style="width: 30px; height: 100%; background: white; display: flex; justify-content: center; align-items: center; transition: 0.2s ease-in-out;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--zw-red)" class="bi bi-check" viewBox="0 0 16 16">
@@ -211,7 +220,7 @@
                           <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
                         </svg>
                       </div>
-                      <input  name="numberoEndereco" [(ngModel)]="addressNumber" type="number" style="flex-grow: 1; background-color: white;" placeholder="Numero" [ngModelOptions]="{standalone: true}" (ngModelChange)="onAddressNumberInputChange()" #addressNumberInput="ngModel" >
+                      <input  name="numberoEndereco" [(ngModel)]="addressNumber" type="number" style="flex-grow: 1; background-color: white;" placeholder="Numero" [ngModelOptions]="{standalone: true}"  #addressNumberInput="ngModel" >
       
                       <div  *ngIf="valid_address_number" style="width: 30px; height: 100%; background: white; display: flex; justify-content: center; align-items: center; transition: 0.2s ease-in-out;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--zw-red)" class="bi bi-check" viewBox="0 0 16 16">

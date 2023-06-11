@@ -1,6 +1,7 @@
 import {  Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { GlobalService } from '../global.service';
 
 import {ongs} from '../ongs';
 import { slideToSide } from '../slideAnimation';
@@ -39,7 +40,7 @@ export class PaginaOngComponent implements OnInit{
 
   public weekdays = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab']
   public my_appointments: any = []
-  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService){}
+  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private global: GlobalService){}
   
   async ngOnInit(): Promise<void> {
     this.ong_id = this.route.snapshot.paramMap.get('ong_id') || '';    

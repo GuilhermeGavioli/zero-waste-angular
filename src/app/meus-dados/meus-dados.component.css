@@ -33,3 +33,16 @@ h1{
     display: flex;
     justify-content: space-between;
 } */
+
+
+.find-ongs-button{
+    background-color: var(--zw-red);
+    color: white;
+    border: none;
+    padding: 8px 12px 8px 12px;
+    width: fit-content;
+    font-size: 1.2em;
+    border-radius: 6px;
+    font-weight: 600;
+    box-sizing: 4px 4px 4px 4px rgba(0, 0, 0, 0.137);
+}

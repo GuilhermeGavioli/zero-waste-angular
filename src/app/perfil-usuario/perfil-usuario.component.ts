@@ -1,9 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppModule } from '../app.module';
 import { OnInit } from '@angular/core';
 import {slideAnimation, slideToSide, fastSlideAnimation, slideToSideFromRight} from '../slideAnimation'
 import { AuthService } from '../auth.service';
+import { GlobalService } from '../global.service';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -27,7 +28,7 @@ export class PerfilUsuarioComponent implements OnInit{
 
 
   
-  constructor(private router: Router, private app: AppModule, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private global: GlobalService, private route: ActivatedRoute) { }
   
   // goToPage(pageName:string){
   //   this.router.navigate([`${pageName}`]);
@@ -37,6 +38,11 @@ export class PerfilUsuarioComponent implements OnInit{
   //   this.router.navigate([`${rot}`]);
   // }
   async ngOnInit() {
+     this.route.url.subscribe((urlSegments: any) => {
+      const routeName = urlSegments[urlSegments.length - 1].path;
+      this.global.setMyRoute(routeName)
+    });
+
     await this.getName()
     
     // await this.getMostLikedOngs();
@@ -48,7 +54,12 @@ export class PerfilUsuarioComponent implements OnInit{
     await this.getLastOrders()
   }
 
+  goTo(url: string) {
+    this.global.goTo(url)
+  }
+
   loading = true;
+  
   openAppointmentDetails(appointment_id: string) {
     this.appointmentContainer.nativeElement.style.bottom = '0'
     
@@ -60,7 +71,9 @@ export class PerfilUsuarioComponent implements OnInit{
       method: 'GET',
     });
     if (res.status === 200) {
-      this.my_appointments = this.my_appointments.filter(appointment => appointment._id !== appointment_id)
+      this.my_appointments = this.my_appointments.filter(appointment => appointment._id.toString() !== appointment_id)
+      this.my_appointments_count--
+      console.log(this.my_appointments)
     } else {
       console.log(await res.text())
     }
@@ -202,23 +215,25 @@ export class PerfilUsuarioComponent implements OnInit{
   }
 
 
+  
+  
 
 
-
-  goTo(url: string){
-    this.router.navigateByUrl(`/${url}`)
-  }
+  
 
   
 
   goToAppointmentsFromOrderPage(order_id: string) {
+    this.global.setLastRoute('perfil')
     this.router.navigateByUrl(`/agendamentosdaorder/${order_id}`)
   }
 
   goToOrderPage(order_id: string) {
+    this.global.setLastRoute('perfil')
     this.router.navigateByUrl(`/solicitacao/${order_id}`)
   }
   goToOngPage(ong_id: string) {
+    this.global.setLastRoute('perfil')
     this.router.navigateByUrl(`/ong/${ong_id}`)
   }
 }

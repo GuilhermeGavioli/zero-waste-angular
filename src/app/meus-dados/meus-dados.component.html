@@ -57,16 +57,28 @@
 
 
 <main class="master" [@slideToSide]>
-    <app-header [back]="'perfil'"></app-header>
+    <app-header [backButton]=true></app-header>
     <main class="main">
+
+        <div #ErrorMessage style="z-index: 3; position: absolute; top: -300px; background-color: var(--zw-second); border-radius: 35px; padding: 16px 24px 16px 24px; color: white; font-weight: 700; width: 300px; font-size: 1.1em; display: flex; align-items: center; gap: 8px; box-shadow: 4px 6px 4px -2px rgba(0, 0, 0, 0.111); margin: auto; right: 0; left: 0; transition: .2s ease-in-out;">
+            <div>
+    
+              <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="white" class="bi bi-exclamation-diamond" viewBox="0 0 16 16">
+                <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+              </svg>
+            </div>
+            <p>{{denied_message}}</p>
+          </div>
+
         
 
         <div style="display: flex; flex-direction: column; gap: 24px;">
 
             <div style="display: flex; flex-direction: column; gap: 8px; align-items: center;">
 
-                <div style="border: 10px solid var(--zw-red); border-radius: 50%; width: 120px; height: 120px; display: flex; justify-content: center; align-items: center;;">
-                    <img src="../../assets/userprofile.png" style="width: 80px;" alt="">
+                <div style=" border-radius: 50%; width: 120px; height: 120px; display: flex; justify-content: center; align-items: center;overflow: hidden;">
+                    <img src="../../assets/userprofile.png" style="width: 70px;" alt="">
                 </div>
                 <p style="color: #bebebe; font-weight: 700; font-size: 1.1em;">{{me?.email}}</p>
                 
@@ -76,34 +88,19 @@
             <div style="display: flex; flex-direction: column; gap: 16px; padding: 0 16px 0 16px;">
                 
                 <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
-                    <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Nome:</label>
-                    <input type="text" name="" style="background: #EAEAEA; border:none; color: #8f8f8f; font-weight: 700; height: 45px; width: 100%; font-size: 1.2em;" value="{{me?.name}}">
+                    <label  style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Nome:</label>
+                    <input [(ngModel)]="new_me.name" type="text" name="" style="background: #ffffff; border:none; color:rgb(100,100,100); font-weight: 500; height: 45px; width: 100%; font-size: 1.2em;" value="{{me?.name}}">
                 </div>
-                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
-                    <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Endereço:</label>
-                    <input type="text" name="" style="background: #EAEAEA; border:none; color: #8f8f8f; font-weight: 700; height: 45px; width: 100%; font-size: 1.2em;" value="{{me?.address}}">
-                </div>
-                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
-                    <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Número:</label>
-                    <input type="number" name="" style="background: #EAEAEA; border:none; color: #8f8f8f; font-weight: 700; height: 45px; width: 100%; font-size: 1.2em;" value="{{me?.address_number}}">
-                </div>
+              
+       
 
                 <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
-                    <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Estado:</label>
-                    <select style="background: #EAEAEA; border:none; color: #8f8f8f; font-weight: 700; height: 45px; width: 100%; font-size: 1.2em;" [(ngModel)]="address_state" name= "UF" style="box-shadow: 2px 4px 6px -3px rgba(0, 0, 0, 0.214); width: 145px;">
-                        <option value="AC">AC</option>
-                        <option value="DF">DF</option>
-                        <option value="ES">ES</option>
-                        <option value="GO">GO</option>
-                        <option value="SC">SC</option>
-                        <option value="SP">SP</option>
-                    </select>
+                    <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Senha:</label>
+                    <input [(ngModel)]="new_me.password" type="password" name="" style="background: #ffffff; border:none; color: rgb(100,100,100); font-weight: 500; height: 45px; width: 100%; font-size: 1.2em;" value="{{me?.password}}">
                 </div>
 
-                <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
-                    <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Telefone:</label>
-                    <input type="text" name="" style="background: #EAEAEA; border:none; color: #8f8f8f; font-weight: 700; height: 45px; width: 100%; font-size: 1.2em;" value="{{me?.phone}}">
-                </div>
+                
+
 
                 <!-- <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px;">
                     <label style="color: var(--zw-red); font-weight: 900; font-size: 1.2em;">Senha:</label>
@@ -111,16 +108,32 @@
                 </div> -->
 
 
-                <button #loginButton (click)="changeInfo()" style="margin-top: 24px; width: 100%; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 6px 46px 6px 46px; font-weight: 600; border-radius: 0px; box-shadow: none;" >
-                    Alterar Info
-                  </button>
+                <div style="display: flex; align-items: center; gap: 8px; justify-content: start;">
+
+                    <!-- <button (click)="changeInfo()" style="margin-top: 24px; width: 100%; border: none; color: white; background: var(--zw-second); font-size: 1.3em; padding: 6px 46px 6px 46px; font-weight: 600; border-radius: 0px; box-shadow: none;" >
+                        Alterar
+                    </button> -->
+                    
+                    <button #changeInfoButton (click)="changeInfo()" class="find-ongs-button" style="color: white; background: var(--zw-second); flex-grow: 1;" >
+                        Alterar Dados
+                    </button>
+                    <button #deleteAccountButton (click)="deleteAccount()" class="find-ongs-button">
+                        Deletar Conta
+                    </button>
+
+                </div>
+
+             
                 
             </div>
 
 
               
               <div style="height: 50px; display: flex; justify-content: center; align-items: center;">
-                  <div #spinner class="spinner" *ngIf="loading"></div>
+                  <div #spinner class="spinner" *ngIf="loading"
+                    [style.border-top]="spinnerColor === 'red' ? '4px solid var(--zw-red);' : '4px solid var(--zw-second);'" 
+
+                  ></div>
               </div>
 
         </div>

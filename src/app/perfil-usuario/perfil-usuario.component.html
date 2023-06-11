@@ -21,7 +21,7 @@
 </main> -->
 
 <main class="master" [@slideAnimation]>
-    <app-header [back]="'perfil'" [color]=true [sidebarButton]="true"></app-header>
+    <app-header [backButton]=false></app-header>
 
 <main class="main">
 
@@ -184,7 +184,7 @@
             </svg>
             <p style="font-weight: 600; width: fit-content; text-align: center; width: 250px;">Voce não possui nenhum Agendamento...</p>
                
-            <button #loginButton (click)="goTo('/orders')" style="width: fit-content; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 6px 36px 6px 36px; font-weight: 600; border-radius: 0px; box-shadow: none;" >
+            <button #loginButton (click)="goTo('/orders')" style="width: fit-content; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 6px 36px 6px 36px; font-weight: 600; border-radius: 0px; box-shadow: none; border-radius: 6px;" >
                 Procurar
               </button>
         </div>
@@ -270,19 +270,17 @@
                      
                       
 
-                        <div style="display: flex; width: 100%; justify-content: space-between;">
+                        <div style="display: flex; width: 100%; justify-content: space-between; gap: 8px;">
 
-                            <button *ngIf="!appointment.confirmed" (click)="desmarcar(appointment._id)"  style="width:fit-content; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 6px 16px 6px 16px; font-weight: 600; border-radius: 0px; box-shadow: none;" >Desmarcar</button>
+                            <button *ngIf="!appointment.confirmed" (click)="desmarcar(appointment._id)"  style="width:fit-content; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 6px 8px 6px 8px; font-weight: 600; border-radius: 0px; box-shadow: none;  border-radius: 10px; flex-grow: 1;" >Desmarcar</button>
 
-                            <button *ngIf="!appointment.confirmed" (click)="goToOrderPage(appointment?.order_parent_id)"  style="width:fit-content; border: none; color: var(--zw-red); background: white; font-size: 1.3em; padding: 6px 16px 6px 16px; font-weight: 600; border-radius: 0px; box-shadow: none;" >
+                            <button *ngIf="!appointment.confirmed" (click)="goToOrderPage(appointment?.order_parent_id)"  style="width:fit-content; border: none; color: var(--zw-red); background: white; font-size: 1.3em; padding: 6px 8px 6px 8px; font-weight: 600; box-shadow: none; border-radius: 6px;" >
                                 Ver Solicitação
                             </button>
 
-                            <button *ngIf="appointment.confirmed"  style="width:fit-content; border: none; color: rgb(170,170,170); background: whitesmoke; font-size: 1.3em; padding: 6px 16px 6px 16px; font-weight: 600; border-radius: 0px; box-shadow: none;" >Desmarcar</button>
+                            <button *ngIf="appointment.confirmed"  style="width:fit-content; border: none; color: rgb(170,170,170); background: whitesmoke; font-size: 1.3em; padding: 6px 8px 6px 8px; font-weight: 600; border-radius: 6px; box-shadow: none; flex-grow: 1;" >Desmarcar</button>
                             
-                            <button *ngIf="appointment.confirmed" (click)="goToOrderPage(appointment?.order_parent_id)"  style="width:fit-content; border: none; color: rgb(170,170,170); background: whitesmoke; font-size: 1.3em; padding: 6px 16px 6px 16px; font-weight: 600; border-radius: 0px; box-shadow: none;" >
-                                Ver Solicitação
-                            </button>
+                        
                         </div>
                 </div>
 

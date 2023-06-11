@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
@@ -38,6 +38,11 @@ import { AgendamentosdaminhaorderComponent } from './agendamentosdaminhaorder/ag
 import { MinhasdoacoesComponent } from './minhasdoacoes/minhasdoacoes.component';
 import { OrdersComponent } from './orders/orders.component';
 import { AjudaComponent } from './ajuda/ajuda.component';
+import { GlobalService } from './global.service';
+
+export function globalServiceFactory(globalService: GlobalService) {
+  return () => globalService.initialize();
+}
 
 @NgModule({
   declarations: [
@@ -77,40 +82,18 @@ import { AjudaComponent } from './ajuda/ajuda.component';
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    GlobalService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: globalServiceFactory,
+      deps: [GlobalService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(private router: Router) {}
-  user = "";
-  autenticate(tipo : String){
-    // @ts-ignore: Object is possibly 'null'.
-    this.user = tipo;
-  }
-  getAtutentication(){
-    return this.user;
-  }
-  autenticate_route(rota: String){
-    if (rota == 'solicitacoes'){
-      if (this.user == "doador"){
-        return 'pesquisa';
-      }
-      else if (this.user == "ong"){
-        return 'minhas-solicitacoes';
-      }else{
-        return '';
-      }
-    }else if(rota == 'comprovante'){
-      if (this.user == "doador"){
-        return 'agendando';
-      }
-      else if (this.user == "ong"){
-        return 'comprovante';
-      }else{
-        return '';
-      }
-    }else{
-      return '';
-    }
-  }
+  
  }

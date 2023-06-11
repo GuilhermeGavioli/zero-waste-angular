@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { GlobalService } from '../global.service';
 import { slideToSide } from '../slideAnimation';
 
 @Component({
@@ -22,7 +23,7 @@ export class AgendamentosdaminhaorderComponent {
   
 
   public appointments: any = []
-  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService){}
+  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private global: GlobalService){}
   
   async ngOnInit(): Promise<void> {
     await this.getUserInfo()

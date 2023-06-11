@@ -57,6 +57,17 @@ export class AuthService {
     return cookieValue
   }
 
+  getAuthCookie() {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith('access_token=')) {
+          return cookie.substring('access_token='.length, cookie.length);
+        }
+      }
+      return '';
+  }
+
   getToken(): any{
     return localStorage.getItem('access_token')
   }
@@ -72,8 +83,11 @@ export class AuthService {
   }
 
   logout(): void {
+    document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     localStorage.removeItem('access_token');
-    this.router.navigateByUrl('/dash')
+    localStorage.removeItem('user-info');
+    this.router.navigateByUrl('/login')
   }
 
   test_id: string | null = null

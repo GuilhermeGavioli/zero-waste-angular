@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { GlobalService } from '../global.service';
 import { slideAnimation, slideToSide } from '../slideAnimation';
 @Component({
   selector: 'app-orders',
@@ -12,9 +13,16 @@ export class OrdersComponent implements OnInit {
 
 
   @ViewChild('container') container!: ElementRef;
+  @ViewChild('AppointmentButton') AppointmentButton!: ElementRef;
+  @ViewChild('ErrorMessage') ErrorMessage!: ElementRef;
 
+  public inputData: any[] = [0,0,0,0,0,0,0];
+  public selected: any | null = null;
+  public input: string = '';
+  public closed = '00:00-00:00'
+  public week_days = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom']
   public possible_items = ['Farinhas e Amidos', 'Conservas', 'Óleos e Gorduras', 'Leites e Derivados', 'Sucos e Bebidas', 'Grãos e Cereais', 'Enlatados']
-  
+
   public orders: any[] = []
   public order: any = null // opened ong info
   // public my_likes: any[] = []
@@ -24,12 +32,17 @@ export class OrdersComponent implements OnInit {
 
   public is_on_order_screen = 0;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private global: GlobalService, private route: ActivatedRoute) {
     
   }
   public user: any;
 
   async ngOnInit() {
+    this.route.url.subscribe((urlSegments: any) => {
+      const routeName = urlSegments[urlSegments.length - 1].path;
+      this.global.setMyRoute(routeName)
+    });
+
     await this.getFiveOrdersData()
     await this.getUserInfo()
     this.addEventListeners()
@@ -56,7 +69,7 @@ export class OrdersComponent implements OnInit {
   public my_not_viewd_donations_count: number = 0;
 
   async getMyAppointments() {
-    const res = await fetch(`http://localhost:3000/myappointments`, {
+    const res = await fetch(`http://localhost:3000/myactiveappointments`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -64,6 +77,22 @@ export class OrdersComponent implements OnInit {
       const data = await res.json();
       console.log(data)
       this.my_appointments = data;
+    }
+  }
+
+  toggleSelection(i: number) {
+    this.inputData[i] = this.inputData[i] ? 0 : 1;
+  }
+
+  preventDefault(e: Event) {
+    e.stopPropagation();
+  }
+
+  inputDataChanged(i: number) {
+    console.log(this.inputData[i])
+    const missing = this.order.items[i] - this.order.donated[i];
+    if (this.inputData[i] > missing) {
+      this.inputData[i] = missing;
     }
   }
 
@@ -95,24 +124,33 @@ export class OrdersComponent implements OnInit {
     this.user = await this.authService.getUserFromStorage()
   }
 
-  makeAppointment(order_id: string) {
-    window.location.href = `/solicitacao/${order_id}`
-  }
+  // makeAppointment(order_id: string) {
+  //   this.global.goTo(`agendando/${order_id}`)
+  // }
 
+  public owner: any;
   async openOrder(i: number) {
     this.is_on_order_screen = 1
-    
     this.order = this.orders[i]
-    // this.order.orders = [];
-    this.order.loading_orders = 1;
-    // const res = await fetch(`http://localhost:3000/getordersfrom?ong_id=${this.orders[i]._id}`, {
-    //   credentials: 'include',
-    //   method: 'GET',
-    // })
-    // const data = await res.json()
-    // console.log(data)
-    // this.order.orders = data;
-    this.order.loading_orders = 0;
+    
+    const res = await fetch(`http://localhost:3000/getorderandtime?order_id=${this.order._id}`, {
+      credentials: 'include',
+      method: 'GET',
+    })
+    if (res.status === 200) {
+      const data = await res.json();
+      this.owner = data.owner
+    }
+
+    console.log(this.order)
+  }
+
+  goBackToOrders() {
+    this.is_on_order_screen = 0;
+    // this.container.nativeElement.scrollTop = this.lastScrollPosition;
+    setTimeout(() => {
+      this.addEventListeners()
+    }, 250);
   }
 
   goToOngPage(ong_id: string) {
@@ -127,9 +165,9 @@ export class OrdersComponent implements OnInit {
   private lastScrollPosition: number = 0;
   private recently_fired: number = 0;
   addEventListeners() {
-    this.container.nativeElement.addEventListener('scroll', async (event: Event) => {
+    this.container?.nativeElement?.addEventListener('scroll', async (event: Event) => {
       const el = event.target as HTMLElement;
-      const currentScrollPosition = this.container.nativeElement.scrollTop;
+      const currentScrollPosition = this.container?.nativeElement?.scrollTop;
 
       this.lastScrollPosition = currentScrollPosition;
       if ((el.scrollHeight - el.scrollTop) <= (el.clientHeight + 150)) {
@@ -170,19 +208,66 @@ export class OrdersComponent implements OnInit {
     }
   }
 
-  async likeOng(ong_id: string, index: number){
-   
-  }
-  
-  async unlikeOng(ong_id: string, index: number){
- 
-  }
 
-  async getMyLikes() {
-  
-  }
 
   navigateTo(url: string): void {
     this.router.navigateByUrl(url);
+  }
+
+  public selected_time: number | null = null;
+  changeTime(i: number) {
+    this.selected_time = i;
+  }
+
+
+
+  public loading: boolean = false;
+  async makeAppointment() {
+    this.showLoading()
+    if (!this.selected_time) {
+      this.denied_message = 'Horário/ Dia para o agendamento não foi selecionado'
+      this.handleMessageAppearence()
+      
+    } else {
+
+      const keys = Object.keys(this.owner.working_time);
+      const res = await fetch(`http://localhost:3000/makeappointment`, {
+        credentials: 'include',
+        body: JSON.stringify({order_parent_id: this.order._id, items: this.inputData, day: keys[this.selected_time]}),
+        method: 'POST',
+      })
+      if (res.status === 200) {
+        console.log('ok')
+      } else {
+        this.denied_message = await res.text();
+        this.handleMessageAppearence();
+      }
+    }
+    this.hideLoading()
+  }
+
+  public denied_message: string = ''
+ public is_message_being_shown = false;
+  handleMessageAppearence() {
+    if (this.is_message_being_shown) return;
+    this.is_message_being_shown = true;
+    this.ErrorMessage.nativeElement.innerText = this.denied_message;
+    this.ErrorMessage.nativeElement.style.top = '25px'
+    setTimeout(() => {
+      this.is_message_being_shown = false
+      this.ErrorMessage.nativeElement.style.top = '-300px'
+      this.denied_message = '';
+    }, 3000);
+  }
+
+
+ showLoading() {
+    this.loading = true
+    this.AppointmentButton.nativeElement.disabled = true
+  }
+
+  hideLoading() {
+    this.loading = false
+    this.AppointmentButton.nativeElement.disabled = false
   }
 }

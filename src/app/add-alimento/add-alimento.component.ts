@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { GlobalService } from '../global.service';
 import { slideAnimation } from '../slideAnimation';
 
 
@@ -17,7 +18,7 @@ export class AddAlimentoComponent {
   public valids = ['a', 'b', 'c', 'd', 'e']
  
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private global: GlobalService) {}
   goToPage(pageName:string){
     this.router.navigate([`${pageName}`]);
   }

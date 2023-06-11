@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalService } from '../global.service';
 import { slideAnimation } from '../slideAnimation';
 
 @Component({
@@ -12,7 +13,7 @@ export class EmailComponent implements OnInit {
 
   public email: string = ''
 
-  constructor(private route: ActivatedRoute, private router: Router){}
+  constructor(private route: ActivatedRoute, private router: Router, private global: GlobalService){}
   
   ngOnInit(): void {
     this.email = this.route.snapshot.paramMap.get('email') || '';    

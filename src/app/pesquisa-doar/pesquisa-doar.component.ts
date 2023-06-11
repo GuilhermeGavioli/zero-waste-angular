@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { GlobalService } from '../global.service';
 import { slideAnimation, slideToSide } from '../slideAnimation';
 
 @Component({
@@ -21,7 +22,7 @@ export class PesquisaDoarComponent implements OnInit {
 
   public is_on_ong_screen = 0;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private global: GlobalService) {
     
   }
 

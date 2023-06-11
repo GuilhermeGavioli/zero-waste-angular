@@ -27,39 +27,43 @@ import { AgendamentosdaminhaorderComponent } from './agendamentosdaminhaorder/ag
 import { MinhasdoacoesComponent } from './minhasdoacoes/minhasdoacoes.component';
 import { OrdersComponent } from './orders/orders.component';
 import { AjudaComponent } from './ajuda/ajuda.component';
+import { AuthGuard } from './auth.guard';
+import { NonauthGuard } from './nonauth.guard';
 
 const routes: Routes = [
   { path: '', component: TipoUsuarioComponent },
-  { path: 'ongs', component: PesquisaDoarComponent },
-  { path: 'add-solicitacao', component: AddAlimentoComponent },
-  {path: 'perfil', component: PerfilUsuarioComponent},
-  {path: 'minhas-solicitacoes', component: MinhasSolicitacoesComponent},
-  {path: 'meus-dados', component: MeusDadosComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'cadastroONG', component: CadONGComponent},
-  {path: 'cadastrousuario', component:CadUserComponent},
-  {path: 'confirmacaodecad', component:ConfCcComponent},
-  {path: 'recupsenha', component:RecupPasswordComponent},
-  {path: 'confemail', component:ConfEeComponent},
-  {path: 'deletarconta', component:DeletarcontaComponent},
-  {path: 'comprovante', component:ComprovanteComponent},
-  {path: 'agendando/:order_id', component:FazerAgendamentoComponent},
-  { path: 'categorias', component: CategoriasComponent },
+  { path: 'ongs', component: PesquisaDoarComponent, canActivate: [AuthGuard]},
+  { path: 'add-solicitacao', component: AddAlimentoComponent, canActivate: [AuthGuard] },
+  {path: 'perfil', component: PerfilUsuarioComponent, canActivate: [AuthGuard]},
+  { path: 'minhas-solicitacoes', component: MinhasSolicitacoesComponent, canActivate: [AuthGuard] },
   
-  { path: 'pagina-ong', component: PaginaOngComponent},
+  {path: 'meus-dados', component: MeusDadosComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent, canActivate: [NonauthGuard]},
+  {path: 'cadastroONG', component: CadONGComponent, canActivate: [NonauthGuard]},
+  { path: 'cadastrousuario', component: CadUserComponent, canActivate: [NonauthGuard] },
+  { path: 'confirmacaodecad/:code_path', component: ConfCcComponent, canActivate: [NonauthGuard] },
+  { path: 'recupsenha', component: RecupPasswordComponent, canActivate: [NonauthGuard] },
   
-  {path: 'ong/:ong_id', component: PaginaOngComponent},
-  { path: 'meus-likes', component: MeusLikesComponent },
-  { path: 'meus-agendamentos', component: MeusAgendamentosComponent },
-  { path: 'start', component:  StartComponent },
-  { path: 'mail/:email', component:  EmailComponent },
-  { path: 'solicitacao/:order_id', component:  SolicitacaoComponent },
-    {path: 'solicitacao', component: PaginaDaSolicitacaoComponent},
-    {path: 'agendamentosdaorder/:order_id', component: AgendamentosdaminhaorderComponent},
-  { path: 'minhasdoacoes', component: MinhasdoacoesComponent },
-  { path: 'ajuda', component: AjudaComponent },
+  { path: 'confemail', component: ConfEeComponent },
+  {path: 'deletarconta', component:DeletarcontaComponent, canActivate: [AuthGuard]},
+  {path: 'comprovante', component:ComprovanteComponent, canActivate: [AuthGuard]},
+  {path: 'agendando/:order_id', component:FazerAgendamentoComponent, canActivate: [AuthGuard]},
+  { path: 'categorias', component: CategoriasComponent, canActivate: [AuthGuard]},
+  
+  { path: 'pagina-ong', component: PaginaOngComponent, canActivate: [AuthGuard]},
+  
+  {path: 'ong/:ong_id', component: PaginaOngComponent, canActivate: [AuthGuard]},
+  { path: 'meus-likes', component: MeusLikesComponent, canActivate: [AuthGuard]},
+  { path: 'meus-agendamentos', component: MeusAgendamentosComponent, canActivate: [AuthGuard]},
+  { path: 'start', component:  StartComponent, canActivate: [AuthGuard]},
+  { path: 'mail/:email', component:  EmailComponent},
+  { path: 'solicitacao/:order_id', component:  SolicitacaoComponent, canActivate: [AuthGuard]},
+    {path: 'solicitacao', component: PaginaDaSolicitacaoComponent, canActivate: [AuthGuard]},
+    {path: 'agendamentosdaorder/:order_id', component: AgendamentosdaminhaorderComponent, canActivate: [AuthGuard]},
+  { path: 'minhasdoacoes', component: MinhasdoacoesComponent, canActivate: [AuthGuard]},
+  { path: 'ajuda', component: AjudaComponent},
     
-    { path: 'orders', component: OrdersComponent },
+    { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

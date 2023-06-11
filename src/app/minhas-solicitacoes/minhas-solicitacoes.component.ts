@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { GlobalService } from '../global.service';
 @Component({
   selector: 'app-minhas-solicitacoes',
   templateUrl: './minhas-solicitacoes.component.html',
@@ -8,7 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class MinhasSolicitacoesComponent implements OnInit {
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private global: GlobalService) { }
   
   public user: any;
   async ngOnInit(): Promise<void> {

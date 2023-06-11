@@ -1,87 +1,164 @@
 <main class="master" [@slideToSide] *ngIf="is_on_order_screen === 1">
-    <app-header></app-header>
-    <main class="main">
+
+
+
+    
+<header class="header" style="height: 184px; background: var(--zw-red);" >
+
+
+    <div class="header-inside">
+
        
+        <!-- <span *ngIf="logoutButton" class="header-back-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="white" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+              </svg>
+        </span> -->
 
+        <span class="header-back-icon" style="display: flex; justify-content: space-between;" (click)="goBackToOrders()" >
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+              </svg> -->
+              <!-- <p style="color: rgba(255, 255, 255, 0.950); font-weight: 900; font-size: 1.2em;" (click)="goBack()">
      
-            <p style="font-size: 1.4em; font-weight: 900; color: rgb(45,45,45)">{{order?.name}}</p>
-            <!-- <p style="font-size: 1.2em; font-weight: 700; color: var(--zw-second); text-decoration: underline; " (click)="goToOngPage(ong_owner?._id)">{{ong_owner?.name}}</p> -->
-            <div>
-                <p style="color: rgb(45,45,45)">{{order?.description}}</p>
-              </div>
-        
+                  Voltar
+                </p> -->
+                 <svg style="stroke-width: 4px; transform: scale(1.6);"  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+            </svg>
+            </span>
+    
 
-        <div *ngIf="order?.over" style="border-radius: 15px; padding: 12px; border: 1px solid var(--zw-red); background-color: whitesmoke; color: var(--zw-red)">
-            <h2 style="font-size: 1.3em;">Agendamento Já concluído</h2>
-            <p style="font-size: 0.9em;">Caso voce já possua um agendamento para com esta solicitação, voce ainda poderá realiza-lo normalmente e receber seu comprovante. Caso desmarque ele, nãos será possivel agenda-lo novamente.</p>
+
+
+    </div>
+</header>
+
+
+
+    <main class="main" style="background: var(--zw-second)">
+
+
+        <div #ErrorMessage style="z-index: 3; position: absolute; top: -300px; background-color: var(--zw-second); border-radius: 35px; padding: 16px 24px 16px 24px; color: white; font-weight: 700; width: 300px; font-size: 1.1em; display: flex; align-items: center; gap: 8px; box-shadow: 4px 6px 4px -2px rgba(0, 0, 0, 0.111); margin: auto; right: 0; left: 0; transition: .2s ease-in-out;">
+            <div>
+    
+              <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="white" class="bi bi-exclamation-diamond" viewBox="0 0 16 16">
+                <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+              </svg>
+            </div>
+            <p>{{denied_message}}</p>
           </div>
 
-        <!-- <div>
-            <p style="color: rgb(45,45,45)"><span style="font-weight: 900;">Endereço: </span>{{ong_owner?.address_street}}</p>
-            <p style="color: rgb(45,45,45)"><span style="font-weight: 900;">Número: </span> {{ong_owner?.address_number}}</p>
-            <p style="color: rgb(45,45,45)"><span style="font-weight: 900;">Estado: </span> {{ong_owner?.address_state}}</p>
-            <p style="color: rgb(45,45,45)"><span style="font-weight: 900;">Contato: </span> 
-                ({{ong_owner?.phone.substring(0,2)}}) {{ong_owner?.phone.slice(2)}}
-            </p>
-      </div> -->
-
-      <div *ngIf="user?.type === 'ong'">warning Apenas usuarios podem fazer agendamentos</div>
-
-        <table>
-            <thead>
-              <tr>
-                  <th>Items</th>
-                <th>Solicitado</th>
-                <th>Doado</th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of possible_items; let i = index">
-                <td class="truncate" [style.background]="order?.items[i] === 0 ? 'rgb(220,220,220)': 'white'"
-                [style.color]="order?.items[i] === 0 ? 'gray': 'black'"
-                >{{ item }}</td>
-                <td [style.background]="order?.items[i] === 0 ? 'rgb(220,220,220)': 'white'"
-                [style.color]="order?.items[i] === 0 ? 'gray': 'black'"
-                >{{order?.items[i]}}</td>
-                <td [style.background]="order?.items[i] === 0 ? 'rgb(220,220,220)': 'white'"
-                [style.color]="order?.items[i] === 0 ? 'gray': 'black'">{{order?.donated[i]}}</td>
-            </tr>
-        </tbody>
-          </table>
-
-
-      
-
-      
-
-            <div *ngIf="user?.type === 'user'">
-
-                <button *ngIf="is_appointed === 0 && !order?.over"  (click)="makeAppointment(order._id)" style="width: 100%; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 12px 46px 12px 46px; font-weight: 600; border-radius: 0px; box-shadow: none;">
-                    Marcar Agendamento
-                </button>
-
-                <button  (click)="is_open = 1;" *ngIf="is_appointed === 1"  style="width: 100%; border: none; color: white; background: var(--zw-red); font-size: 1.3em; padding: 12px 24px 12px 24px; font-weight: 600; border-radius: 0px; box-shadow: none;">
-                    Desmarcar Agendamento
-                </button> 
     
-                <!-- <button  (click)="is_open = 1" *ngIf="is_appointed === 1"  style="width: 100%; border: none; color: var(--zw-red); background: white; font-size: 1.3em; padding: 8px 24px 8px 24px; font-weight: 600; border-radius: 0px; box-shadow: none;">
-                    Desmarcar Agendamento
-                </button>-->
+            
+        
+          <!-- <div class="header-back-icon" style="height: 50px; display: flex; align-items: center; justify-content: flex-start;">
+            <svg style="stroke-width: 4px; transform: scale(1.6);" (click)="is_on_order_screen = 0" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--zw-red)" class="bi bi-chevron-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+            </svg>
+        </div> -->
+     
+          <div class="info" style="margin-bottom: 36px;">
+              <p style="color: rgb(170,170,170); font-size: 0.9em;">/solicitações/{{order?.name}}</p>
+        </div>
+        
+        <div class="info">
+            <h4>{{order?.name}}</h4>
+            <p>{{order?.description}}</p>
+            <p>Criado em: {{order?.created_at?.split('-')[0]}}</p>
+        </div>
+    
+     
+        
+        
+        <span class="titles-box">
+            <div>
+                <h2 class="box-title">Horários Disponiveis</h2>
+                <h4>Selecione um horário</h4>
             </div>
-
-           
-
-
+        </span>
+        <div class="times">
     
-            
-            
-          
-          
-
-       
-        <!-- <button >Marcar Agendamento</button> -->
+            <div *ngFor="let time of week_days; let i = index">
 
         
+            <div *ngIf="owner?.working_time?.[week_days[i]] !== closed" class="time" (click)="changeTime(i)"
+                [style.background]="selected_time === i ? 'var(--zw-red)': 'whitesmoke'"
+            >
+          
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                      </svg>
+           
+             
+                    
+                    <p>{{week_days[i]}} {{owner?.working_time?.[week_days[i]]}}</p>
+              
+            </div>
+            
+            
+        </div>
+    </div>
+    
+      
+    
+        <span class="titles-box">
+            <h2>Dados da Solicitação</h2>
+        </span>
+        <div class="request">
+            <table style="background: whitesmoke; width: 100%;">
+                <thead >
+                  <tr>
+                    <th style="border-radius: 5px;">ITEM</th>
+                    <th style="border-radius: 5px;">REQUERIDO</th>
+                    <th style="border-radius: 5px;">DOADO</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let item of order?.items; let i = index">
+                  <tr>
+                    <td>{{possible_items[i]}}</td>
+                    <td>{{item}}</td>
+                    <td>{{order.donated[i]}}</td>
+                  </tr>
+                </tbody>
+             
+              </table>
+    
+        </div>
+    
+    
+        <span class="titles-box">
+            <div>
+                <h2>Doação</h2>
+                <h4>Abaixo estão os items possiveis para essa doação. Selecione oque deseja doar.</h4>
+            </div>
+        </span>
+        <div class="donations">
+            <div *ngFor="let item of order?.items; let i = index">    
+                <div class="donation" *ngIf="(item - order.donated[i]) > 0" (click)="toggleSelection(i)"
+                    [ngClass]="{'activated': inputData[i], 'disabled': !inputData[i]}"
+                    >
+                <h3>{{possible_items[i]}}</h3>
+                <div class="donation-pair-of-button-and-input">
+                    <button class="find-ongs-button" style="background: var(--zw-second); padding: 2px 8px 2px 8px;">Doar</button>
+                    <p>max: {{item - order.donated[i]}}</p>
+                    <input (click)="preventDefault($event)" (change)="inputDataChanged(i)" type="number" class="quantity-input" [(ngModel)]="inputData[i]" max="item - order?.donated[i]">
+                </div>
+            </div>
+        </div>
+       
+        </div>
+    
+        
+        <div style="width: 100vw; display: flex; position: absolute; bottom: -1px; right: 0; background: var(--zw-second); justify-content: center; padding: 16px 0 16px 0; height: 90px;">
+            <button #AppointmentButton class="find-ongs-button" (click)="makeAppointment()" style="display: flex; align-items: center; justify-content: center; width: 280px;">
+                <span *ngIf="!loading">Marcar Agendamento</span>
+    
+                <div #spinner class="spinner" *ngIf="loading"></div>
+            </button>
+        </div>
         
 
      
@@ -95,11 +172,25 @@
         
     </main>
 </main>
+
+
+
 <main class="master" [@slideAnimation] *ngIf="is_on_order_screen === 0">
 
-<app-header></app-header>
+<app-header [backButton]=true></app-header>
 
-<main #container class="main" style="background: var(--zw-red)">
+<main #container class="main" style="background: whitesmoke;">
+
+
+
+   
+    <div style="display: flex; align-items: center; justify-content: space-between; margin: 0 4px 16px 4px;">
+
+        <span>
+            <h1 style=" color: rgb(100,100,100); font-size: 1.7em; font-weight: 700;">Solicitações</h1>
+        </span>
+        <p class="s-text clear-text">Filtrar</p>
+    </div>
 
 
 
@@ -123,42 +214,7 @@
             </div> 
         </div>
     </div>
-        <!-- <div class="company">
-            <div style="display: flex; gap: 8px;">
-                <div class="company-pic"></div>
-                <div class="company-info elip sc">
-                    <h4 class="company-name elip fl">{{ong?.name}}</h4>
-                    <p class="company-description elip tl s-text clear-text">Descricao grande da minha ong para fins de testagem de style elipsis</p>
-                </div>
-            </div>
-            <div class="pair-of-buttons">
-               
-
-                    <a  class="view-more-button" (click)="openOng(i)">
-                        Ver mais
-                    </a>
-      
-                    <div style="display: flex; gap: 8px;">
-
-             
-                <button *ngIf="!ong.liked" (click)="likeOng(ong._id, i)"class="like-button" style="display: flex; align-items: center; gap: 8px; width: fit-content;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
-                        <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2.144 2.144 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a9.84 9.84 0 0 0-.443.05 9.365 9.365 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111L8.864.046zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a8.908 8.908 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.224 2.224 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.866.866 0 0 1-.121.416c-.165.288-.503.56-1.066.56z"/>
-                    </svg>
-                    </button>
-                <button *ngIf="ong.liked" (click)="unlikeOng(ong._id, i)"class="dislike-button" style="display: flex; align-items: center; gap: 8px; width: fit-content;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
-                        <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
-                      </svg>
-                    </button>
-                    <div style="display: flex; align-items: center; justify-content: flex-end; gap: 4px;">
-                        <p>{{ong?.likes}}</p>
-                    </div>
-                </div>
-                </div>
-                
-                
-            </div> -->
+     
 
 
 
@@ -166,12 +222,6 @@
 
 
 
-
-
-
-               <!-- starts -->
-           
-            <!-- ends -->
 
 
             

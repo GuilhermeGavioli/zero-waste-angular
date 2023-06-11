@@ -1,32 +1,227 @@
-th{
-    background-color: var(--zw-red);
-    padding: 12px 0 12px 0;
-    color: white;
-}
 
-td{
-    text-align: center;
-    border: 1px solid rgb(182, 182, 182);
-    padding: 8px 0 8px 0;
-}
-
-tr{
-    margin: 0;
-    padding: 0;
-}
-
-table{
-    border-collapse: collapse;
-    gap: 0;
+.days-of-week{
+    display: flex;
+    gap: 8px;
     width: 100%;
+    justify-content: flex-start;
+    overflow-x: scroll;
 }
 
-.truncate {
-    max-width: 60px; /* Adjust the width as per your requirement */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-align: start!important;
-    padding: 8px;
-  }
+.week-day{
+    height: 120px;
+    min-width: 70px;
+    background-color: var(--my-sec);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
 
+.wd-activated{
+    background-color: var(--my-primary);
+
+}
+
+.times{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+.time{
+    
+    display: flex;
+    gap: 8px;
+    background-color: var(--zw-second);
+
+    align-items: center;
+    padding: 8px 16px 8px 16px;
+    width: 250px;
+    border-radius: 10px;
+    
+}
+.time-pic{
+    width: fit-content;
+    height: fit-content;
+}
+
+
+.progress-bar{
+    width: 100%;
+    height: 4px;
+    background-color: red;
+}
+
+.request{
+    display: flex;
+    justify-content: space-between;
+}
+
+.donations{
+    height: fit-content;
+    width: 100%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 124px;
+    gap: 8px;
+    /* background-color: yellow; */
+}
+.donation{
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    /* background-color: aqua; */
+    padding: 16px 8px 16px 8px;
+    justify-content: space-between;
+    background-color: rgb(220,220,220);
+}
+
+.donation-pair-of-button-and-input{
+    display: flex;
+    justify-content: space-between;
+}
+
+.quantity-input{
+    background-color: rgb(210, 210, 210);
+    width: 80px;
+}
+
+
+.marcar-agendamento-btn{
+    max-width: 550px;
+    width: 90%;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.open{
+    background-color: var(--zw-yellow);
+}
+
+.closed{
+    background-color: rgb(220,220,220);
+    color: gray;
+}
+
+th,td{
+    width: 33.3%;
+    text-align: center;
+}
+
+.activated{
+    background-color: var(--zw-red);
+}
+.disabled{
+    /* background-color: brown; */
+}
+
+
+
+.find-ongs-button{
+    background-color: var(--zw-red);
+    color: white;
+    border: none;
+    padding: 12px 24px 12px 24px;
+    width: fit-content;
+    font-size: 1.2em;
+    border-radius: 6px;
+    font-weight: 600;
+    box-sizing: 4px 4px 4px 4px rgba(0, 0, 0, 0.137);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* headeretest */
+
+
+    /* --zw-red: #6526ca;
+    --zw-red-dark: #3b1578; */
+    .header{
+        height: 64px;
+        width: 100vw;
+        background-color: var(--zw-red);
+        z-index: 2;
+    }
+    
+    .header-inside{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 0 16px 0 16px;
+        justify-content: space-between;
+    }
+    .header-back-icon, .header-options-icon{
+        /* position: absolute;
+        left: 16px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: fit-content;
+        height: fit-content; */
+    }
+    .header-options-icon{
+        left: unset;
+        right: 16px;
+    }
+    .header-title{
+        text-align: center;
+    }
+    
+    
+    
+    .logout-window{
+        position: absolute; bottom: 0; width: 100vw; height: fit-content; background: white; border-top-left-radius: 0; border-top-right-radius: 0;
+        padding: 32px 0 32px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0px -4px 16px 2px rgba(0, 0, 0, 0.141);
+        gap: 16px;
+        
+    }
+    .cancel-button, .logout-button{
+        font-weight: 600;
+        border-radius: 25px;
+        padding: 8px 42px 8px 42px;
+        border: 1px solid var(--zw-red);
+        color: var(--zw-red);
+        width: fit-content;
+        font-size: 1.2em;
+    }
+    .logout-button{
+        background-color: var(--zw-red);
+        color: white;
+    }
+    
+    .sidebar{
+        width: 90vw;
+        height: 100vh;
+        background-color: white;
+        position: absolute;
+        left: -90vw;
+        z-index: 3;
+        transition: 0.15s ease-in-out;
+    }

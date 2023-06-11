@@ -53,12 +53,19 @@
     <app-header></app-header>
 <main class="main">
 
-    <span class="titles-box">
-    
-        <h2>Info</h2>
 
+    <div #ErrorMessage style="z-index: 3; position: absolute; top: -300px; background-color: var(--zw-second); border-radius: 35px; padding: 16px 24px 16px 24px; color: white; font-weight: 700; width: 300px; font-size: 1.1em; display: flex; align-items: center; gap: 8px; box-shadow: 4px 6px 4px -2px rgba(0, 0, 0, 0.111); margin: auto; right: 0; left: 0; transition: .2s ease-in-out;">
+        <div>
 
-    </span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="white" class="bi bi-exclamation-diamond" viewBox="0 0 16 16">
+            <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+          </svg>
+        </div>
+        <p>{{denied_message}}</p>
+      </div>
+
+ 
 
     <div class="info">
         <h4>{{order?.name}}</h4>
@@ -66,76 +73,8 @@
         <p>Criado em: {{order?.created_at?.split('-')[0]}}</p>
     </div>
 
-    <span class="titles-box">
-        <h2>Funcionamento</h2>
-    </span>
-    <div class="days-of-week">
-        <div class="week-day wd-activated">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar2" viewBox="0 0 16 16">
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                  </svg>
-            </span>
-            <h3 style="margin-top: 16px;">Dom</h3>
-        </div>
-        <div class="week-day wd-activated">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar2" viewBox="0 0 16 16">
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                  </svg>
-            </span>
-            <h3 style="margin-top: 16px;">Seg</h3>
-        </div>
-        <div class="week-day wd-activated">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar2" viewBox="0 0 16 16">
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                  </svg>
-            </span>
-            <h3 style="margin-top: 16px;">Ter</h3>
-        </div>
-        <div class="week-day wd-activated">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar2" viewBox="0 0 16 16">
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                  </svg>
-            </span>
-            <h3 style="margin-top: 16px;">Qua</h3>
-        </div>
-        <div class="week-day wd-activated">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar2" viewBox="0 0 16 16">
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                  </svg>
-            </span>
-            <h3 style="margin-top: 16px;">Qui</h3>
-        </div>
-        <div class="week-day wd-activated">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar2" viewBox="0 0 16 16">
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                  </svg>
-            </span>
-            <h3 style="margin-top: 16px;">Sex</h3>
-        </div>
-        <div class="week-day wd-activated">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar2" viewBox="0 0 16 16">
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                  </svg>
-            </span>
-            <h3 style="margin-top: 16px;">Sab</h3>
-        </div>
+ 
     
-     
-    </div>
     
     <span class="titles-box">
         <div>
@@ -145,30 +84,19 @@
     </span>
     <div class="times">
 
-        <div *ngFor="let weekday of week_days">
-            
-            <div  *ngIf="times?.[weekday] === closed" class="time closed">
-            <span class="time-pic">
+        <div *ngFor="let time of week_days; let i = index">
+            <!-- <p>{{time.[week_days[i]]}}</p> -->
+    
+        <div *ngIf="working_times?.[week_days[i]] !== closed" class="time">
+             <span class="time-pic">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
                     <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
                     <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
                   </svg>
             </span>
             <div class="time-info">
-                <h3>{{weekday}}</h3>
-                <p>{{times?.[weekday]}}</p>
-            </div>
-        </div>
-        <div *ngIf="times?.[weekday] !== closed" class="time open">
-            <span class="time-pic">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-                  </svg>
-            </span>
-            <div class="time-info">
-                <h3>{{weekday}}</h3>
-                <p>{{times?.[weekday]}}</p>
+                
+                <p>{{week_days[i]}} {{working_times?.[week_days[i]]}}</p>
             </div>
         </div>
         
@@ -176,28 +104,23 @@
     </div>
 </div>
 
-    <span class="titles-box">
-        <h2>Progresso</h2>
-    </span>
-    <div class="progress-bar">
-
-    </div>
+  
 
     <span class="titles-box">
         <h2>Dados da Solicitação</h2>
     </span>
     <div class="request">
-        <table style="background: blue; width: 100%;">
-            <thead style="background: green;">
+        <table style="background: whitesmoke; width: 100%;">
+            <thead >
               <tr>
-                <th>ITEM</th>
-                <th>REQUERIDO</th>
-                <th>DOADO</th>
+                <th style="border-radius: 5px;">ITEM</th>
+                <th style="border-radius: 5px;">REQUERIDO</th>
+                <th style="border-radius: 5px;">DOADO</th>
               </tr>
             </thead>
             <tbody *ngFor="let item of order?.items; let i = index">
               <tr>
-                <td>{{item_names[i]}}</td>
+                <td>{{possible_items[i]}}</td>
                 <td>{{item}}</td>
                 <td>{{order.donated[i]}}</td>
               </tr>
@@ -219,9 +142,9 @@
             <div class="donation" *ngIf="(item - order.donated[i]) > 0" (click)="toggleSelection(i)"
                 [ngClass]="{'activated': inputData[i], 'disabled': !inputData[i]}"
                 >
-            <h3>{{item_names[i]}}</h3>
+            <h3>{{possible_items[i]}}</h3>
             <div class="donation-pair-of-button-and-input">
-                <button class="classic-button p-btn">Doar</button>
+                <button class="find-ongs-button" style="background: var(--zw-second); padding: 2px 8px 2px 8px;">Doar</button>
                 <p>max: {{item - order.donated[i]}}</p>
                 <input (click)="preventDefault($event)" (change)="inputDataChanged(i)" type="number" class="quantity-input" [(ngModel)]="inputData[i]"max="item - order.donated[i]">
             </div>
@@ -232,8 +155,12 @@
     
 
     
-    <div style="width: 100vw; display: flex; position: absolute; bottom: 0; right: 0; background: yellow; justify-content: center; padding: 16px 0 16px 0;">
-        <button class="classic-button p-btn marcar-agendamento-btn" (click)="makeAppointment()">Marcar Agendamento</button>
+    <div style="width: 100vw; display: flex; position: absolute; bottom: 0; right: 0; background: var(--zw-second); justify-content: center; padding: 16px 0 16px 0;">
+        <button #AppointmentButton class="find-ongs-button" (click)="makeAppointment()" style="display: flex; align-items: center; justify-content: center;">
+            <span *ngIf="!loading">Marcar Agendamento</span>
+
+            <div #spinner class="spinner" *ngIf="loading"></div>
+        </button>
     </div>
 </main>
 </main>

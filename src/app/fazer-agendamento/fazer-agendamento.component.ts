@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalService } from '../global.service';
 import { slideToSide } from '../slideAnimation';
 
 @Component({
@@ -10,16 +11,18 @@ import { slideToSide } from '../slideAnimation';
 })
 export class FazerAgendamentoComponent implements OnInit {
   public order_id: string = ''
-  public times: any = {}
+  public working_times: any = {}
   public order: any = {}
   public closed = '00:00-00:00'
   public week_days = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom']
-  public item_names = ['item a', 'item b', 'item c', 'item d', 'item e', 'item f', 'item g']
+  public possible_items = ['Farinhas e Amidos', 'Conservas', 'Óleos e Gorduras', 'Leites e Derivados', 'Sucos e Bebidas', 'Grãos e Cereais', 'Enlatados']
   public inputData: any[] = [0,0,0,0,0,0,0];
   public selected: any | null = null;
   public input: string = '';
 
-  constructor(private route: ActivatedRoute){}
+  constructor(private route: ActivatedRoute, private global: GlobalService) { }
+  @ViewChild('AppointmentButton') AppointmentButton!: ElementRef;
+  @ViewChild('ErrorMessage') ErrorMessage!: ElementRef;
   // appointment_id
 
   async ngOnInit() {
@@ -31,23 +34,58 @@ export class FazerAgendamentoComponent implements OnInit {
     })
     if (res.status === 200) {
       const data = await res.json();
-      this.times = data.time
-      this.order = data.order
       console.log(data)
+      this.working_times = data.owner.working_time
+      this.order = data.order
+      console.log(this.working_times)
     }
   }
 
+  public loading = false;
   async makeAppointment() {
+    this.showLoading()
     const res = await fetch(`http://localhost:3000/makeappointment`, {
       credentials: 'include',
       body: JSON.stringify({order_parent_id: this.order_id, items: this.inputData, day: 'ter'}),
       method: 'POST',
     })
-    console.log(await res.text())
+    if (res.status === 200) {
+      console.log('ok')
+    } else {
+      this.denied_message = await res.text();
+      this.handleMessageAppearence();
+    }
+    this.hideLoading()
+  }
+
+  
+  public denied_message: string = ''
+ public is_message_being_shown = false;
+  handleMessageAppearence() {
+    if (this.is_message_being_shown) return;
+    this.is_message_being_shown = true;
+    this.ErrorMessage.nativeElement.innerText = this.denied_message;
+    this.ErrorMessage.nativeElement.style.top = '25px'
+    setTimeout(() => {
+      this.is_message_being_shown = false
+      this.ErrorMessage.nativeElement.style.top = '-300px'
+      this.denied_message = '';
+    }, 3000);
+  }
+
+
+ showLoading() {
+    this.loading = true
+    this.AppointmentButton.nativeElement.disabled = true
+  }
+
+  hideLoading() {
+    this.loading = false
+    this.AppointmentButton.nativeElement.disabled = false
   }
 
   toggleSelection(i: number) {
-    this.inputData[i] = this.inputData[i] ? null : 1;
+    this.inputData[i] = this.inputData[i] ? 0 : 1;
   }
 
   preventDefault(e: Event) {

@@ -6,7 +6,6 @@
     width: 100vw;
     background-color: var(--zw-red);
     z-index: 2;
-
 }
 
 .header-inside{
@@ -15,16 +14,17 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding: 0 16px 0 16px;
+    justify-content: space-between;
 }
 .header-back-icon, .header-options-icon{
-    position: absolute;
+    /* position: absolute;
     left: 16px;
     top: 0;
     bottom: 0;
     margin: auto;
     width: fit-content;
-    height: fit-content;
+    height: fit-content; */
 }
 .header-options-icon{
     left: unset;

@@ -1,6 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalService } from '../global.service';
 import { slideToSide } from '../slideAnimation';
 
 @Component({
@@ -14,11 +15,20 @@ export class MeusLikesComponent implements OnInit {
   public my_likes: any[] = [];
   public ids: any[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private global: GlobalService, private route: ActivatedRoute) { }
   
   async ngOnInit() {
+    this.route.url.subscribe((urlSegments: any) => {
+      const routeName = urlSegments[urlSegments.length - 1].path;
+      this.global.setMyRoute(routeName)
+    });
     await this.getMyLikes()
     await this.getOngsInfo()
+  }
+
+
+  goTo(url: string) {
+    this.global.goTo(url)
   }
 
   async getMyLikes() {
@@ -78,10 +88,7 @@ export class MeusLikesComponent implements OnInit {
     }
   }
 
-  goTo(url: string){
-    this.router.navigateByUrl(`/${url}`)
-  }
-
+  
   goToOngPage(ong_id: string) {
     this.router.navigateByUrl(`/ong/${ong_id}`)
   }

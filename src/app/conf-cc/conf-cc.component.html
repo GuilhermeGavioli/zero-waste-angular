@@ -1,8 +1,13 @@
 
 <div class="container">
-    <p class="titulo">Conta registrada!</p>
+    <h1>Bem-Vindo, Conta Criada com Sucesso!</h1>
+    <p class="titulo">Agora voce pode Logar</p>
         <div class="img">
         </div>
-    <p class="link">Clique aqui para entrar</p>
+    <p (click)="goTo('login')">Login</p>
     </div>
     
+
+    <div style="height: 50px; display: flex; justify-content: center; align-items: center;">
+        <div #spinner class="spinner" *ngIf="loading"></div>
+      </div>

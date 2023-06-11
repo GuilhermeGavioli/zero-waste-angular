@@ -100,17 +100,20 @@ h3{
 }
 
 .times{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background-color: blue;
-    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
 }
 .time{
     display: flex;
     gap: 8px;
-    width: 100%;
+    background-color: var(--zw-second);
+
     align-items: center;
-    padding: 8px;
+    padding: 8px 16px 8px 16px;
+    width: 250px;
+    border-radius: 10px;
 }
 .time-pic{
     width: fit-content;
@@ -130,17 +133,23 @@ h3{
 }
 
 .donations{
-    height: 200px;
+    height: fit-content;
     width: 100%;
-    margin-bottom: 124px;
-    background-color: yellow;
-}
-.donation{
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    background-color: aqua;
-    padding: 8px 0 8px 0;
+    margin-bottom: 124px;
+    gap: 8px;
+    /* background-color: yellow; */
+}
+.donation{
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    /* background-color: aqua; */
+    padding: 16px 8px 16px 8px;
     justify-content: space-between;
+    background-color: rgb(220,220,220);
 }
 
 .donation-pair-of-button-and-input{
@@ -149,7 +158,7 @@ h3{
 }
 
 .quantity-input{
-    background-color: gray;
+    background-color: rgb(210, 210, 210);
     width: 80px;
 }
 
@@ -176,8 +185,22 @@ th,td{
 }
 
 .activated{
-    background-color: blueviolet;
+    background-color: var(--zw-red);
 }
 .disabled{
-    background-color: brown;
+    /* background-color: brown; */
+}
+
+
+
+.find-ongs-button{
+    background-color: var(--zw-red);
+    color: white;
+    border: none;
+    padding: 12px 24px 12px 24px;
+    width: fit-content;
+    font-size: 1.2em;
+    border-radius: 6px;
+    font-weight: 600;
+    box-sizing: 4px 4px 4px 4px rgba(0, 0, 0, 0.137);
 }

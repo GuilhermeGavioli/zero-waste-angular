@@ -1,5 +1,7 @@
 import { Component, Input, ViewChild, ElementRef  } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { GlobalService } from '../global.service';
 
 @Component({
   selector: 'app-header',
@@ -9,18 +11,24 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   @ViewChild('sidebar') sidebar!: ElementRef;
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService, private global: GlobalService) { }
   
   public is_sidebar_open: number = 0;
 
-  @Input() logoutButton: boolean = false;
-  @Input() sidebarButton: boolean = false;
-  @Input() color: boolean = false;
-  @Input() back: string = '';
+  @Input() logoutButton?: boolean = false;
+  @Input() sidebarButton?: boolean = false;
+  @Input() color?: boolean = true;
+  @Input() backButton?: boolean = true;
 
 
+  goBack() {
+    const last_route = this.global.getLastRoute()
+    this.global.goTo(last_route)
+  }
 
-
+  logout() {
+    this.authService.logout()
+  }
 
   openSidebar() {
     this.sidebar.nativeElement.style.left = '0'
@@ -35,8 +43,4 @@ export class HeaderComponent {
     this.closeSidebar()
   }
 
-
-  goBack(){
-    this.router.navigateByUrl(`/${this.back}`)
-  }
 }

@@ -4,6 +4,7 @@ import { AppModule } from '../app.module';
 import { AuthService } from '../auth.service';
 import { Validators } from '@angular/forms';
 import { slideAnimation, slideToSide, fastSlideAnimation, slideToSideFromRight, slideAnimationWithLeave } from '../slideAnimation';
+import { GlobalService } from '../global.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -26,7 +27,9 @@ export class LoginComponent {
   @ViewChild('emailContainer') emailContainer!: ElementRef;
   @ViewChild('passwordContainer') passwordContainer!: ElementRef;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  @ViewChild('ErrorMessage') ErrorMessage!: ElementRef;
+
+  constructor(private router: Router, private authService: AuthService, private global: GlobalService) { }
 
 
   public state: string = 'login'
@@ -131,7 +134,7 @@ export class LoginComponent {
   public denied_message: string = ''
   async login() {
     this.showLoading()
-    setTimeout(async () => {
+    
       const res = await fetch(`http://localhost:3000/account/login/default`, {
         credentials: 'include',
         method: 'POST',
@@ -145,9 +148,24 @@ export class LoginComponent {
         
       } else {
         this.denied_message = await res.text();
+        this.handleMessageAppearence();
       }
       this.hideLoading()
-    }, 1500);
+
+  }
+
+  public is_message_being_shown = false;
+  handleMessageAppearence() {
+    if (this.is_message_being_shown) return;
+    this.is_message_being_shown = true;
+    this.ErrorMessage.nativeElement.innerText = this.denied_message;
+    this.ErrorMessage.nativeElement.style.top = '25px'
+    setTimeout(() => {
+      this.is_message_being_shown = false
+      this.ErrorMessage.nativeElement.style.top = '-300px'
+      this.denied_message = '';
+    }, 3000);
+
   }
 
   goTo(path: string) {

@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { GlobalService } from '../global.service';
 import { slideAnimation, slideToSide, fastSlideAnimation, slideToSideFromRight } from '../slideAnimation';
 
 @Component({
@@ -14,7 +15,7 @@ export class CadONGComponent {
 
 
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private global: GlobalService) { }
 
   
   public email: string = ''

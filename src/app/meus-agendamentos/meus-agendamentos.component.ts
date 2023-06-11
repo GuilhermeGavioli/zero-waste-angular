@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { GlobalService } from '../global.service';
 
 @Component({
   selector: 'app-meus-agendamentos',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 export class MeusAgendamentosComponent {
 
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private global: GlobalService){}
   public my_appointments: any[] = [];
 
   public possible_items = ['Farinhas e Amidos', 'Conservas', 'Óleos e Gorduras', 'Leites e Derivados', 'Sucos e Bebidas', 'Grãos e Cereais', 'Enlatados']
@@ -33,7 +34,7 @@ export class MeusAgendamentosComponent {
   public my_appointments_count: number = 0;
   public my_not_viewd_donations_count: number = 0;
   async getMyAppointments() {
-    const res = await fetch(`http://localhost:3000/myappointments`, {
+    const res = await fetch(`http://localhost:3000/myactiveappointments`, {
       credentials: 'include',
       method: 'GET',
     });

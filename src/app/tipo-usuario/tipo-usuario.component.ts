@@ -10,7 +10,6 @@ import { AppModule } from '../app.module';
 export class TipoUsuarioComponent {
 constructor(private router: Router, private app: AppModule) {}
  goToPage(pageName:string, user:string){
-  this.app.autenticate(user);
-  this.router.navigate([`${pageName}`]);
+ 
 }
 }
