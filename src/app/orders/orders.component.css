@@ -69,13 +69,15 @@
     /* background-color: yellow; */
 }
 .donation{
-    border-radius: 20px;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     /* background-color: aqua; */
-    padding: 16px 8px 16px 8px;
+    padding: 16px 16px 16px 16px;
     justify-content: space-between;
     background-color: rgb(220,220,220);
+    background-color: white;
+    gap: 8px;
 }
 
 .donation-pair-of-button-and-input{
@@ -84,7 +86,8 @@
 }
 
 .quantity-input{
-    background-color: rgb(210, 210, 210);
+    background-color: white;
+    border-radius: 10px;
     width: 80px;
 }
 
@@ -102,6 +105,7 @@
 
 .closed{
     background-color: rgb(220,220,220);
+    background-color: white;
     color: gray;
 }
 
@@ -112,6 +116,7 @@ th,td{
 
 .activated{
     background-color: var(--zw-red);
+    color: white;
 }
 .disabled{
     /* background-color: brown; */

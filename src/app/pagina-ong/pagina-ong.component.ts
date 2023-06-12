@@ -58,7 +58,7 @@ export class PaginaOngComponent implements OnInit{
   }
 
   async getMyAppointments() {
-    const res = await fetch(`http://localhost:3000/myappointments`, {
+    const res = await fetch(`${this.global.APIURL}/myappointments`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -76,7 +76,7 @@ export class PaginaOngComponent implements OnInit{
     const found = this.my_appointments.find((appointment: any) =>  appointment.order_parent_id === order_id )
     if (!found) return
     console.log(found)
-    const res = await fetch(`http://localhost:3000/delete/myappointment?appointment_id=${found._id}`, {
+    const res = await fetch(`${this.global.APIURL}/delete/myappointment?appointment_id=${found._id}`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -102,7 +102,7 @@ export class PaginaOngComponent implements OnInit{
 
 
   // async makeAppointment() {
-  //   const res = await fetch(`http://localhost:3000/makeappointment`, {
+  //   const res = await fetch(`${this.global.APIURL}/makeappointment`, {
   //     body: JSON.stringify({
   //       order_parent_id: this.order_id,
   //       day: 'ter',
@@ -119,7 +119,7 @@ export class PaginaOngComponent implements OnInit{
   // }
 
   async getOng() {
-    const res = await fetch(`http://localhost:3000/ongs?ong_id=${this.ong_id}`, {
+    const res = await fetch(`${this.global.APIURL}/ongs?ong_id=${this.ong_id}`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -132,7 +132,7 @@ export class PaginaOngComponent implements OnInit{
   }
 
   async getOngOrders() {
-    const res = await fetch(`http://localhost:3000/getactiveordersfrom?ong_id=${this.ong._id}`, {
+    const res = await fetch(`${this.global.APIURL}/getactiveordersfrom?ong_id=${this.ong._id}`, {
       credentials: 'include',
     method: 'GET',
     })

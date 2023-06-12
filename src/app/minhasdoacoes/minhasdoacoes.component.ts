@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { GlobalService } from '../global.service';
@@ -11,7 +11,8 @@ import {slideAnimation, slideToSide, fastSlideAnimation, slideToSideFromRight} f
   animations: [slideAnimation, slideToSide, fastSlideAnimation, slideToSideFromRight]
 })
 export class MinhasdoacoesComponent {
-
+  @ViewChild('downloadPDFButton') downloadPDFButton!: ElementRef;
+  
 
   public my_donations: any = []
   public not_viewd_donations: any = []
@@ -43,8 +44,37 @@ export class MinhasdoacoesComponent {
     }
   }
 
+  async getSinglePDF(pdf_id: string) {
+    this.downloadPDFButton.nativeElement.disabled = true;
+    const res = await fetch(`${this.global.APIURL}/filesystem?pdf_id=${pdf_id}`, {
+      credentials: 'include',
+      method: 'GET',
+    });
+    if (res.status === 200) {
+      const pdfBlob = await res.blob();
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+      const anchor = document.createElement('a');
+      anchor.style.display = 'none';
+      anchor.href = pdfUrl;
+      anchor.download = 'file.pdf';
+
+    // Append the anchor to the document body and click it
+    document.body.appendChild(anchor);
+    anchor.click();
+
+    // Clean up by revoking the temporary URL
+    URL.revokeObjectURL(pdfUrl);
+      
+    } else {
+      console.log(await res.text())
+  }
+    setTimeout(() => {
+      this.downloadPDFButton.nativeElement.disabled = false;
+    }, 800);
+  }
+
   async gerarComprovante(appointment_id: string){
-    const res = await fetch(`http://localhost:3000/generatePDF?appointment_id=${appointment_id.toString()}`, {
+    const res = await fetch(`${this.global.APIURL}/generatePDF?appointment_id=${appointment_id.toString()}`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -58,7 +88,7 @@ export class MinhasdoacoesComponent {
     this.not_viewd_donations.forEach((item: any) => {
       arr.push(item._id)
     })
-    const res = await fetch(`http://localhost:3000/viewDonations`, {
+    const res = await fetch(`${this.global.APIURL}/viewDonations`, {
       credentials: 'include',
       method: 'POST',
       body: JSON.stringify({ ids: arr })
@@ -69,7 +99,7 @@ export class MinhasdoacoesComponent {
   }
 
   async getMyDonations() {
-    const res = await fetch(`http://localhost:3000/getmydonations`, {
+    const res = await fetch(`${this.global.APIURL}/getmydonations`, {
       credentials: 'include',
       method: 'GET',
     });

@@ -48,6 +48,7 @@ export class PerfilUsuarioComponent implements OnInit{
     // await this.getMostLikedOngs();
     if (this.user.type === 'ong') {
       await this.getMyOrders()
+      await this.getMyOngLikes()
     } else if (this.user.type === 'user') {
       await this.getMyAppointments()
     }
@@ -66,7 +67,7 @@ export class PerfilUsuarioComponent implements OnInit{
   }
 
   async desmarcar(appointment_id: string) {
-    const res = await fetch(`http://localhost:3000/delete/myappointment?appointment_id=${appointment_id}`, {
+    const res = await fetch(`${this.global.APIURL}/delete/myappointment?appointment_id=${appointment_id}`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -93,7 +94,7 @@ export class PerfilUsuarioComponent implements OnInit{
 
 
   async getMostLikedOngs() {
-    const res = await fetch(`http://localhost:3000/mostlikedongs`, {
+    const res = await fetch(`${this.global.APIURL}/mostlikedongs`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -115,7 +116,7 @@ export class PerfilUsuarioComponent implements OnInit{
 
   public last_orders: any;
   async getLastOrders() {
-    const res = await fetch(`http://localhost:3000/gettwolastorders`, {
+    const res = await fetch(`${this.global.APIURL}/gettwolastorders`, {
       credentials: 'include',
       method: 'GET',
     })
@@ -137,7 +138,7 @@ export class PerfilUsuarioComponent implements OnInit{
   }
 
   async getMyOrders() {
-    const res = await fetch(`http://localhost:3000/myactiveorders`, {
+    const res = await fetch(`${this.global.APIURL}/myactiveorders`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -163,7 +164,7 @@ export class PerfilUsuarioComponent implements OnInit{
   public my_appointments_count: number = 0;
   public my_not_viewd_donations_count: number = 0;
   async getMyAppointments() {
-    const res = await fetch(`http://localhost:3000/myactiveappointments`, {
+    const res = await fetch(`${this.global.APIURL}/myactiveappointments`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -182,7 +183,7 @@ export class PerfilUsuarioComponent implements OnInit{
 
 
   async likeOng(ong_id: string, index: number){
-    const res = await fetch(`http://localhost:3000/like?ong_id=${ong_id}`, {
+    const res = await fetch(`${this.global.APIURL}/like?ong_id=${ong_id}`, {
       credentials: 'include',
       method: 'GET',
     })
@@ -193,7 +194,7 @@ export class PerfilUsuarioComponent implements OnInit{
   }
   
   async unlikeOng(ong_id: string, index: number){
-    const res = await fetch(`http://localhost:3000/unlike?ong_id=${ong_id}`, {
+    const res = await fetch(`${this.global.APIURL}/unlike?ong_id=${ong_id}`, {
       credentials: 'include',
       method: 'GET',
     })
@@ -204,13 +205,25 @@ export class PerfilUsuarioComponent implements OnInit{
   }
 
   async getMyLikes() {
-    const res = await fetch(`http://localhost:3000/mylikes`, {
+    const res = await fetch(`${this.global.APIURL}/mylikes`, {
       credentials: 'include',
       method: 'GET',
     })
     const data = await res.json()
     if (data && res.status === 200){
       this.my_likes = data;
+    }
+  }
+
+  public my_ong_likes = 0;
+  async getMyOngLikes() {
+    const res = await fetch(`${this.global.APIURL}/myonglikes`, {
+      credentials: 'include',
+      method: 'GET',
+    })
+    const data = await res.json()
+    if (data && res.status === 200){
+      this.my_ong_likes = data;
     }
   }
 

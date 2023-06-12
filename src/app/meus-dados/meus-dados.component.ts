@@ -62,7 +62,7 @@ export class MeusDadosComponent implements OnInit {
   public address_state: string = '';
 
   async getMyData() {
-    const res = await fetch(`http://localhost:3000/getMyInfo`, {
+    const res = await fetch(`${this.global.APIURL}/getMyInfo`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -85,7 +85,7 @@ export class MeusDadosComponent implements OnInit {
 
   async changeInfo() {
     this.showLoading()
-    const res = await fetch(`http://localhost:3000/account/change`, {
+    const res = await fetch(`${this.global.APIURL}/account/change`, {
       credentials: 'include',
       method: 'POST',
       body: JSON.stringify({ password: this.new_me.password, confirm_password: this.new_me.password, name: this.new_me.name})
@@ -105,7 +105,7 @@ export class MeusDadosComponent implements OnInit {
   async deleteAccount() {
     this.showLoading()
     console.log(this.new_me.password)
-    const res = await fetch(`http://localhost:3000/account/delete`, {
+    const res = await fetch(`${this.global.APIURL}/account/delete`, {
       credentials: 'include',
       method: 'POST',
       body: JSON.stringify({ password: this.new_me.password})

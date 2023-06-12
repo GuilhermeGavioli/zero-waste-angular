@@ -23,23 +23,27 @@ export class ConfCcComponent implements OnInit {
   }
 
   goTo(path: string) {
-    
+    this.router.navigateByUrl(`/${path}`)
   }
 
+
+  public message: string = ''
   async fireConfirmation() {
 
     // this.showLoading()
     
-      const res = await fetch(`http://localhost:3000/mfa?code_path=${this.code_path}`, {
+      const res = await fetch(`${this.global.APIURL}/mfa?code_path=${this.code_path}`, {
         credentials: 'include',
         method: 'GET',
       });
       if (res.status === 200) {
         this.created = true;
-
+        this.message = 'Bem-Vindo ao ZeroWaste, sua conta foi criada com Sucesso!'
+        this.loading = false;
         
       } else {
-        console.log(await res.text())
+        this.loading = false;
+        this.message = await res.text()
         // this.denied_message = await res.text();
         // this.handleMessageAppearence();
       }

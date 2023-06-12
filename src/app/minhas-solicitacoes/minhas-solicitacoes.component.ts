@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { GlobalService } from '../global.service';
+import { slideToSide } from '../slideAnimation';
 @Component({
   selector: 'app-minhas-solicitacoes',
   templateUrl: './minhas-solicitacoes.component.html',
-  styleUrls: ['./minhas-solicitacoes.component.css']
+  styleUrls: ['./minhas-solicitacoes.component.css'],
+  animations: [slideToSide]
 })
 export class MinhasSolicitacoesComponent implements OnInit {
 
@@ -23,7 +25,7 @@ export class MinhasSolicitacoesComponent implements OnInit {
 
   public my_orders: any;
   async getMyOrders() {
-    const res = await fetch(`http://localhost:3000/myorders`, {
+    const res = await fetch(`${this.global.APIURL}/myorders`, {
       credentials: 'include',
       method: 'GET',
     });

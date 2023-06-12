@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService } from '../global.service';
+import { slideToSide } from '../slideAnimation';
 
 @Component({
   selector: 'app-meus-agendamentos',
   templateUrl: './meus-agendamentos.component.html',
-  styleUrls: ['./meus-agendamentos.component.css']
+  styleUrls: ['./meus-agendamentos.component.css'],
+  animations: [slideToSide]
 })
 export class MeusAgendamentosComponent {
 
@@ -21,7 +23,7 @@ export class MeusAgendamentosComponent {
   }
 
   async desmarcar(appointment_id: string) {
-    const res = await fetch(`http://localhost:3000/delete/myappointment?appointment_id=${appointment_id}`, {
+    const res = await fetch(`${this.global.APIURL}/delete/myappointment?appointment_id=${appointment_id}`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -34,7 +36,7 @@ export class MeusAgendamentosComponent {
   public my_appointments_count: number = 0;
   public my_not_viewd_donations_count: number = 0;
   async getMyAppointments() {
-    const res = await fetch(`http://localhost:3000/myactiveappointments`, {
+    const res = await fetch(`${this.global.APIURL}/myactiveappointments`, {
       credentials: 'include',
       method: 'GET',
     });

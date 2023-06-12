@@ -79,7 +79,7 @@ export class CadUserComponent {
 
     
  
-      const res = await fetch(`http://localhost:3000/account/register/user`, {
+      const res = await fetch(`${this.global.APIURL}/account/register/user`, {
         credentials: 'include',
         method: 'POST',
         body: JSON.stringify(user)

@@ -3,6 +3,17 @@
 
 <main class="main">
 
+    <div #ErrorMessage style="z-index: 3; position: absolute; top: -300px; background-color: var(--zw-second); border-radius: 35px; padding: 16px 24px 16px 24px; color: white; font-weight: 700; width: 300px; font-size: 1.1em; display: flex; align-items: center; gap: 8px; box-shadow: 4px 6px 4px -2px rgba(0, 0, 0, 0.111); margin: auto; right: 0; left: 0; transition: .2s ease-in-out;">
+        <div>
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="white" class="bi bi-exclamation-diamond" viewBox="0 0 16 16">
+            <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+          </svg>
+        </div>
+        <p>{{denied_message}}</p>
+      </div>
+
 
     <div style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
     
@@ -32,10 +43,10 @@
       <div style="display: flex; flex-direction: column; gap: 8px;">
 
         <div>
-            <input placeholder="Nome da Campanha" type="text" name="" id="" style="width: 100%; height: 40px; border: 1px solid rgb(220,220,220); border-radius: 15px;">
+            <input placeholder="Nome da Campanha" type="text" name="" id="" style="width: 100%; height: 40px; border: 1px solid rgb(220,220,220); border-radius: 15px;" [(ngModel)]="name">
         </div>
           
-        <textarea #descriptionInput placeholder="Descreva sua Campanha (min: 85)" [ngModelOptions]="{standalone: true}" [(ngModel)]="description" (ngModelChange)="onDescriptionInputChange()" style=" width: 300px; background-color: white; padding: 8px; border-radius: 25px; outline: none; padding: 8px; border: 1px solid rgb(220,220,220); width: 100%; height: 200px;" name="" id=""></textarea>
+        <textarea #descriptionInput placeholder="Descreva sua Campanha (min: 85)" [ngModelOptions]="{standalone: true}" [(ngModel)]="description" style=" width: 300px; background-color: white; padding: 8px; border-radius: 25px; outline: none; padding: 8px; border: 1px solid rgb(220,220,220); width: 100%; height: 200px;" name="" id=""></textarea>
 <!-- 
           <div style="display: flex; width: 100%; height: fit-content; align-items: flex-start; background: white; overflow: hidden; flex-direction: column;">
             <label for="">Descreva sua Campanha de Doação:</label>
@@ -79,8 +90,14 @@
             Voltar
         </button>
         
-        <button (click)="createOrder()" class="find-ongs-button" style="flex-grow: 1;" >
-            Criar Solicitação
+        <button #createOrderButton (click)="createOrder()" class="find-ongs-button" style="flex-grow: 1;" >
+            <span *ngIf="!loading">
+                Criar Solicitação
+            </span>
+
+            <div *ngIf="loading" style="height: 50px; display: flex; justify-content: center; align-items: center;">
+                <div #spinner class="spinner"></div>
+              </div>
         </button>
     </div>
         

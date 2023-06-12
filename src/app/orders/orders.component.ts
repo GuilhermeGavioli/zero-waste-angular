@@ -51,32 +51,51 @@ export class OrdersComponent implements OnInit {
      }
   }
 
+
+
+
+
+
+
+
+
+
+
   async desmarcar(appointment_id: string) {
-    const res = await fetch(`http://localhost:3000/delete/myappointment?appointment_id=${appointment_id}`, {
+    const res = await fetch(`${this.global.APIURL}/delete/myappointment?appointment_id=${appointment_id}`, {
       credentials: 'include',
       method: 'GET',
     });
     if (res.status === 200) {
-      this.my_appointments = this.my_appointments.filter(appointment => appointment._id !== appointment_id)
+      this.my_active_appointments = this.my_active_appointments.filter(appointment => appointment._id !== appointment_id)
     } else {
       console.log(await res.text())
     }
   }
 
-  public is_appointed = 0;
- public my_appointments: any[] = [];
+  public is_appointed: null | boolean = null;
+  public relative_appointment: string = '';
+
+ public my_active_appointments: any[] = [];
   public my_appointments_count: number = 0;
   public my_not_viewd_donations_count: number = 0;
 
   async getMyAppointments() {
-    const res = await fetch(`http://localhost:3000/myactiveappointments`, {
+    const res = await fetch(`${this.global.APIURL}/myactiveappointments`, {
       credentials: 'include',
       method: 'GET',
     });
     if (res.status === 200) {
       const data = await res.json();
-      console.log(data)
-      this.my_appointments = data;
+      this.my_active_appointments = data;
+      this.is_appointed = null
+      this.my_active_appointments?.forEach((appointment: any) => {
+        if (appointment?.order_parent_id == this.order?._id) { 
+          this.relative_appointment = appointment._id;
+          this.is_appointed = true;
+        }
+      })
+      console.log(this.relative_appointment)
     }
   }
 
@@ -106,7 +125,7 @@ export class OrdersComponent implements OnInit {
   //   console.log(this.ong_owner)
   //   if (this.user.type === 'user') {
   //     await this.getMyAppointments()
-  //     this.my_appointments?.forEach((appointment: any) => {
+  //     this.my_active_appointments?.forEach((appointment: any) => {
   //       if (appointment?.order_parent_id == this.order_id && !appointment.confirmed) { 
   //         this.is_appointed = 1;
   //         this.appointed_mentioned_to_this_order = appointment;
@@ -130,10 +149,11 @@ export class OrdersComponent implements OnInit {
 
   public owner: any;
   async openOrder(i: number) {
-    this.is_on_order_screen = 1
     this.order = this.orders[i]
+    await this.getMyAppointments()
+    this.is_on_order_screen = 1
     
-    const res = await fetch(`http://localhost:3000/getorderandtime?order_id=${this.order._id}`, {
+    const res = await fetch(`${this.global.APIURL}/getorderandtime?order_id=${this.order._id}`, {
       credentials: 'include',
       method: 'GET',
     })
@@ -142,7 +162,7 @@ export class OrdersComponent implements OnInit {
       this.owner = data.owner
     }
 
-    console.log(this.order)
+    console.log(this.owner)
   }
 
   goBackToOrders() {
@@ -183,7 +203,7 @@ export class OrdersComponent implements OnInit {
 
   async getFiveOrdersData() {
     if (this.is_over === 1) return;
-    const res = await fetch(`http://localhost:3000/gettenorders?pack=${this.current_pack}`, {
+    const res = await fetch(`${this.global.APIURL}/gettenorders?pack=${this.current_pack}`, {
       credentials: 'include',
       method: 'GET',
     })
@@ -231,13 +251,13 @@ export class OrdersComponent implements OnInit {
     } else {
 
       const keys = Object.keys(this.owner.working_time);
-      const res = await fetch(`http://localhost:3000/makeappointment`, {
+      const res = await fetch(`${this.global.APIURL}/makeappointment`, {
         credentials: 'include',
         body: JSON.stringify({order_parent_id: this.order._id, items: this.inputData, day: keys[this.selected_time]}),
         method: 'POST',
       })
       if (res.status === 200) {
-        console.log('ok')
+        window.location.href = '/meus-agendamentos'
       } else {
         this.denied_message = await res.text();
         this.handleMessageAppearence();

@@ -28,7 +28,7 @@ export class FazerAgendamentoComponent implements OnInit {
   async ngOnInit() {
     this.order_id = this.route.snapshot.paramMap.get('order_id') || '';
     console.log(this.order_id)
-    const res = await fetch(`http://localhost:3000/getorderandtime?order_id=${this.order_id}`, {
+    const res = await fetch(`${this.global.APIURL}/getorderandtime?order_id=${this.order_id}`, {
       credentials: 'include',
       method: 'GET',
     })
@@ -44,7 +44,7 @@ export class FazerAgendamentoComponent implements OnInit {
   public loading = false;
   async makeAppointment() {
     this.showLoading()
-    const res = await fetch(`http://localhost:3000/makeappointment`, {
+    const res = await fetch(`${this.global.APIURL}/makeappointment`, {
       credentials: 'include',
       body: JSON.stringify({order_parent_id: this.order_id, items: this.inputData, day: 'ter'}),
       method: 'POST',

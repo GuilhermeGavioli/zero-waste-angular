@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { GlobalService } from '../global.service';
@@ -25,6 +25,9 @@ export class AgendamentosdaminhaorderComponent {
   public appointments: any = []
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private global: GlobalService){}
   
+  
+  @ViewChild('ConfirmDonationButton') ConfirmDonationButton!: ElementRef;
+
   async ngOnInit(): Promise<void> {
     await this.getUserInfo()
     this.order_id = this.route.snapshot.paramMap.get('order_id') || '';    
@@ -48,20 +51,31 @@ export class AgendamentosdaminhaorderComponent {
   }
 
   async confirmDonation(appointment_id: string) {
-    appointment_id
-     const res = await fetch(`http://localhost:3000/confirmdonation?appointment_id=${appointment_id}`, {
+    this.ConfirmDonationButton.nativeElement.disabled = true
+     const res = await fetch(`${this.global.APIURL}/confirmdonation?appointment_id=${appointment_id}`, {
       credentials: 'include',
       method: 'GET',
     });
     if (res.status === 200) {
-      alert('ok')
+      this.appointments.forEach((appointment: any) => {
+        if (appointment._id === appointment_id) {
+          appointment.confirmed = true;
+        }
+       })
+      this.appointments = appointment_id
     } else {
       console.log(await res.text())
     }
+    setTimeout(() => {
+      if (this.ConfirmDonationButton.nativeElement) {
+        this.ConfirmDonationButton.nativeElement.disabled = false
+      }
+    }, 950);
+
   }
 
   async getAppointmentsFromMyOrder() {
-    const res = await fetch(`http://localhost:3000/getAppointmentsFromMyOrder?order_id=${this.order_id}`, {
+    const res = await fetch(`${this.global.APIURL}/getAppointmentsFromMyOrder?order_id=${this.order_id}`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -83,7 +97,7 @@ export class AgendamentosdaminhaorderComponent {
   }
 
   async makeAppointment() {
-    const res = await fetch(`http://localhost:3000/makeappointment`, {
+    const res = await fetch(`${this.global.APIURL}/makeappointment`, {
       body: JSON.stringify({
         order_parent_id: this.order_id,
         day: 'ter',
@@ -100,7 +114,7 @@ export class AgendamentosdaminhaorderComponent {
   }
 
   async getOrder() {
-    const res = await fetch(`http://localhost:3000/getorderandtime?order_id=${this.order_id}`, {
+    const res = await fetch(`${this.global.APIURL}/getorderandtime?order_id=${this.order_id}`, {
       credentials: 'include',
       method: 'GET',
     });

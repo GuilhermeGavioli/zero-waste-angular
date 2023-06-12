@@ -32,7 +32,7 @@ export class MeusLikesComponent implements OnInit {
   }
 
   async getMyLikes() {
-    const res = await fetch(`http://localhost:3000/mylikes`, {
+    const res = await fetch(`${this.global.APIURL}/mylikes`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -49,7 +49,7 @@ export class MeusLikesComponent implements OnInit {
   public ongs: any = [];
   async getOngsInfo() {
     console.log(this.ids)
-    const res = await fetch(`http://localhost:3000/getMyLikesOngInfo`, {
+    const res = await fetch(`${this.global.APIURL}/getMyLikesOngInfo`, {
       credentials: 'include',
       method: 'POST',
       body: JSON.stringify({ ids: this.ids })
@@ -62,12 +62,11 @@ export class MeusLikesComponent implements OnInit {
     } else {
       console.log(await res.text())
     }
-    
   }
 
 
   async likeOng(ong_id: string, index: number){
-    const res = await fetch(`http://localhost:3000/like?ong_id=${ong_id}`, {
+    const res = await fetch(`${this.global.APIURL}/like?ong_id=${ong_id}`, {
       credentials: 'include',
       method: 'GET',
     })
@@ -78,7 +77,7 @@ export class MeusLikesComponent implements OnInit {
   }
   
   async unlikeOng(ong_id: string, index: number){
-    const res = await fetch(`http://localhost:3000/unlike?ong_id=${ong_id}`, {
+    const res = await fetch(`${this.global.APIURL}/unlike?ong_id=${ong_id}`, {
       credentials: 'include',
       method: 'GET',
     })

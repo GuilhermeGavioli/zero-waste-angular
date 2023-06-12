@@ -17,6 +17,7 @@ export class CadONGComponent {
 
   constructor(private router: Router, private authService: AuthService, private global: GlobalService) { }
 
+  @ViewChild('ErrorMessage') ErrorMessage!: ElementRef;
   
   public email: string = ''
   public valid_email: boolean = false
@@ -155,17 +156,9 @@ export class CadONGComponent {
   }
 
 
-  public loading: boolean = false;
-  showLoading() {
-    this.loading = true
-    this.registerButton.nativeElement.disabled = true
-  }
 
-  hideLoading() {
-    this.loading = false
-    this.registerButton.nativeElement.disabled = false
-  }
   
+  public loading: boolean = false;
   async register() {
     this.showLoading()
     const user: any = {
@@ -188,34 +181,49 @@ export class CadONGComponent {
       }
     })
     user.working_time = {...weeks} 
-    
-   
-    setTimeout(async () => {
-      const res = await fetch(`http://localhost:3000/account/register/ONG`, {
+    const res = await fetch(`${this.global.APIURL}/account/register/ONG`, {
         credentials: 'include',
         method: 'POST',
         body: JSON.stringify(user)
       });
       if (res.status === 200) {
-        const data = await res.text();
-        console.log('ok')
-        console.log(data)
-        this.router.navigateByUrl(`/mail/${this.email}`)
+        this.router.navigateByUrl(`/mail/${this.email.toLowerCase()}`)
         // localStorage.setItem('user-info', JSON.stringify({ type: data.type, name: data.name }))
         // this.router.navigate(['/perfil'])
-        
       } else {
-        console.log(await res.text());
+        this.denied_message= await res.text()
+        this.handleMessageAppearence()
       }
       this.hideLoading()
-    }, 1500);
+  
   }
 
-  async oauth(){
-    const res = await fetch(`http://localhost:3000/oauth`, {
-      credentials: 'include',
-      method: 'GET',
-    });
+
+  showLoading() {
+    this.loading = true
+    this.registerButton.nativeElement.disabled = true
+  }
+
+  hideLoading() {
+    this.loading = false
+    this.registerButton.nativeElement.disabled = false
+  }
+  
+
+
+  public is_message_being_shown = false;
+  public denied_message = '';
+  handleMessageAppearence() {
+    if (this.is_message_being_shown) return;
+    this.is_message_being_shown = true;
+    this.ErrorMessage.nativeElement.innerText = this.denied_message;
+    this.ErrorMessage.nativeElement.style.top = '25px'
+    setTimeout(() => {
+      this.is_message_being_shown = false
+      this.ErrorMessage.nativeElement.style.top = '-300px'
+      this.denied_message = '';
+    }, 3000);
+
   }
   
 

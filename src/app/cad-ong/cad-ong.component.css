@@ -31,9 +31,10 @@
 
 
 .week-day-card{
+  border-radius: 10px;
   padding: 8px;
-  display: flex;
-  flex-direction: column;
+  display: flex; 
+  gap: 4px;
   align-items: center;
 }
 

@@ -29,6 +29,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { AjudaComponent } from './ajuda/ajuda.component';
 import { AuthGuard } from './auth.guard';
 import { NonauthGuard } from './nonauth.guard';
+import { ReportComponent } from './report/report.component';
 
 const routes: Routes = [
   { path: '', component: TipoUsuarioComponent },
@@ -46,7 +47,7 @@ const routes: Routes = [
   
   { path: 'confemail', component: ConfEeComponent },
   {path: 'deletarconta', component:DeletarcontaComponent, canActivate: [AuthGuard]},
-  {path: 'comprovante', component:ComprovanteComponent, canActivate: [AuthGuard]},
+  {path: 'meus-comprovantes', component:ComprovanteComponent, canActivate: [AuthGuard]},
   {path: 'agendando/:order_id', component:FazerAgendamentoComponent, canActivate: [AuthGuard]},
   { path: 'categorias', component: CategoriasComponent, canActivate: [AuthGuard]},
   
@@ -58,10 +59,11 @@ const routes: Routes = [
   { path: 'start', component:  StartComponent, canActivate: [AuthGuard]},
   { path: 'mail/:email', component:  EmailComponent},
   { path: 'solicitacao/:order_id', component:  SolicitacaoComponent, canActivate: [AuthGuard]},
-    {path: 'solicitacao', component: PaginaDaSolicitacaoComponent, canActivate: [AuthGuard]},
+    // {path: 'solicitacao', component: PaginaDaSolicitacaoComponent, canActivate: [AuthGuard]},
     {path: 'agendamentosdaorder/:order_id', component: AgendamentosdaminhaorderComponent, canActivate: [AuthGuard]},
   { path: 'minhasdoacoes', component: MinhasdoacoesComponent, canActivate: [AuthGuard]},
   { path: 'ajuda', component: AjudaComponent},
+  { path: 'report', component: ReportComponent, canActivate: [AuthGuard]},
     
     { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
 ];

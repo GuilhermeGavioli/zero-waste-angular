@@ -44,7 +44,7 @@ export class LoginComponent {
   
 
   async oauth(){
-    const res = await fetch(`http://localhost:3000/oauth`, {
+    const res = await fetch(`${this.global.APIURL}/oauth`, {
       credentials: 'include',
       method: 'GET',
     });
@@ -135,7 +135,7 @@ export class LoginComponent {
   async login() {
     this.showLoading()
     
-      const res = await fetch(`http://localhost:3000/account/login/default`, {
+      const res = await fetch(`${this.global.APIURL}/account/login/default`, {
         credentials: 'include',
         method: 'POST',
         body: JSON.stringify({email: this.email, password: this.password})

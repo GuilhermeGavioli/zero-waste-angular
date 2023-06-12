@@ -13,10 +13,38 @@ import { slideAnimation } from '../slideAnimation';
 export class AddAlimentoComponent {
 
   public description: string = ''
+  public name: string = ''
   public valid_description: boolean = false
   @ViewChild('descriptionInput') descriptionInput!: ElementRef;
-  public valids = ['a', 'b', 'c', 'd', 'e']
- 
+  @ViewChild('createOrderButton') createOrderButton!: ElementRef;
+  @ViewChild('ErrorMessage') ErrorMessage!: ElementRef;
+
+  public denied_message: string = ''
+  public loading: boolean = false;
+  showLoading() {
+    this.loading = true
+    this.createOrderButton.nativeElement.disabled = true
+  }
+
+  hideLoading() {
+    this.loading = false
+    this.createOrderButton.nativeElement.disabled = false
+  }
+
+  public is_message_being_shown = false;
+  handleMessageAppearence() {
+    if (this.is_message_being_shown) return;
+    this.is_message_being_shown = true;
+    this.ErrorMessage.nativeElement.innerText = this.denied_message;
+    this.ErrorMessage.nativeElement.style.top = '25px'
+    setTimeout(() => {
+      this.is_message_being_shown = false
+      this.ErrorMessage.nativeElement.style.top = '-300px'
+      this.denied_message = '';
+    }, 3000);
+
+  }
+
 
   constructor(private router: Router, private global: GlobalService) {}
   goToPage(pageName:string){
@@ -38,20 +66,24 @@ export class AddAlimentoComponent {
 
 
   async createOrder() {
-    const res = await fetch(`http://localhost:3000/createorder`, {
+    this.loading = true
+    const res = await fetch(`${this.global.APIURL}/createorder`, {
       credentials: 'include',
       method: 'POST',
-      body: JSON.stringify({items: this.items, expires_in: 'threedays', name: this.name, description: this.description})
+      body: JSON.stringify({items: this.items, name: this.name, description: this.description})
     });
     if (res.status === 200) {
       alert('ok')
+      window.location.href = '/perfil'
     } else {
-      console.log(await res.text())
+      this.denied_message = await res.text()
+      this.handleMessageAppearence()
     }
+    this.loading = false
   }
 
 
-  public name: string = ''
+
   public valid_name: boolean = false
   @ViewChild('nameInput') nameInput!: ElementRef;
   @ViewChild('nameContainer') nameContainer!: ElementRef;

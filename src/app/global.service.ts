@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class GlobalService {
 
+  public APIURL: string = 'http://http://localhost:3000'
+
   constructor(private route: ActivatedRoute, private router: Router) { }
   last_route: string = 'perfil'
   my_route: string = 'perfil'

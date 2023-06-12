@@ -46,7 +46,7 @@ export class PesquisaDoarComponent implements OnInit {
     this.ong = this.ongs[i]
     this.ong.orders = [];
     this.ong.loading_orders = 1;
-    const res = await fetch(`http://localhost:3000/getactiveordersfrom?ong_id=${this.ongs[i]._id}`, {
+    const res = await fetch(`${this.global.APIURL}/getactiveordersfrom?ong_id=${this.ongs[i]._id}`, {
       credentials: 'include',
       method: 'GET',
     })
@@ -83,7 +83,7 @@ export class PesquisaDoarComponent implements OnInit {
 
   async getFiveOngsData() {
     if (this.is_over === 1) return;
-    const res = await fetch(`http://localhost:3000/gettenongs?pack=${this.current_pack}`, {
+    const res = await fetch(`${this.global.APIURL}/gettenongs?pack=${this.current_pack}`, {
       credentials: 'include',
       method: 'GET',
     })
@@ -111,7 +111,7 @@ export class PesquisaDoarComponent implements OnInit {
   public possible_items = ['Farinhas e Amidos', 'Conservas', 'Óleos e Gorduras', 'Leites e Derivados', 'Sucos e Bebidas', 'Grãos e Cereais', 'Enlatados']
 
   async likeOng(ong_id: string, index: number){
-    const res = await fetch(`http://localhost:3000/like?ong_id=${ong_id}`, {
+    const res = await fetch(`${this.global.APIURL}/like?ong_id=${ong_id}`, {
       credentials: 'include',
       method: 'GET',
     })
@@ -122,7 +122,7 @@ export class PesquisaDoarComponent implements OnInit {
   }
   
   async unlikeOng(ong_id: string, index: number){
-    const res = await fetch(`http://localhost:3000/unlike?ong_id=${ong_id}`, {
+    const res = await fetch(`${this.global.APIURL}/unlike?ong_id=${ong_id}`, {
       credentials: 'include',
       method: 'GET',
     })
@@ -133,7 +133,7 @@ export class PesquisaDoarComponent implements OnInit {
   }
 
   async getMyLikes() {
-    const res = await fetch(`http://localhost:3000/mylikes`, {
+    const res = await fetch(`${this.global.APIURL}/mylikes`, {
       credentials: 'include',
       method: 'GET',
     })

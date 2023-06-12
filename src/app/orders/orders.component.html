@@ -36,7 +36,7 @@
 
 
 
-    <main class="main" style="background: var(--zw-second)">
+    <main class="main" style="background: whitesmoke">
 
 
         <div #ErrorMessage style="z-index: 3; position: absolute; top: -300px; background-color: var(--zw-second); border-radius: 35px; padding: 16px 24px 16px 24px; color: white; font-weight: 700; width: 300px; font-size: 1.1em; display: flex; align-items: center; gap: 8px; box-shadow: 4px 6px 4px -2px rgba(0, 0, 0, 0.111); margin: auto; right: 0; left: 0; transition: .2s ease-in-out;">
@@ -59,23 +59,32 @@
             </svg>
         </div> -->
      
-          <div class="info" style="margin-bottom: 36px;">
-              <p style="color: rgb(170,170,170); font-size: 0.9em;">/solicitações/{{order?.name}}</p>
-        </div>
-        
-        <div class="info">
-            <h4>{{order?.name}}</h4>
-            <p>{{order?.description}}</p>
-            <p>Criado em: {{order?.created_at?.split('-')[0]}}</p>
-        </div>
-    
      
-        
-        
+
+
+  
+
         <span class="titles-box">
             <div>
-                <h2 class="box-title">Horários Disponiveis</h2>
-                <h4>Selecione um horário</h4>
+                <h2 style="color: white; border-radius: 20px; padding: 2px 24px 2px 24px; background-color: var(--zw-second); width: fit-content; margin-bottom: 8px;">Info</h2>
+                <h4 style="color: rgb(50,50,50)">Criado por: {{owner?.name}}</h4>
+                <h4 style="color: rgb(50,50,50)">{{order?.description}}</h4>
+            
+             
+                
+                <h4 style="color: rgb(50,50,50)">Solicitado em {{order?.created_at}}</h4>
+            </div>
+        </span>
+        
+    
+  
+        
+ 
+
+        <span class="titles-box">
+            <div>
+                <h2 style="color: white; border-radius: 20px; padding: 2px 24px 2px 24px; background-color: var(--zw-second); width: fit-content; margin-bottom: 8px;">Horários</h2>
+                <h4 style="color: rgb(50,50,50)">Abaixo estão os horários que a Instituição que realizou a Solicitação funciona durante a semana. Selecione um horário para que possamos realizar seu Agendamento.</h4>
             </div>
         </span>
         <div class="times">
@@ -84,7 +93,8 @@
 
         
             <div *ngIf="owner?.working_time?.[week_days[i]] !== closed" class="time" (click)="changeTime(i)"
-                [style.background]="selected_time === i ? 'var(--zw-red)': 'whitesmoke'"
+                [style.background]="selected_time === i ? 'var(--zw-red)': 'white'"
+                [style.color]="selected_time === i ? 'white': 'black'"
             >
           
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
@@ -93,8 +103,12 @@
                       </svg>
            
              
-                    
-                    <p>{{week_days[i]}} {{owner?.working_time?.[week_days[i]]}}</p>
+                    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+
+                        <p>{{owner?.working_time?.[week_days[i]]}}</p> 
+                        <p style="background: var(--zw-second); color: white; font-weight: 700; padding: 4px 8px 4px 8px; border-radius: 15px;">{{week_days[i]}}</p>
+                        
+                    </div>
               
             </div>
             
@@ -103,36 +117,21 @@
     </div>
     
       
-    
+
+      
         <span class="titles-box">
-            <h2>Dados da Solicitação</h2>
+            <div>
+                <h2 style="color: white; border-radius: 20px; padding: 2px 24px 2px 24px; background-color: var(--zw-second); width: fit-content; margin-bottom: 8px;">Local</h2>
+                <h4 style="color: rgb(50,50,50)">Ao fazer um Agendamento, voce deve entregar os Produtos acordados no local:</h4>
+                
+                <h4 style="color: rgb(50,50,50)">Rua {{owner?.address_street}}, {{owner?.address_state}}, {{owner?.address_number}}</h4>
+            </div>
         </span>
-        <div class="request">
-            <table style="background: whitesmoke; width: 100%;">
-                <thead >
-                  <tr>
-                    <th style="border-radius: 5px;">ITEM</th>
-                    <th style="border-radius: 5px;">REQUERIDO</th>
-                    <th style="border-radius: 5px;">DOADO</th>
-                  </tr>
-                </thead>
-                <tbody *ngFor="let item of order?.items; let i = index">
-                  <tr>
-                    <td>{{possible_items[i]}}</td>
-                    <td>{{item}}</td>
-                    <td>{{order.donated[i]}}</td>
-                  </tr>
-                </tbody>
-             
-              </table>
-    
-        </div>
-    
     
         <span class="titles-box">
             <div>
-                <h2>Doação</h2>
-                <h4>Abaixo estão os items possiveis para essa doação. Selecione oque deseja doar.</h4>
+                <h2 style="color: white; border-radius: 20px; padding: 2px 24px 2px 24px; background-color: var(--zw-second); width: fit-content; margin-bottom: 8px;">Produtos</h2>
+                <h4 style="color: rgb(50,50,50)">Abaixo estão os items restantes possiveis para essa Solicitação. Selecione oque deseja doar, pelo menos uma unidade de algum item é necessária para que possamos realizar seu Agendamento.</h4>
             </div>
         </span>
         <div class="donations">
@@ -142,7 +141,7 @@
                     >
                 <h3>{{possible_items[i]}}</h3>
                 <div class="donation-pair-of-button-and-input">
-                    <button class="find-ongs-button" style="background: var(--zw-second); padding: 2px 8px 2px 8px;">Doar</button>
+                    <button class="find-ongs-button" style="background: var(--zw-second); padding: 2px 14px 2px 14px; border-radius: 10px;">Doar</button>
                     <p>max: {{item - order.donated[i]}}</p>
                     <input (click)="preventDefault($event)" (change)="inputDataChanged(i)" type="number" class="quantity-input" [(ngModel)]="inputData[i]" max="item - order?.donated[i]">
                 </div>
@@ -152,9 +151,17 @@
         </div>
     
         
-        <div style="width: 100vw; display: flex; position: absolute; bottom: -1px; right: 0; background: var(--zw-second); justify-content: center; padding: 16px 0 16px 0; height: 90px;">
-            <button #AppointmentButton class="find-ongs-button" (click)="makeAppointment()" style="display: flex; align-items: center; justify-content: center; width: 280px;">
+        <div *ngIf="!is_appointed" style="width: 100vw; display: flex; position: absolute; bottom: -1px; right: 0; background-color: var(--zw-red); justify-content: center; padding: 16px 0 16px 0; height: 70px;">
+            <button #AppointmentButton class="find-ongs-button" (click)="makeAppointment()" style="display: flex; align-items: center; justify-content: center; width: 100%; font-size: 1.3em;">
                 <span *ngIf="!loading">Marcar Agendamento</span>
+    
+                <div #spinner class="spinner" *ngIf="loading"></div>
+            </button>
+        </div>
+
+        <div *ngIf="is_appointed" style="width: 100vw; display: flex; position: absolute; bottom: -1px; right: 0; background-color: var(--zw-red); justify-content: center; padding: 16px 0 16px 0; height: 70px;">
+            <button #AppointmentButton class="find-ongs-button" (click)="desmarcar(relative_appointment)" style="display: flex; align-items: center; justify-content: center; width: 100%; font-size: 1.3em;">
+                <span *ngIf="!loading">Desmarcar Agendamento</span>
     
                 <div #spinner class="spinner" *ngIf="loading"></div>
             </button>
@@ -194,6 +201,8 @@
 
 
 
+
+
     <div style="display: flex; flex-direction: column; gap: 8px;">
         <div *ngFor="let order of orders; let i = index;">
             <div style="width: 100%; height: fit-content; background: white; border-radius: 16px; padding: 8px 16px 8px 16px; gap: 8px; display: flex; flex-direction: column;" (click)="openOrder(i)">
@@ -210,7 +219,7 @@
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <p>{{order?.created_at?.split('-')[0]}}</p>
-                <p>ver detalhes</p>
+                <p style="background: var(--zw-second); color: white; font-weight: 700; padding: 4px 8px 4px 8px; border-radius: 15px;">Quero Doar</p>
             </div> 
         </div>
     </div>
