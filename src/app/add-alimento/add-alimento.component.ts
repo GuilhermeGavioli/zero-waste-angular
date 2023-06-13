@@ -75,7 +75,6 @@ export class AddAlimentoComponent {
       body: JSON.stringify({items: this.items, name: this.name, description: this.description})
     });
     if (res.status === 200) {
-      alert('ok')
       window.location.href = '/perfil'
     } else {
       this.denied_message = await res.text()
