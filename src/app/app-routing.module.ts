@@ -30,9 +30,10 @@ import { AjudaComponent } from './ajuda/ajuda.component';
 import { AuthGuard } from './auth.guard';
 import { NonauthGuard } from './nonauth.guard';
 import { ReportComponent } from './report/report.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 const routes: Routes = [
-  { path: '', component: TipoUsuarioComponent },
+  { path: '', component: TipoUsuarioComponent, canActivate: [NonauthGuard] },
   { path: 'ongs', component: PesquisaDoarComponent, canActivate: [AuthGuard]},
   { path: 'add-solicitacao', component: AddAlimentoComponent, canActivate: [AuthGuard] },
   {path: 'perfil', component: PerfilUsuarioComponent, canActivate: [AuthGuard]},
@@ -43,7 +44,9 @@ const routes: Routes = [
   {path: 'cadastroONG', component: CadONGComponent, canActivate: [NonauthGuard]},
   { path: 'cadastrousuario', component: CadUserComponent, canActivate: [NonauthGuard] },
   { path: 'confirmacaodecad/:code_path', component: ConfCcComponent, canActivate: [NonauthGuard] },
+
   { path: 'recupsenha', component: RecupPasswordComponent, canActivate: [NonauthGuard] },
+  { path: 'changepassword/:code_path', component: ChangepasswordComponent,  },
   
   { path: 'confemail', component: ConfEeComponent },
   {path: 'deletarconta', component:DeletarcontaComponent, canActivate: [AuthGuard]},
@@ -56,7 +59,7 @@ const routes: Routes = [
   {path: 'ong/:ong_id', component: PaginaOngComponent, canActivate: [AuthGuard]},
   { path: 'meus-likes', component: MeusLikesComponent, canActivate: [AuthGuard]},
   { path: 'meus-agendamentos', component: MeusAgendamentosComponent, canActivate: [AuthGuard]},
-  { path: 'start', component:  StartComponent, canActivate: [AuthGuard]},
+  { path: 'start', component:  StartComponent},
   { path: 'mail/:email', component:  EmailComponent},
   { path: 'solicitacao/:order_id', component:  SolicitacaoComponent, canActivate: [AuthGuard]},
     // {path: 'solicitacao', component: PaginaDaSolicitacaoComponent, canActivate: [AuthGuard]},

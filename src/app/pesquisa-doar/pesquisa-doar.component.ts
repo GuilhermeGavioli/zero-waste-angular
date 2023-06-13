@@ -12,6 +12,7 @@ import { slideAnimation, slideToSide } from '../slideAnimation';
 export class PesquisaDoarComponent implements OnInit {
 
   @ViewChild('container') container!: ElementRef;
+  @ViewChild('ErrorMessage') ErrorMessage!: ElementRef;
   
   public ongs: any[] = []
   public ong: any = null // opened ong info
@@ -19,6 +20,8 @@ export class PesquisaDoarComponent implements OnInit {
   public current_pack: number = 1
   public is_over: number = 0
   public ong_active_orders: any;
+
+
 
   public is_on_ong_screen = 0;
 
@@ -79,6 +82,14 @@ export class PesquisaDoarComponent implements OnInit {
       }
       
      })
+  }
+
+  goBackToOngs() {
+    this.is_on_ong_screen = 0;
+    setTimeout(() => {
+      this.addEventListeners()
+      this.container.nativeElement.scrollTop = this.lastScrollPosition;
+    }, 250);
   }
 
   async getFiveOngsData() {
@@ -146,5 +157,34 @@ export class PesquisaDoarComponent implements OnInit {
   navigateTo(url: string): void {
     this.router.navigateByUrl(url);
   }
+
+
+
+
+  public loading: boolean = false;
+  public denied_message: string = ''
+  public is_message_being_shown = false;
+   handleMessageAppearence() {
+     if (this.is_message_being_shown) return;
+     this.is_message_being_shown = true;
+     this.ErrorMessage.nativeElement.innerText = this.denied_message;
+     this.ErrorMessage.nativeElement.style.top = '25px'
+     setTimeout(() => {
+       this.is_message_being_shown = false
+       this.ErrorMessage.nativeElement.style.top = '-300px'
+       this.denied_message = '';
+     }, 3000);
+   }
+ 
+ 
+  showLoading() {
+     this.loading = true
+    //  this.AppointmentButton.nativeElement.disabled = true
+   }
+ 
+   hideLoading() {
+     this.loading = false
+    //  this.AppointmentButton.nativeElement.disabled = false
+   }
 
 }

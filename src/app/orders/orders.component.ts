@@ -61,17 +61,7 @@ export class OrdersComponent implements OnInit {
 
 
 
-  async desmarcar(appointment_id: string) {
-    const res = await fetch(`${this.global.APIURL}/delete/myappointment?appointment_id=${appointment_id}`, {
-      credentials: 'include',
-      method: 'GET',
-    });
-    if (res.status === 200) {
-      this.my_active_appointments = this.my_active_appointments.filter(appointment => appointment._id !== appointment_id)
-    } else {
-      console.log(await res.text())
-    }
-  }
+
 
   public is_appointed: null | boolean = null;
   public relative_appointment: string = '';
@@ -116,29 +106,7 @@ export class OrdersComponent implements OnInit {
   }
 
 
-  // async ngOnInit(): Promise<void> {  
-  //   this.order_id = this.route.snapshot.paramMap.get('order_id') || '';    
-  //   if (!this.order_id) this.router.navigateByUrl('/perfil');
 
-  //   await this.getUserInfo()
-  //   await this.getOrder()
-  //   console.log(this.ong_owner)
-  //   if (this.user.type === 'user') {
-  //     await this.getMyAppointments()
-  //     this.my_active_appointments?.forEach((appointment: any) => {
-  //       if (appointment?.order_parent_id == this.order_id && !appointment.confirmed) { 
-  //         this.is_appointed = 1;
-  //         this.appointed_mentioned_to_this_order = appointment;
-  //         console.log(this.appointed_mentioned_to_this_order)
-  //       }
-  //     })
-  //   } else if (this.user.type === 'ong') {
-  //     if (this.order?.order?.owner === this.user?.id ) this.is_owner = 1
-  //   } else {
-  //     this.router.navigateByUrl('/perfil');
-  //   }
-    
-  // }
   async getUserInfo() {
     this.user = await this.authService.getUserFromStorage()
   }
@@ -148,7 +116,9 @@ export class OrdersComponent implements OnInit {
   // }
 
   public owner: any;
+  public last_scrolled_position = null;
   async openOrder(i: number) {
+   
     this.order = this.orders[i]
     await this.getMyAppointments()
     this.is_on_order_screen = 1
@@ -166,10 +136,11 @@ export class OrdersComponent implements OnInit {
   }
 
   goBackToOrders() {
+
     this.is_on_order_screen = 0;
-    // this.container.nativeElement.scrollTop = this.lastScrollPosition;
     setTimeout(() => {
       this.addEventListeners()
+      this.container.nativeElement.scrollTop = this.lastScrollPosition;
     }, 250);
   }
 
@@ -240,11 +211,25 @@ export class OrdersComponent implements OnInit {
   }
 
 
+  async desmarcar(appointment_id: string) {
+    this.showLoading()
+    const res = await fetch(`${this.global.APIURL}/delete/myappointment?appointment_id=${appointment_id}`, {
+      credentials: 'include',
+      method: 'GET',
+    });
+    if (res.status === 200) {
+      this.my_active_appointments = this.my_active_appointments.filter(appointment => appointment._id !== appointment_id)
+      window.location.href = '/meus-agendamentos'
+    } else {
+      this.denied_message = await res.text();
+      this.handleMessageAppearence()
+    }
+  }
 
   public loading: boolean = false;
   async makeAppointment() {
     this.showLoading()
-    if (!this.selected_time) {
+    if (this.selected_time === null) {
       this.denied_message = 'Horário/ Dia para o agendamento não foi selecionado'
       this.handleMessageAppearence()
       
@@ -263,12 +248,14 @@ export class OrdersComponent implements OnInit {
         this.handleMessageAppearence();
       }
     }
-    this.hideLoading()
   }
 
   public denied_message: string = ''
  public is_message_being_shown = false;
   handleMessageAppearence() {
+    setTimeout(() => {
+      this.hideLoading()
+    }, 550);
     if (this.is_message_being_shown) return;
     this.is_message_being_shown = true;
     this.ErrorMessage.nativeElement.innerText = this.denied_message;

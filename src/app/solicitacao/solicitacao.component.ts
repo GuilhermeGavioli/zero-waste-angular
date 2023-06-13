@@ -163,7 +163,8 @@ export class SolicitacaoComponent {
   public loading: boolean = false;
   async makeAppointment() {
     this.showLoading()
-    if (!this.selected_time) {
+  
+    if (this.selected_time == null) {
       this.denied_message = 'Horário/ Dia para o agendamento não foi selecionado'
       this.handleMessageAppearence()
       
@@ -194,17 +195,23 @@ export class SolicitacaoComponent {
     if (res.status === 200) {
       this.my_active_appointments = this.my_active_appointments.filter(appointment => appointment._id !== appointment_id)
       this.hideLoading()
-      window.location.href = '/perfil'
+      window.location.href = '/meus-agendamentos'
     } else {
       this.denied_message = await res.text()
       this.handleMessageAppearence()
-      this.hideLoading()
     }
   }
+
+
+
+
 
   public denied_message: string = ''
  public is_message_being_shown = false;
   handleMessageAppearence() {
+    setTimeout(() => {
+      this.hideLoading()
+    }, 550);
     if (this.is_message_being_shown) return;
     this.is_message_being_shown = true;
     this.ErrorMessage.nativeElement.innerText = this.denied_message;

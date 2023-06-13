@@ -230,3 +230,11 @@ th,td{
         z-index: 3;
         transition: 0.15s ease-in-out;
     }
+
+
+
+    button:disabled{
+        background-color: rgb(224, 224, 224)!important;
+        opacity: 100%;
+        color: rgb(136, 136, 136)!important;
+    }

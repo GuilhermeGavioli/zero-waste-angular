@@ -12,6 +12,9 @@ import { slideToSide } from '../slideAnimation';
 })
 export class AgendamentosdaminhaorderComponent {
 
+  @ViewChild('ErrorMessage') ErrorMessage!: ElementRef;
+  @ViewChild('ConfirmDonationButton') ConfirmDonationButton!: ElementRef;
+
 
   public weekdays = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab']
   public order_id: string = ''
@@ -26,7 +29,6 @@ export class AgendamentosdaminhaorderComponent {
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private global: GlobalService){}
   
   
-  @ViewChild('ConfirmDonationButton') ConfirmDonationButton!: ElementRef;
 
   async ngOnInit(): Promise<void> {
     await this.getUserInfo()
@@ -50,7 +52,10 @@ export class AgendamentosdaminhaorderComponent {
     }
   }
 
+  public all_disabled = false;
+
   async confirmDonation(appointment_id: string) {
+    this.all_disabled = true
     this.ConfirmDonationButton.nativeElement.disabled = true
      const res = await fetch(`${this.global.APIURL}/confirmdonation?appointment_id=${appointment_id}`, {
       credentials: 'include',
@@ -64,13 +69,10 @@ export class AgendamentosdaminhaorderComponent {
        })
       this.appointments = appointment_id
     } else {
-      console.log(await res.text())
+      this.denied_message = await res.text()
+      this.handleMessageAppearence()
     }
-    setTimeout(() => {
-      if (this.ConfirmDonationButton.nativeElement) {
-        this.ConfirmDonationButton.nativeElement.disabled = false
-      }
-    }, 950);
+
 
   }
 
@@ -96,22 +98,7 @@ export class AgendamentosdaminhaorderComponent {
     console.log(this.my_donation)
   }
 
-  async makeAppointment() {
-    const res = await fetch(`${this.global.APIURL}/makeappointment`, {
-      body: JSON.stringify({
-        order_parent_id: this.order_id,
-        day: 'ter',
-        items: this.my_donation
-      }),
-      credentials: 'include',
-      method: 'POST',
-    });
-    if (res.status === 200) {
-      console.log('ok')
-    } else {
-      console.log(await res.text())
-    }
-  }
+
 
   async getOrder() {
     const res = await fetch(`${this.global.APIURL}/getorderandtime?order_id=${this.order_id}`, {
@@ -128,8 +115,37 @@ export class AgendamentosdaminhaorderComponent {
     }
   }
 
-  goTo(url: string){
-    this.router.navigateByUrl(`/${url}`)
+  public loading: boolean = false
+  public denied_message: string = ''
+  public is_message_being_shown = false;
+  handleMessageAppearence() {
+    setTimeout(() => {
+      this.hideLoading()
+      this.ConfirmDonationButton.nativeElement.disabled = false
+    }, 850);
+    if (this.is_message_being_shown) return;
+    this.is_message_being_shown = true;
+    this.ErrorMessage.nativeElement.innerText = this.denied_message;
+    this.ErrorMessage.nativeElement.style.top = '25px'
+    setTimeout(() => {
+      this.is_message_being_shown = false
+      this.ErrorMessage.nativeElement.style.top = '-300px'
+      this.denied_message = '';
+    }, 3000);
+
   }
-  
+
+  showLoading() {
+    this.loading = true
+    this.ConfirmDonationButton.nativeElement.disabled = true
+  }
+
+  hideLoading() {
+    this.loading = false
+    this.ConfirmDonationButton.nativeElement.disabled = false
+  }
+
+  goTo(path: string) {
+    this.router.navigateByUrl(`/${path}`)
+  }
 }

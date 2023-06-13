@@ -150,13 +150,16 @@ export class LoginComponent {
         this.denied_message = await res.text();
         this.handleMessageAppearence();
       }
-      this.hideLoading()
+  
 
   }
 
   public is_message_being_shown = false;
   handleMessageAppearence() {
-    if (this.is_message_being_shown) return;
+    
+    setTimeout(() => {
+      this.hideLoading()
+    }, 550);
     this.is_message_being_shown = true;
     this.ErrorMessage.nativeElement.innerText = this.denied_message;
     this.ErrorMessage.nativeElement.style.top = '25px'
@@ -167,6 +170,8 @@ export class LoginComponent {
     }, 3000);
 
   }
+
+  
 
   goTo(path: string) {
     this.router.navigateByUrl(`/${path}`)

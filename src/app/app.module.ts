@@ -40,6 +40,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { AjudaComponent } from './ajuda/ajuda.component';
 import { GlobalService } from './global.service';
 import { ReportComponent } from './report/report.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 export function globalServiceFactory(globalService: GlobalService) {
   return () => globalService.initialize();
@@ -77,6 +78,7 @@ export function globalServiceFactory(globalService: GlobalService) {
     OrdersComponent,
     AjudaComponent,
     ReportComponent,
+    ChangepasswordComponent,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -1,9 +1,26 @@
-<div class="box">
-    <div class="color-box"><img src="../../assets/IMAGEM.png" alt="imagem"></div>
-    <h1>Olá</h1>
-    <p>Por favor escolha como você deseja prosseguir.</p>
-    <div class="escolha-usuario">
-        <button class="btn-doador" (click)="goToPage('login', 'doador');" ><h2>Quero doar</h2></button>
-        <button class="btn-ong" (click)="goToPage('login', 'ong');"><h3>Sou uma ONG</h3></button>
+
+<main class="master" [@slideToSide]>
+
+    
+    <main class="main" style="background: #CA262C; display: flex; align-items: center; justify-content: center;">
+
+
+        <div style="height: fit-content; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 126px;">
+
+            <div>
+                <h1 class="title">ZERO WASTE</h1>
+                <h1 class="title">BEM-VINDO</h1>
+            </div>
+    <div style="display: flex; flex-direction: column; width: 300px; margin: auto; gap: 16px;">
+
+        <button (click)="goTo('ajuda')"  class="find-ongs-button" 
+        style="background: var(--zw-second); color: white; width: 100%;">COMO FUNCIONA?</button>
+        
+        <button (click)="goTo('login')" class="find-ongs-button" style=" color: var(--zw-red); background: white; width: 100%;">JÁ SEI, QUERO ENTRAR!</button>
     </div>
-</div>
+    </div>
+    
+
+
+</main>
+</main>

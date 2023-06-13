@@ -33,6 +33,10 @@ export class AddAlimentoComponent {
 
   public is_message_being_shown = false;
   handleMessageAppearence() {
+    setTimeout(() => {
+      this.createOrderButton.nativeElement.disabled = false
+      this.loading = false;
+    }, 850);
     if (this.is_message_being_shown) return;
     this.is_message_being_shown = true;
     this.ErrorMessage.nativeElement.innerText = this.denied_message;
@@ -47,9 +51,7 @@ export class AddAlimentoComponent {
 
 
   constructor(private router: Router, private global: GlobalService) {}
-  goToPage(pageName:string){
-    this.router.navigate([`${pageName}`]);
-  }
+ 
 
   onDescriptionInputChange() {
     if (this.description.length >= 85 && this.description.length < 400) {
@@ -66,7 +68,7 @@ export class AddAlimentoComponent {
 
 
   async createOrder() {
-    this.loading = true
+    this.showLoading();
     const res = await fetch(`${this.global.APIURL}/createorder`, {
       credentials: 'include',
       method: 'POST',
@@ -79,7 +81,6 @@ export class AddAlimentoComponent {
       this.denied_message = await res.text()
       this.handleMessageAppearence()
     }
-    this.loading = false
   }
 
 
@@ -114,5 +115,7 @@ export class AddAlimentoComponent {
   goTo(url: string){
     this.router.navigateByUrl(`/${url}`)
   }
+
+  
 
 }

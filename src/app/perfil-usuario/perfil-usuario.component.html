@@ -122,14 +122,14 @@
             </div>
             <p class="s-text">Mensagens</p>
         </div> -->
-        <div class="category">
+        <div class="category" (click)="goTo('meus-likes')">
             <div class="category-circle">
                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
                     <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
                   </svg>
             </div>
-            <p class="s-text" (click)="goTo('meus-likes')">Favoritados</p>
+            <p class="s-text">Favoritados</p>
         </div>
         <div class="category" *ngIf="user?.type === 'user'" (click)="goTo('meus-comprovantes')">
             <div class="category-circle">
@@ -164,14 +164,14 @@
 
     <div style="display: flex; justify-content: space-between; gap: 8px; margin-top: 8px;">
     
-        <div (click)="goTo('orders')" style="height: 220px; width: 50%; background: var(--zw-red-clear); border-radius: 16px; display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 8px;"
+        <div (click)="goTo('orders')" style="height: 220px; width: 50%; background: var(--zw-red-clear); border-radius: 16px; display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 8px; padding-top: 18px;"
         >
             <img src="../../assets/red/profile/donations.png" style="width: 120px;" alt="">
-            <h3 style="text-align:center; color: white; padding: 0 16px 0 16px;">Todas Solicitaçoes</h3>
+            <h3 style="text-align:center; color: white; padding: 0 16px 0 16px;">Ver Solicitaçoes</h3>
         </div>
         <div (click)="goTo('ongs')" style="height: 220px; width: 50%; background: white; border-radius: 16px; display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 8px; box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.112);">
         <img src="../../assets/red/profile/ongs.png" style="width: 120px;" alt="">
-                <h3 style="text-align:center; color: var(--zw-red-dark)">Todas Instituiçoes</h3>
+                <h3 style="text-align:center; color: var(--zw-red-dark); padding: 0 16px 0 16px;">Ver Instituiçoes</h3>
     </div>
     </div>
 

@@ -20,29 +20,16 @@
 
     <div class="header-inside">
 
-       
-        <!-- <span *ngIf="logoutButton" class="header-back-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="white" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
-              </svg>
-        </span> -->
+
 
         <span *ngIf="backButton" class="header-back-icon" style="display: flex; justify-content: space-between;" >
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-              </svg> -->
-              <!-- <p style="color: rgba(255, 255, 255, 0.950); font-weight: 900; font-size: 1.2em;" (click)="goBack()">
-     
-                  Voltar
-                </p> -->
+
                  <svg style="stroke-width: 4px; transform: scale(1.6);" (click)="goBack()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-chevron-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
             </svg>
             </span>
         <span *ngIf="!backButton" class="header-back-icon" style="display: flex; justify-content: space-between; flex-grow: 1;" >
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-list" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-              </svg> -->
+   
               <p style="color: rgba(255, 255, 255, 0.950); font-weight: 900; font-size: 1.2em;">Zero Waste</p>
             </span>
             
@@ -57,25 +44,11 @@
 
 
         <span *ngIf="!logoutButton && !sidebarButton" class="header-back-icon">
-            <!-- <svg  (click)="goBack()" xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-chevron-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-            </svg> -->
+  
            
         </span>
-        <!-- <span class="header-options-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="white" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                </svg>
-                
-        </span> -->
-        <!-- <h1 class="header-title">Main</h1> -->
+ 
     </div>
 </header>
 
-
-<!-- <div class="logout-window">
-
-    <button class="cancel-button">Cancelar</button>
-    <button class="logout-button">Logout</button>
-</div> -->
 

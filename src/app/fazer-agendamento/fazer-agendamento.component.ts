@@ -86,6 +86,7 @@ export class FazerAgendamentoComponent implements OnInit {
 
   toggleSelection(i: number) {
     this.inputData[i] = this.inputData[i] ? 0 : 1;
+    console.log(this.inputData[i])
   }
 
   preventDefault(e: Event) {

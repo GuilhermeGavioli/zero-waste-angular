@@ -5,6 +5,17 @@
     <app-header ></app-header>
     <main class="main">
 
+        <div #ErrorMessage style="z-index: 3; position: absolute; top: -300px; background-color: var(--zw-second); border-radius: 35px; padding: 16px 24px 16px 24px; color: white; font-weight: 700; width: 300px; font-size: 1.1em; display: flex; align-items: center; gap: 8px; box-shadow: 4px 6px 4px -2px rgba(0, 0, 0, 0.111); margin: auto; right: 0; left: 0; transition: .2s ease-in-out;">
+            <div>
+    
+              <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="white" class="bi bi-exclamation-diamond" viewBox="0 0 16 16">
+                <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+              </svg>
+            </div>
+            <p>{{denied_message}}</p>
+          </div>
+
         <div *ngIf="appointments.length === 0"  style="padding: 0 32px 0 32px; position: absolute; inset: 0 0 32px 0; margin: auto; gap: 16px; width: fit-content; height: fit-content; display: flex; flex-direction: column; align-items: center;">
          
             
@@ -83,7 +94,7 @@
 
             <div style="display: flex; width: 100%; justify-content: space-between;">
     
-                <button #ConfirmDonationButton *ngIf="!appointment?.confirmed" (click)="confirmDonation(appointment._id)"  style="width:100%; border: none; color: white; background: var(--zw-red); font-size: 1.1em; padding: 6px 16px 6px 16px; font-weight: 600; border-radius: 0px; box-shadow: none;" >
+                <button [disabled]="all_disabled" #ConfirmDonationButton *ngIf="!appointment?.confirmed" (click)="confirmDonation(appointment._id)"  style="width:100%; border: none; color: white; background: var(--zw-red); font-size: 1.1em; padding: 6px 16px 6px 16px; font-weight: 600; border-radius: 0px; box-shadow: none;" >
                     
                     Confirmar Doação
                 </button>
