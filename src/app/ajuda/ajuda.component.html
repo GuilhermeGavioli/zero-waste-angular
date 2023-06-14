@@ -5,17 +5,17 @@
         <div style="display: flex; align-items: center; justify-content: space-evenly; flex-direction: column; gap: 78px; height: 100%; width: 100%;">
 
             <div style="display: flex; flex-direction: column; gap: 32px; align-items: center; justify-content: space-between;">
-                <img src="../../assets/red/tutorial/find-donation.png" style="width: 140px;" alt="">
+                <img src="../../assets/red/tutorial/Group 295.png" style="width: 160px;" alt="">
                 <h1 class="unic-title-on-screen" style="font-size: 1.6em; font-weight: 900; padding: 0;">ACOMPANHE SOLICITAÇÕES CRIADAS POR INSTUTIIÇÕES</h1>
             </div>
-            <div style="display: flex; gap: 8px;">
+            <!-- <div style="display: flex; gap: 8px;">
                 <div style="width: 6px; height: 6px; background: var(--zw-second); border-radius: 50%;"></div>
                 <div style="width: 6px; height: 6px; background: white; border-radius: 50%;"></div>
                 <div style="width: 6px; height: 6px; background: white; border-radius: 50%;"></div>
                 <div style="width: 6px; height: 6px; background: white; border-radius: 50%;"></div>
                 <div style="width: 6px; height: 6px; background: white; border-radius: 50%;"></div>
                 <div style="width: 6px; height: 6px; background: white; border-radius: 50%;"></div>
-            </div>
+            </div> -->
         </div>
 
     </main>
@@ -27,9 +27,9 @@
         <div style="display: flex; align-items: center; justify-content: space-evenly; flex-direction: column; gap: 78px; height: 100%; width: 100%;">
 
             <div style="display: flex; flex-direction: column; gap: 32px; align-items: center; justify-content: space-between;">
-                <h1 class="unic-title-on-screen" style="color: white; padding: 0 16px 0 16px;">AGENDE UM DIA PARA REALIZAR SUA <span style="color: var(--zw-second)">DOAÇÃO</span> </h1>
+                <h1 class="unic-title-on-screen" style="color: white; padding: 0 16px 0 16px; font-size: 2em;">AGENDAMENTO</h1>
                 <img src="../../assets/red/tutorial/appointment.png" style="width: 210px;" alt="">
-                <p style="text-align: center; color: white; padding: 0 16px 0 16px; line-height: 28px; font-size: .9em; font-weight: 900;">Agendamentos podem ser cancelados à qualquer momento, havendo um limite de dois agendamentos ativos por usuário, que passam a nao ser ativos quando confirmados pela Instituição ou cancelados pelo próprio usuario.</p>
+                <p style="text-align: center; color: white;  padding: 0 16px 0 16px; line-height: 28px; font-size: .9em; font-weight: 900;">Agendamentos podem ser cancelados à qualquer momento, havendo um limite de dois agendamentos ativos por usuário, que passam a nao ser ativos quando confirmados pela Instituição ou cancelados pelo próprio usuario.</p>
           
             </div>
             <!-- <div style="display: flex; gap: 8px;">
@@ -47,13 +47,13 @@
 
 
 <main class="master" [@slideAnimationWithLeave] *ngIf="state === 3" (click)="state = 4">
-    <main class="main" style="background-color: var(--zw-red)">
+    <main class="main" style="background:#a71d21">
 
             <div style="display: flex; align-items: center; justify-content: space-evenly; flex-direction: column; gap: 78px; height: 100%; width: 100%;">
 
             <div style="display: flex; flex-direction: column; padding: 0 16px 0 16px; gap: 32px; align-items: center; justify-content: space-between;">
-                <img src="../../assets/red/tutorial/get-item.png" style="width: 160px;" alt="">
-                <h1 class="unic-title-on-screen">SEPARE OS ITENS REFERENTES AO SEU <span style="color: var(--zw-second)">AGENDAMENTO</span> </h1>
+                <p style="color: white; font-weight: 700; text-align: center;">Separe os itens referentes ao agendamento, voce poderá doa-los mesmo que a doação já tenha sido completa por outros usuarios, a menos que voce cancele seu agendamento, então, nesse caso não poderá realizar outro para uma doação já completa.</p>
+                <img src="../../assets/red/tutorial/Group 311.png" style="width: 200px;" alt="">
 
           
             </div>
@@ -71,14 +71,14 @@
 </main>
 
 <main class="master" [@slideAnimationWithLeave] *ngIf="state === 4" (click)="state = 5">
-    <main class="main" style="background-color: var(--zw-red)">
+    <main class="main" style="background-color: #a71d21">
 
 
         <div style="display: flex; align-items: center; justify-content: space-evenly; flex-direction: column; gap: 78px; height: 100%; width: 100%;">
 
             <div style="display: flex; flex-direction: column; gap: 32px; align-items: center; justify-content: space-between;">
-                <h1 class="unic-title-on-screen" style="color: var(--zw-second)">FAÇA A ENTREGA</h1>
-                <img src="../../assets/red/tutorial/give-item (2).png" style="width: 250px;" alt="">
+                <h1 class="unic-title-on-screen" style="color: white; padding: 0 16px 0 16px; font-size: 2em;">FAÇA A ENTREGA</h1>
+                <img src="../../assets/red/tutorial/Group 312.png" style="width: 300px;" alt="">
                 <p style="text-align: center; color: white; padding: 0 16px 0 16px; line-height: 28px; font-size: 0.9em; font-weight: 900;">Ao fazer a entrega referente à um agendamento ligado à uma solicitação, a Instituição confirmará seu agendamento e a partir disso ele se tornará, efetivamente, uma doação.</p>
           
             </div>
@@ -100,11 +100,11 @@
 <main class="master" [@slideAnimationWithLeave] *ngIf="state === 5" (click)="goTo('login')">
     <main class="main" style="background-color: var(--zw-red)">
 
-        <div style="display: flex; align-items: center; justify-content: space-evenly; flex-direction: column; gap: 78px; height: 100%; width: 100%;">
+        <div style="display: flex; align-items: center; justify-content: space-evenly; flex-direction: column; gap: 50px; height: 100%; width: 100%;">
 
-            <div style="display: flex; flex-direction: column; gap: 32px; align-items: center; justify-content: space-between;">
-                <h1 class="unic-title-on-screen" style="color: var(--zw-red)">AGUARDE A CONFIRMAÇÃO DA INSTITUIÇÃO</h1>
-                <img src="../../assets/red/tutorial/recipt.png" style="width: 300px;" alt="">
+            <div style="display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: space-between;">
+                <h1 class="unic-title-on-screen" style="color: white">ACOMPANHE A CONFIRMAÇÃO DA INSTITUIÇÃO</h1>
+                <img src="../../assets/red/tutorial/Group 307.png" style="width: 260px;" alt="">
                 <p style="text-align: center; color: white; padding: 0 16px 0 16px; line-height: 28px; font-weight: 900;">Voce pode acompanhar a confirmação da ONG referente ao seu agendamento em seu Perfil, após confirmadas, as doaçoes ficam listados podem ser acessadas em seu Perfil e podem ser usados para emitir comprovantes.</p>
 
           

@@ -16,7 +16,7 @@ import { CadONGComponent } from './cad-ong/cad-ong.component';
 import { CadUserComponent } from './cad-user/cad-user.component';
 import { ConfCcComponent } from './conf-cc/conf-cc.component';
 import { RecupPasswordComponent } from './recup-password/recup-password.component';
-import { ConfEeComponent } from './conf-ee/conf-ee.component';
+
 import { DeletarcontaComponent } from './deletarconta/deletarconta.component';
 import { ComprovanteComponent } from './comprovante/comprovante.component';
 import { FazerAgendamentoComponent } from './fazer-agendamento/fazer-agendamento.component';
@@ -61,7 +61,7 @@ export function globalServiceFactory(globalService: GlobalService) {
     CadUserComponent,
     ConfCcComponent,
     RecupPasswordComponent,
-    ConfEeComponent,
+ 
     DeletarcontaComponent,
     ComprovanteComponent,
     FazerAgendamentoComponent,

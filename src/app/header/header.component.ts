@@ -1,9 +1,10 @@
-import { Component, Input, ViewChild, ElementRef  } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef   } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { GlobalService } from '../global.service';
 
 @Component({
+
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']

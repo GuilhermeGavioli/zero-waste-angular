@@ -1,9 +1,9 @@
-<main class="master" [@slideToSide] *ngIf="is_on_ong_screen === 1">
+<main class="master" [@slideToSide] *ngIf="is_on_ong_screen === 1" style="position: relative">
 
 
 
     
-    <header class="header" style="height: 104px; background: var(--zw-red);" >
+    <header class="header" style="background: var(--zw-red);" >
         <div class="header-inside">
             <span class="header-back-icon" style="display: flex; justify-content: space-between;" (click)="goBackToOngs()" >
                      <svg style="stroke-width: 4px; transform: scale(1.6);"  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-chevron-left" viewBox="0 0 16 16">
@@ -16,7 +16,7 @@
     
 
 
-    <main class="main" style="background: whitesmoke">
+    <main class="main" style="background: whitesmoke; padding-top: 64px;">
 
 
         <div #ErrorMessage style="z-index: 3; position: absolute; top: -300px; background-color: var(--zw-second); border-radius: 35px; padding: 16px 24px 16px 24px; color: white; font-weight: 700; width: 300px; font-size: 1.1em; display: flex; align-items: center; gap: 8px; box-shadow: 4px 6px 4px -2px rgba(0, 0, 0, 0.111); margin: auto; right: 0; left: 0; transition: .2s ease-in-out;">
@@ -33,6 +33,9 @@
         
             <div class="local">
                 <p>Para doar basta verificar o endereço abaixo e enviar os alimentos necessários para a ONG.</p>
+                <div>
+                    <h2><span>{{ong?.name}}</span></h2>
+                </div>
                 <div>
                     <h3>Cidade: <span>{{ong?.address_street}}</span></h3>
                 </div>
@@ -62,26 +65,25 @@
             </div>
 
             <div class="alimentos">
-            <div *ngFor="let order of ong_active_orders">
+            <div *ngFor="let order of ong_active_orders; let i = index">
 
-                <h2>Solicitações em Aberto:</h2>
-                <button class="alimento" (click)="goToOrderPage(order?._id)">
-                    <h1 class="nome-sol">{{order?.name}}</h1>
-                    <p>Alimento:</p>
-                    <div *ngFor="let item of order.items; let i = index;">
-                        <p *ngIf="order?.items[i] !== 0">{{possible_items[i]}}: {{order?.items[i]}}</p>
+                <div style="width: 100%; height: fit-content; background: white; border-radius: 16px; padding: 8px 16px 8px 16px; gap: 8px; display: flex; flex-direction: column;" (click)="goToOrderPage(order._id)">
+                    <div>
+                        <p style="font-size: 1.2em; font-weight: 900;" class="elip sl">{{order?.name}}</p>
+                        <p class="elip tl">{{order?.description}}</p>
                     </div>
-             
-                    <p class="data">Solicitação realizada em: {{order?.created_at}}</p>    
                     <div style="display: flex; gap: 12px; align-items: center; width: 100%;">
                         <p>{{((order?.sum_donated / order?.sum_items) * 100).toString().split('.')[0]}}%</p>
                         <div class="progress-bar-outside">
                             <div class="progress-bar-inside" [style.width.%]="((order?.sum_donated / order?.sum_items) * 100) + 2">
                             </div>
-                            
                         </div>
                     </div>
-                </button>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <p>{{order?.created_at?.split('-')[0]}}</p>
+                        <p style="background: var(--zw-second); color: white; font-weight: 700; padding: 4px 8px 4px 8px; border-radius: 15px;">Quero Doar</p>
+                    </div> 
+                </div>
             </div>
         </div>
             <br>

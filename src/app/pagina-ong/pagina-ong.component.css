@@ -79,13 +79,13 @@ button{
 
 
 .voltar-btn{
-    background-color: #CA262C;
+    background-color: var(--zw-red);
 }
 .voltar-btn img{
     filter:invert(100%);
 }
 .header{
-    background-color: #CA262C;
+    background-color: var(--zw-red);;
     width: auto;
     position: relative;
     top: -25px;

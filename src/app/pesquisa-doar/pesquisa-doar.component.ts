@@ -54,7 +54,16 @@ export class PesquisaDoarComponent implements OnInit {
       method: 'GET',
     })
     const data = await res.json()
-    console.log(data)
+    if (!data) return
+    for (let i = 0; i < data?.length; i++) {
+      data[i].sum_items = 0
+      data[i].sum_donated = 0
+      for (let j = 0; j < data[i].items?.length; j++) {
+        data[i].sum_items += data[i].items[j]
+        data[i].sum_donated += data[i].donated[j]
+      }
+    }
+
     this.ong_active_orders = data;
     this.ong.loading_orders = 0;
   }

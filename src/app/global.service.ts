@@ -6,24 +6,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class GlobalService {
 
-  public APIURL: string = 'http://localhost:3000'
+  public APIURL: string = 'http://54.165.249.27:3000'
+  // public APIURL: string = 'http://localhost:3000'
 
   constructor(private route: ActivatedRoute, private router: Router) { }
   last_route: string = 'perfil'
   my_route: string = 'perfil'
 
-  initialize(): Promise<any> {
+  initialize() {
     // Perform your initialization tasks here
     // For example, you can fetch some data from a server
 
-    return new Promise<any>((resolve, reject) => {
-      // Simulating an asynchronous operation
-      setTimeout(() => {
-        // Resolve the promise when initialization is complete
-        console.log('global test')
-        resolve(true);
-      }, 2000);
-    });
+  
   }
 
   public setMyRoute(route: string) {
